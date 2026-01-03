@@ -384,6 +384,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initTheme();
   addExperience(true); // Add initial example
   addEducation(true); // Add initial example
+  setCurrentYear(); // Set current year in footer
 });
 
 // Theme Toggle Functionality
@@ -1336,6 +1337,14 @@ function debounce(func, wait) {
 }
 const debouncedSearch = debounce(searchCareers, 300);
 const debouncedJobSearch = debounce(simulateJobSearch, 300);
+
+// Footer Functions
+function setCurrentYear() {
+  const yearEl = document.getElementById("current-year");
+  if (yearEl) {
+    yearEl.textContent = new Date().getFullYear();
+  }
+}
 
 // Global Access
 window.showPage = showPage;
