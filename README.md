@@ -79,3 +79,8 @@
 ---
 
 <h3 align="center">⭐ Developed with passion by <a href="https://github.com/ABHIJEET-0001">Abhijeet Kasera</a> — Always building intelligent systems that matter.</h3>
+
+---
+
+This contribution was made as part of ECWoC 2026.
+
