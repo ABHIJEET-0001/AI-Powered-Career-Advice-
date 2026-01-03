@@ -7,6 +7,8 @@
   </a>
 </p>
 
+> **Note:** This project has been migrated to a modern **React + TypeScript + Vite** architecture. See the [Migration Details](#-project-migration) below.
+
 <p align="center">
   <b>Empowering students and professionals with AI-driven career insights, personalized learning paths, and real-time skill recommendations.</b>  
 </p>
@@ -34,12 +36,42 @@
 
 <h2>🧠 Tech Stack</h2>
 <ul>
-  <li>💻 <b>Frontend:</b> React.js, HTML5, CSS3, JavaScript</li>
-  <li>🧩 <b>Backend:</b> Node.js, FastAPI</li>
-  <li>🤖 <b>AI & NLP:</b> OpenAI API (LLM-based Recommendation Engine)</li>
-  <li>🔥 <b>Database & Auth:</b> Firebase</li>
-  <li>📱 <b>Deployment:</b> Netlify</li>
+  <li>💻 <b>Frontend Client:</b> React 18, TypeScript, Vite</li>
+  <li>🎨 <b>Styling:</b> Modern CSS3 (Variables, Module integration)</li>
+  <li>⚡ <b>Build Tool:</b> Vite</li>
+  <li>📦 <b>State Management:</b> React Context API</li>
+  <li>🧩 <b>Backend (Planned):</b> Node.js, FastAPI</li>
+  <li>🤖 <b>AI & NLP:</b> OpenAI API/Gemini (LLM-based Recommendation Engine)</li>
 </ul>
+
+---
+
+<h2>�️ Project Migration</h2>
+
+This project has recently undergone a major migration from vanilla HTML/JS to a robust React application.
+
+### Why the Change?
+- **TypeScript**: Ensures type safety, reducing bugs and improving developer experience compared to plain JavaScript.
+- **Component-Based Architecture**: Breaks down the monolithic interface into reusable components (`Navbar`, `Footer`, `ChatBot`, etc.).
+- **Enhanced State Management**: Uses `AuthContext` for secure and efficient global state handling (User Auth, Course Enrollment).
+- **Modern Tooling**: Leveraging **Vite** for lightning-fast development server start and optimized production builds.
+
+### How to Run Locally
+
+1. **Install Dependencies**
+   ```bash
+   npm install
+   ```
+   
+2. **Start Development Server**
+   ```bash
+   npm run dev
+   ```
+
+3. **Build for Production**
+   ```bash
+   npm run build
+   ```
 
 ---
 
@@ -59,6 +91,7 @@
   <li>🗂️ Saving user progress and career suggestions</li>
   <li>🎙️ AI Voice Assistant for interactive guidance</li>
   <li>🏆 Gamified skill-tracking dashboard</li>
+  <li>🔌 Connection to real Backend APIs</li>
 </ul>
 
 ---
