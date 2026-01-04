@@ -15,23 +15,31 @@
 </head>
 
 <body>
-    <nav class="navbar">
+    <nav class="navbar" id="navbar">
         <div class="container">
             <div class="nav-brand">
-                <h2>AI Career Advisor</h2>
+                <h2 class="brand-logo">
+                    <span class="logo-icon">🤖</span>
+                    <span class="brand-text">AI Career Advisor</span>
+                </h2>
             </div>
             <div class="nav-menu" id="nav-menu">
-                <a href="#" class="nav-link" onclick="showPage('home')">Home</a>
-                <a href="#" class="nav-link" onclick="showPage('careers')">Explore Careers</a>
-                <a href="#" class="nav-link" onclick="showPage('learning')">Learning Hub</a>
-                <a href="#" class="nav-link" onclick="showPage('community')">Community</a>
-                <a href="#" id="dashboard-link" class="nav-link hidden" onclick="showPage('dashboard')">Dashboard</a>
-                <button id="auth-button" class="btn btn--primary" onclick="handleGetStartedClick()">Get Started</button>
-                <button class="theme-toggle" id="theme-toggle">
+                <a href="#" class="nav-link active" data-page="home" onclick="showPage('home')">Home</a>
+                <a href="#" class="nav-link" data-page="careers" onclick="showPage('careers')">Explore Careers</a>
+                <a href="#" class="nav-link" data-page="learning" onclick="showPage('learning')">Learning Hub</a>
+                <a href="#" class="nav-link" data-page="community" onclick="showPage('community')">Community</a>
+                <a href="#" id="dashboard-link" class="nav-link hidden" data-page="dashboard" onclick="showPage('dashboard')">Dashboard</a>
+            </div>
+            <div class="nav-actions">
+                <button id="auth-button" class="btn btn--cta" onclick="handleGetStartedClick()">
+                    <span>Get Started</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
                     <i class="fas fa-moon"></i>
                 </button>
             </div>
-            <div class="nav-toggle" onclick="toggleMobileMenu()">
+            <div class="nav-toggle" id="nav-toggle" onclick="toggleMobileMenu()">
                 <span></span>
                 <span></span>
                 <span></span>
