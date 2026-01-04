@@ -424,6 +424,84 @@ themeToggle.addEventListener("click", () => {
     localStorage.setItem("theme", "dark");
   }
 });
+
+// ===== ENHANCED NAVBAR FUNCTIONALITY =====
+
+// Navbar scroll behavior - add shadow and shrink on scroll
+let lastScrollTop = 0;
+const navbar = document.getElementById("navbar");
+
+window.addEventListener("scroll", () => {
+  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  
+  // Add 'scrolled' class when scrolling down
+  if (scrollTop > 50) {
+    navbar.classList.add("scrolled");
+  } else {
+    navbar.classList.remove("scrolled");
+  }
+  
+  lastScrollTop = scrollTop;
+});
+
+// Active link highlighting
+function updateActiveLink(pageName) {
+  // Remove active class from all links
+  document.querySelectorAll(".nav-link").forEach(link => {
+    link.classList.remove("active");
+  });
+  
+  // Add active class to current page link
+  const activeLink = document.querySelector(`.nav-link[data-page="${pageName}"]`);
+  if (activeLink) {
+    activeLink.classList.add("active");
+  }
+}
+
+// Enhanced mobile menu toggle with hamburger animation
+function toggleMobileMenu() {
+  const navMenu = document.getElementById("nav-menu");
+  const navToggle = document.getElementById("nav-toggle");
+  
+  navMenu.classList.toggle("active");
+  navToggle.classList.toggle("active");
+  
+  // Prevent body scroll when mobile menu is open
+  if (navMenu.classList.contains("active")) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "";
+  }
+}
+
+// Close mobile menu when clicking outside
+document.addEventListener("click", (e) => {
+  const navMenu = document.getElementById("nav-menu");
+  const navToggle = document.getElementById("nav-toggle");
+  const navbar = document.getElementById("navbar");
+  
+  if (navMenu.classList.contains("active") && 
+      !navbar.contains(e.target)) {
+    toggleMobileMenu();
+  }
+});
+
+// Close mobile menu on window resize to desktop size
+window.addEventListener("resize", () => {
+  if (window.innerWidth > 768) {
+    const navMenu = document.getElementById("nav-menu");
+    const navToggle = document.getElementById("nav-toggle");
+    
+    if (navMenu.classList.contains("active")) {
+      navMenu.classList.remove("active");
+      navToggle.classList.remove("active");
+      document.body.style.overflow = "";
+    }
+  }
+});
+
+// ===== END OF NAVBAR ENHANCEMENTS =====
+
 // --- Smarter Chatbot with Career Questions ---
 const chatbotKnowledge = {
   greetings: ["hello", "hi", "hey"],
@@ -540,6 +618,10 @@ function showPage(pageName) {
     targetPage.classList.add("active");
     currentPage = pageName;
     window.scrollTo(0, 0);
+    
+    // Update active link in navbar
+    updateActiveLink(pageName);
+    
     switch (pageName) {
       case "careers":
         loadCareers();
@@ -556,12 +638,18 @@ function showPage(pageName) {
         break;
     }
   }
-  document.getElementById("nav-menu").classList.remove("active");
+  
+  // Close mobile menu when navigating
+  const navMenu = document.getElementById("nav-menu");
+  const navToggle = document.getElementById("nav-toggle");
+  if (navMenu.classList.contains("active")) {
+    navMenu.classList.remove("active");
+    navToggle.classList.remove("active");
+    document.body.style.overflow = "";
+  }
 }
 
-function toggleMobileMenu() {
-  document.getElementById("nav-menu").classList.toggle("active");
-}
+// toggleMobileMenu is defined in the navbar enhancements section above
 
 // Auth Functions
 function showLoginForm() {
