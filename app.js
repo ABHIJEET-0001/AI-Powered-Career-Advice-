@@ -577,7 +577,10 @@ function showRegisterForm() {
 function login() {
   const email = document.getElementById("login-email").value;
   const password = document.getElementById("login-password").value;
-  if (!email || !password) return alert("Please enter both email and password");
+  if (!email || !password) {
+    showToast("Please enter both email and password", "warning", "Missing Information");
+    return;
+  }
 
   const users = JSON.parse(localStorage.getItem("users") || "[]");
   const user = users.find((u) => u.email === email && u.password === password);
@@ -589,9 +592,10 @@ function login() {
     }
     localStorage.setItem("currentUser", JSON.stringify(user));
     updateLoginStateUI();
+    showToast(`Welcome back, ${user.name}!`, "success", "Login Successful");
     showPage("dashboard");
   } else {
-    alert("Invalid email or password");
+    showToast("Invalid email or password", "error", "Login Failed");
   }
 }
 
@@ -599,11 +603,16 @@ function register() {
   const name = document.getElementById("register-name").value;
   const email = document.getElementById("register-email").value;
   const password = document.getElementById("register-password").value;
-  if (!name || !email || !password) return alert("Please fill all fields");
+  if (!name || !email || !password) {
+    showToast("Please fill all fields", "warning", "Missing Information");
+    return;
+  }
 
   const users = JSON.parse(localStorage.getItem("users") || "[]");
-  if (users.some((u) => u.email === email))
-    return alert("User with this email already exists");
+  if (users.some((u) => u.email === email)) {
+    showToast("User with this email already exists", "error", "Registration Failed");
+    return;
+  }
 
   const newUser = {
     id: Date.now(),
@@ -618,6 +627,7 @@ function register() {
   currentUser = newUser;
   localStorage.setItem("currentUser", JSON.stringify(currentUser));
   updateLoginStateUI();
+  showToast(`Welcome ${name}! Please complete your profile to get started.`, "success", "Registration Successful");
   showPage("profile-setup");
 }
 
@@ -783,8 +793,10 @@ function saveProfile() {
     document.querySelectorAll('input[type="checkbox"]:checked')
   ).map((cb) => cb.value);
 
-  if (!educationLevel || skills.length === 0 || interests.length === 0)
-    return alert("Please complete all profile fields");
+  if (!educationLevel || skills.length === 0 || interests.length === 0) {
+    showToast("Please complete all profile fields", "warning", "Incomplete Profile");
+    return;
+  }
 
   currentUser.profile = {
     educationLevel,
@@ -883,8 +895,10 @@ function nextQuestion(isSkipping = false) {
   if (
     assessmentData.answers[assessmentData.currentQuestion] === undefined &&
     !isSkipping
-  )
-    return alert("Please select an answer or skip the question.");
+  ) {
+    showToast("Please select an answer or skip the question", "warning", "Answer Required");
+    return;
+  }
   if (assessmentData.currentQuestion < appData.assessmentQuestions.length - 1) {
     assessmentData.currentQuestion++;
     loadQuestion();
@@ -1173,7 +1187,7 @@ function loadEnrolledCourses() {
 
 function enrollInCourse(button, courseId) {
   if (!currentUser) {
-    alert("Please log in to enroll in courses.");
+    showToast("Please log in to enroll in courses.", "warning", "Login Required");
     showPage("auth");
     return;
   }
@@ -1190,6 +1204,11 @@ function enrollInCourse(button, courseId) {
   button.textContent = "Enrolled";
   button.classList.add("enrolled");
   button.disabled = true;
+  
+  // Find the course name for the toast
+  const course = appData.courses.find(c => c.id === courseId);
+  const courseName = course ? course.title : "course";
+  showToast(`Successfully enrolled in ${courseName}!`, "success", "Enrollment Confirmed");
 }
 
 function unEnrollCourse(courseId) {
@@ -1414,7 +1433,7 @@ function displayJobs(jobs) {
   container.innerHTML = jobs
     .map(
       (job) => `
-                <div class="topic-item" style="cursor: pointer;" onclick="alert('Applied to ${job.title} at ${job.company}!')">
+                <div class="topic-item" style="cursor: pointer;" onclick="showToast('Successfully applied to ${job.title} at ${job.company}!', 'success', 'Application Submitted')">>
                    <div>
                      <h4>${job.title}</h4>
                      <span>${job.company} • ${job.location}</span>
@@ -1442,6 +1461,60 @@ function simulateJobSearch(query) {
   displayJobs(filteredJobs);
 }
 // --- End New Modal Functions ---
+
+// Toast Notification Functions
+function showToast(message, type = 'info', title = '', duration = 4000) {
+  const container = document.getElementById('toast-container');
+  if (!container) return;
+
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+  
+  const iconMap = {
+    success: 'fas fa-check-circle',
+    error: 'fas fa-exclamation-circle',
+    warning: 'fas fa-exclamation-triangle',
+    info: 'fas fa-info-circle'
+  };
+
+  toast.innerHTML = `
+    <i class="toast-icon ${iconMap[type] || iconMap.info}"></i>
+    <div class="toast-content">
+      ${title ? `<div class="toast-title">${title}</div>` : ''}
+      <div class="toast-message">${message}</div>
+    </div>
+    <button class="toast-close" onclick="hideToast(this.parentElement)">
+      <i class="fas fa-times"></i>
+    </button>
+  `;
+
+  container.appendChild(toast);
+
+  // Trigger animation
+  setTimeout(() => {
+    toast.classList.add('show');
+  }, 10);
+
+  // Auto hide after duration
+  setTimeout(() => {
+    hideToast(toast);
+  }, duration);
+
+  return toast;
+}
+
+function hideToast(toast) {
+  if (!toast) return;
+  
+  toast.classList.remove('show');
+  toast.classList.add('hide');
+  
+  setTimeout(() => {
+    if (toast.parentElement) {
+      toast.parentElement.removeChild(toast);
+    }
+  }, 300);
+}
 
 // Utility Functions
 function debounce(func, wait) {
