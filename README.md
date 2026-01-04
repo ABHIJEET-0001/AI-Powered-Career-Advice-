@@ -71,7 +71,7 @@ To run this project locally, follow these steps:
 
 ### 1. Clone the Repository
 ```bash
-git clone [https://github.com/ABHIJEET-0001/AI-Powered-Career-Advice-.git](https://github.com/ABHIJEET-0001/AI-Powered-Career-Advice-.git)
+git clone https://github.com/ABHIJEET-0001/AI-Powered-Career-Advice-.git
 cd AI-Powered-Career-Advice-
 ```
 ### 2. Install Dependencies
