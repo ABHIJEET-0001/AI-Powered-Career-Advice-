@@ -641,6 +641,16 @@
                 <h2>Resume Builder</h2>
                 <p>Create a professional resume with AI-powered suggestions</p>
             </div>
+             
+             <div class="form-group">
+  <label><strong>Select Resume Template (ATS Friendly)</strong></label>
+  <select id="resume-template" class="form-control">
+    <option value="classic">Classic ATS</option>
+    <option value="modern">Modern ATS</option>
+    <option value="minimal">Minimal ATS</option>
+  </select>
+</div>
+
 
             <div class="profile-setup">
                 <div class="form-group">
@@ -725,27 +735,23 @@
     </div>
 
 
-    <div class="chatbot-container">
-        <div class="chatbot-toggle" onclick="toggleChatbot()">
-            <i class="fas fa-robot"></i>
-        </div>
-        <div class="chatbot-window hidden" id="chatbot-window">
-            <div class="chatbot-header">
-                <h4>AI Career Mentor</h4>
-                <button onclick="toggleChatbot()">&times;</button>
-            </div>
-            <div class="chatbot-messages" id="chatbot-messages">
-                <div class="message bot-message">
-                    <p>Hi there! 👋 I'm your AI Career Mentor. How can I help you with your career journey today?</p>
-                </div>
-            </div>
-            <div class="chatbot-input">
-                <input type="text" placeholder="Ask me anything..." id="chatbot-input"
-                    onkeypress="handleChatInput(event)">
-                <button onclick="sendChatMessage()"><i class="fas fa-paper-plane"></i></button>
-            </div>
-        </div>
-    </div>
+    <!-- Voiceflow Chatbot Integration -->
+<script type="text/javascript">
+  (function(d, t) {
+      var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+      v.onload = function() {
+        window.voiceflow.chat.load({
+          verify: { projectID: '695a584af022b1214685d01f' },
+          url: 'https://general-runtime.voiceflow.com',
+          versionID: 'production',
+          voice: {
+            url: "https://runtime-api.voiceflow.com"
+          }
+        });
+      };
+      v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+  })(document, 'script');
+</script>
 
     <footer class="footer">
         <div class="container">
