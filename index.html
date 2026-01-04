@@ -29,6 +29,15 @@
                 <a href="#" class="nav-link" data-page="learning" onclick="showPage('learning')">Learning Hub</a>
                 <a href="#" class="nav-link" data-page="community" onclick="showPage('community')">Community</a>
                 <a href="#" id="dashboard-link" class="nav-link hidden" data-page="dashboard" onclick="showPage('dashboard')">Dashboard</a>
+                <div class="nav-actions-mobile">
+                    <button id="auth-button-mobile" class="btn btn--cta" onclick="handleGetStartedClick()">
+                        <span>Get Started</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button class="theme-toggle" id="theme-toggle-mobile" aria-label="Toggle theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
             </div>
             <div class="nav-actions">
                 <button id="auth-button" class="btn btn--cta" onclick="handleGetStartedClick()">
