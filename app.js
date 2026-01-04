@@ -384,6 +384,13 @@ document.addEventListener("DOMContentLoaded", function () {
   initTheme();
   addExperience(true); // Add initial example
   addEducation(true); // Add initial example
+  // Initialize form validation for profile setup
+  setupProfileFormValidation();
+
+  // Set initial form validation state if profile page exists
+  if (document.getElementById("profile-setup-page")) {
+    validateProfileForm();
+  }
 });
 
 // Theme Toggle Functionality
@@ -643,21 +650,135 @@ function updateLoginStateUI() {
 function addSkill() {
   const skillInput = document.getElementById("skill-input");
   const skill = skillInput.value.trim();
-  if (!skill) return;
+  
+  // Validate skill length
+  if (!skill) {
+    showValidationError("skills-error", "Please enter a skill");
+    return;
+  }
+  
+  if (skill.length < 3) {
+    showValidationError("skills-error", "Skill must be at least 3 characters long");
+    return;
+  }
 
   const skillsList = document.getElementById("skills-list");
   const skillTag = document.createElement("span");
   skillTag.className = "skill-tag";
-  skillTag.textContent = skill;
+  // store the actual skill text in a data attribute to avoid serializing the remove button
+  skillTag.dataset.skill = skill;
+  skillTag.appendChild(document.createTextNode(skill));
+  
+  // Add remove button
+  const removeButton = document.createElement("span");
+  removeButton.className = "remove-skill";
+  removeButton.innerHTML = "&times;";
+  skillTag.appendChild(removeButton);
+  
   skillsList.appendChild(skillTag);
   skillInput.value = "";
+  clearValidationError("skills-error");
+  
+  // Validate form after adding skill
+  validateProfileForm();
+}
+
+// Allow removing skills by delegating click events
+function setupSkillRemoval() {
+  const skillsList = document.getElementById("skills-list");
+  if (skillsList) {
+    skillsList.addEventListener("click", function(event) {
+      if (event.target.classList.contains("remove-skill")) {
+        const parent = event.target.parentElement;
+        if (parent) parent.remove();
+        validateProfileForm();
+      }
+    });
+  }
+}
+
+// Simple validation helpers
+function showValidationError(id, message) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.textContent = message;
+  el.style.display = "block";
+}
+
+function clearValidationError(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.textContent = "";
+  el.style.display = "none";
+}
+
+// Validate profile form and enable/disable save button
+function validateProfileForm() {
+  const education = document.getElementById("education-level");
+  const skillsList = document.getElementById("skills-list");
+  const interests = document.querySelectorAll('.interests-grid input[type="checkbox"]:checked');
+  const saveButton = document.querySelector('.profile-setup .btn--full-width');
+
+  let valid = true;
+
+  if (!education || !education.value) {
+    showValidationError("education-error", "Please select your education level");
+    if (education) education.classList.add('error');
+    valid = false;
+  } else {
+    clearValidationError("education-error");
+    if (education) education.classList.remove('error');
+  }
+
+  if (!skillsList || skillsList.children.length === 0) {
+    showValidationError("skills-error", "Please add at least one skill");
+    const skillInput = document.getElementById('skill-input');
+    if (skillInput) skillInput.classList.add('error');
+    valid = false;
+  } else {
+    clearValidationError("skills-error");
+    const skillInput = document.getElementById('skill-input');
+    if (skillInput) skillInput.classList.remove('error');
+  }
+
+  if (!interests || interests.length === 0) {
+    showValidationError("interests-error", "Please select at least one interest");
+    valid = false;
+  } else {
+    clearValidationError("interests-error");
+  }
+
+  if (saveButton) saveButton.disabled = !valid;
+}
+
+// Setup form listeners and skill removal
+function setupProfileFormValidation() {
+  const education = document.getElementById("education-level");
+  const skillInput = document.getElementById("skill-input");
+  const interests = document.querySelectorAll('.interests-grid input[type="checkbox"]');
+
+  if (education) education.addEventListener("change", validateProfileForm);
+  if (skillInput) {
+    skillInput.addEventListener("input", function() { clearValidationError("skills-error"); });
+    // allow Enter to add
+    skillInput.addEventListener("keypress", function(e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        addSkill();
+      }
+    });
+  }
+  interests.forEach(cb => cb.addEventListener("change", validateProfileForm));
+
+  // Setup skill removal delegation
+  setupSkillRemoval();
 }
 
 function saveProfile() {
   const educationLevel = document.getElementById("education-level").value;
   const skills = Array.from(
     document.getElementById("skills-list").children
-  ).map((el) => el.textContent);
+  ).map((el) => el.dataset && el.dataset.skill ? el.dataset.skill : (el.firstChild && el.firstChild.nodeValue ? el.firstChild.nodeValue.trim() : el.textContent.trim()));
   const interests = Array.from(
     document.querySelectorAll('input[type="checkbox"]:checked')
   ).map((cb) => cb.value);
