@@ -154,6 +154,27 @@
             </div>
         </section>
 
+        <section id="testimonials" class="testimonials">
+  <h2>What Our Users Say</h2>
+
+  <div class="testimonial-container" id="testimonialContainer">
+    <!-- Testimonials will be injected via JS -->
+  </div>
+
+  <button class="add-testimonial-btn" onclick="openTestimonialForm()">
+    Add Testimonial
+  </button>
+
+  <!-- Testimonial Form -->
+  <div id="testimonialForm" class="testimonial-form hidden">
+    <input type="text" id="name" placeholder="Your Name" required />
+    <input type="text" id="career" placeholder="Career / Transition" />
+    <textarea id="message" placeholder="Your Experience" required></textarea>
+    <button onclick="addTestimonial()">Submit</button>
+  </div>
+</section>
+
+
         <section class="cta-section">
             <div class="container">
                 <h2>Start Your Free Career Assessment Today</h2>
