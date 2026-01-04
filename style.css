@@ -107,7 +107,7 @@ p {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px 20px;
+    padding: 5px 0px;
 }
 
 .nav-brand h2 {
@@ -155,6 +155,31 @@ p {
     cursor: pointer;
     font-size: 1.4rem;
     transition: var(--transition);
+}
+
+/* Logo in navbar */
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-logo {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
+
+/* Slightly reduce text size on smaller screens */
+@media (max-width: 768px) {
+    .nav-logo {
+        width: 34px;
+        height: 34px;
+    }
+
+    .nav-brand h2 {
+        font-size: 1.2rem;
+    }
 }
 
 .theme-toggle:hover {
