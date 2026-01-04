@@ -1,4 +1,4 @@
- :root {
+:root {
   /* Light Theme Variables */
   --primary: #4381ff; /* Brighter, more energetic blue */
   --primary-dark: #3a71e8;
@@ -237,6 +237,7 @@ p {
     padding: 100px 0;
     text-align: center;
     overflow: hidden;
+    background-image: none;
 }
 
 .hero::before {
@@ -506,6 +507,7 @@ section {
     background: var(--primary);
     border-radius: 5px;
     transition: width 0.3s ease;
+    width: 10%;
 }
 
 .progress-text {
@@ -1239,6 +1241,10 @@ section {
 
 .mb-4 {
     margin-bottom: 16px;
+}
+
+.search-bar-margin {
+    margin-bottom: 24px;
 }
 
 /* Page visibility management */

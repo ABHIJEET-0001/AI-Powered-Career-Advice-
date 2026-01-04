@@ -11,8 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <link rel="stylesheet" href="style.css">
-</head>
+<link rel="stylesheet" href="assets/styles/style.css"></head>
 
 <body>
     <nav class="navbar">
@@ -27,7 +26,7 @@
                 <a href="#" class="nav-link" onclick="showPage('community')">Community</a>
                 <a href="#" id="dashboard-link" class="nav-link hidden" onclick="showPage('dashboard')">Dashboard</a>
                 <button id="auth-button" class="btn btn--primary" onclick="handleGetStartedClick()">Get Started</button>
-                <button class="theme-toggle" id="theme-toggle">
+                <button class="theme-toggle" id="theme-toggle" title="Toggle theme">
                     <i class="fas fa-moon"></i>
                 </button>
             </div>
@@ -40,7 +39,7 @@
     </nav>
 
     <div id="home-page" class="page active">
-        <section class="hero" style="background-image: none;">
+        <section class="hero">
             <div class="container">
                 <div class="hero-content">
                     <h1 class="hero-title">Find the Right Career Path with AI</h1>
@@ -212,7 +211,7 @@
                 <h2>Complete Your Profile</h2>
                 <div class="form-group">
                     <label class="form-label">Education Level</label>
-                    <select class="form-control" id="education-level">
+                    <select class="form-control" id="education-level" title="Select education level">
                         <option value="">Select your education level</option>
                         <option value="highschool">High School</option>
                         <option value="bachelor">Bachelor's Degree</option>
@@ -275,10 +274,10 @@
                 </div>
                 <div class="progress-text">
                     <span>Question <span id="current-question">1</span> of <span id="total-questions">10</span></span>
-                    <a href="#" style="font-size: 0.9rem;" onclick="skipAssessment()">Skip All</a>
+                    <a href="#" class="skip-link" onclick="skipAssessment()">Skip All</a>
                 </div>
                 <div class="progress-bar">
-                    <div class="progress-fill" id="assessment-progress" style="width: 10%;"></div>
+                    <div class="progress-fill" id="assessment-progress"></div>
                 </div>
                 <div class="question-container">
                     <h3 id="question-text"></h3>
@@ -303,7 +302,7 @@
                 <p>Discover various career options and find the perfect match for your skills and interests</p>
             </div>
 
-            <div class="search-bar">
+            <div class="search-bar search-bar-margin">
                 <i class="fas fa-search search-icon"></i>
                 <input type="text" placeholder="Search careers..." class="form-control"
                     onkeyup="debouncedSearch(this.value)">
@@ -312,7 +311,7 @@
             <div class="filters">
                 <div class="filter-group">
                     <span class="filter-label">Filter by:</span>
-                    <select class="form-control" onchange="filterCareers('salary', this.value)">
+                    <select class="form-control" onchange="filterCareers('salary', this.value)" title="Filter by salary">
                         <option value="">Salary Range</option>
                         <option value="high">High Salary</option>
                         <option value="medium">Medium Salary</option>
@@ -320,7 +319,7 @@
                     </select>
                 </div>
                 <div class="filter-group">
-                    <select class="form-control" onchange="filterCareers('growth', this.value)">
+                    <select class="form-control" onchange="filterCareers('growth', this.value)" title="Filter by growth">
                         <option value="">Growth Potential</option>
                         <option value="high">High Growth</option>
                         <option value="medium">Medium Growth</option>
@@ -328,7 +327,7 @@
                     </select>
                 </div>
                 <div class="filter-group">
-                    <select class="form-control" onchange="filterCareers('skills', this.value)">
+                    <select class="form-control" onchange="filterCareers('skills', this.value)" title="Filter by skills">
                         <option value="">Skill Level</option>
                         <option value="beginner">Beginner Friendly</option>
                         <option value="intermediate">Intermediate</option>
@@ -690,7 +689,7 @@
                 <button class="modal-close" onclick="closeModal('job-search-modal')">&times;</button>
             </div>
             <div class="modal-body">
-                <div class="search-bar" style="margin-bottom: 24px;">
+                <div class="search-bar search-bar-margin">
                     <i class="fas fa-search search-icon"></i>
                     <input type="text" placeholder="Search for jobs (e.g., 'Data Scientist')" class="form-control"
                         onkeyup="debouncedJobSearch(this.value)">
@@ -719,7 +718,7 @@
             <div class="chatbot-input">
                 <input type="text" placeholder="Ask me anything..." id="chatbot-input"
                     onkeypress="handleChatInput(event)">
-                <button onclick="sendChatMessage()"><i class="fas fa-paper-plane"></i></button>
+                <button onclick="sendChatMessage()" title="Send message"><i class="fas fa-paper-plane"></i></button>
             </div>
         </div>
     </div>
@@ -760,7 +759,7 @@
         </div>
     </footer>
 
-    <script src="app.js"></script>
+    <script src="assets/scripts/app.js"></script>
 </body>
 
 </html>
