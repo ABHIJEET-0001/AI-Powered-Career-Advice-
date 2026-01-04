@@ -1,16 +1,11 @@
-# Contributing to AI-Powered Career Advice
+# Contributing
 
-Thank you for contributing 🚀
+Thank you for your interest in contributing!
 
-## Steps
+## How to Contribute
 1. Fork the repository
-2. Clone your fork
-3. Create a new branch
-4. Make your changes
-5. Commit and push
-6. Open a Pull Request
+2. Create a feature branch
+3. Commit your changes with clear messages
+4. Open a Pull Request
 
-## Guidelines
-- Keep changes simple
-- Follow existing structure
-- Be respectful
+Please follow the existing project structure and code style.
