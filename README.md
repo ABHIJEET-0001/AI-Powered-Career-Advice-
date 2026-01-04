@@ -1,11 +1,12 @@
 <h1 align="center">🎯 AI Career Advisor — Personalized Career & Skills Guidance</h1>
 
 <p align="center">
-  <strong>Live Demo:</strong> 
+  <strong>🔗 Live Demo:</strong> 
   <a href="https://sunny-rabanadas-bd1f6f.netlify.app/" target="_blank">
-    Click Here 🚀
+    Explore the Application 🚀
   </a>
 </p>
+
 
 <p align="center">
   <b>Empowering students and professionals with AI-driven career insights, personalized learning paths, and real-time skill recommendations.</b>  
@@ -43,7 +44,7 @@
 
 ---
 
-<h2>📘 How It Works</h2>
+<h2>⚙️ How It Works</h2>
 <ol>
   <li>Visit the <a href="https://sunny-rabanadas-bd1f6f.netlify.app/" target="_blank">Live Demo</a>.</li>
   <li>Enter your skills, interests, and career goals.</li>
