@@ -1498,3 +1498,39 @@ window.enrollInCourse = enrollInCourse;
 window.unEnrollCourse = unEnrollCourse;
 window.handleGetStartedClick = handleGetStartedClick;
 window.setDynamicCopyright=setDynamicCopyright('AI Career Advisor');
+
+const testimonials = [];
+
+function openTestimonialForm() {
+  document.getElementById("testimonialForm").classList.toggle("hidden");
+}
+
+function addTestimonial() {
+  const name = document.getElementById("name").value;
+  const career = document.getElementById("career").value;
+  const message = document.getElementById("message").value;
+
+  if (!name || !message) {
+    alert("Please fill required fields");
+    return;
+  }
+
+  testimonials.push({ name, career, message });
+  renderTestimonials();
+}
+
+function renderTestimonials() {
+  const container = document.getElementById("testimonialContainer");
+  container.innerHTML = "";
+
+  testimonials.forEach(t => {
+    const card = document.createElement("div");
+    card.className = "testimonial-card";
+    card.innerHTML = `
+      <h4>${t.name}</h4>
+      <small>${t.career || ""}</small>
+      <p>${t.message}</p>
+    `;
+    container.appendChild(card);
+  });
+}
