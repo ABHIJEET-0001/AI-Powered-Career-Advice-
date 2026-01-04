@@ -65,6 +65,31 @@ through explainable, data-driven recommendations.
 
 ---
 
+## 🛠️ Installation & Setup
+
+To run this project locally, follow these steps:
+
+### 1. Clone the Repository
+```bash
+git clone [https://github.com/ABHIJEET-0001/AI-Powered-Career-Advice-.git](https://github.com/ABHIJEET-0001/AI-Powered-Career-Advice-.git)
+cd AI-Powered-Career-Advice-
+```
+### 2. Install Dependencies
+```Bash
+npm install
+```
+### 3. Environment Configuration
+Create a .env file in the root directory and add your credentials (refer to .env.example):
+
+```text Code snippet
+OPENAI_API_KEY=your_key_here
+FIREBASE_API_KEY=your_key_here
+```
+### 4. Run the Application
+```Bash
+npm start
+```
+---
 ## 🧩 System Workflow
 
 ```text
