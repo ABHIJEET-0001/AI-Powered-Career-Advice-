@@ -79,3 +79,10 @@
 ---
 
 <h3 align="center">⭐ Developed with passion by <a href="https://github.com/ABHIJEET-0001">Abhijeet Kasera</a> — Always building intelligent systems that matter.</h3>
+
+
+## 🌐 Live Demo
+
+🔗 https://sunny-rabanadas-bd1f6f.netlify.app
+
+Experience the AI Career Advisor in action with real-time career guidance, personalized skill recommendations, and AI-powered insights.
