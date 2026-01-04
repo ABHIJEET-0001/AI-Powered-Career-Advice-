@@ -232,8 +232,6 @@ p {
 /* Hero Section */
 .hero {
     position: relative;
-    background-color: var(--bg-gray);
-    color: white;
     padding: 100px 0;
     text-align: center;
     overflow: hidden;
@@ -246,16 +244,35 @@ p {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
-    opacity: 0.95;
+    background: linear-gradient(-45deg, #4381ff, #042d86, #04744b, #000e69);
+    background-size: 400% 400%;
+    animation: gradientBG 7s ease infinite;
+    opacity: 0.9;
     z-index: 1;
+}
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .hero-content {
     position: relative;
-    z-index: 2;
+    z-index: 1;
     max-width: 800px;
     margin: 0 auto;
+    animation: fadeIn 2s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .hero-title {
@@ -296,14 +313,17 @@ section {
 .testimonial-card,
 .career-card,
 .course-card {
+    position: relative;
     background: var(--bg-white);
-    border-radius: 16px;
-    padding: 32px;
-    box-shadow: var(--card-shadow);
-    transition: var(--transition);
     border: 1px solid var(--border-light);
-    display: flex;
-    flex-direction: column;
+    padding: 32px;                 
+    border-radius: 16px;            
+    box-shadow: var(--card-shadow); 
+    display: flex;                  
+    flex-direction: column;        
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 1;
+    overflow: hidden;
 }
 
 .feature-card:hover,
@@ -311,10 +331,31 @@ section {
 .testimonial-card:hover,
 .career-card:hover,
 .course-card:hover {
-    box-shadow: var(--card-shadow-hover);
-    transform: translateY(-8px);
+    transform: translateY(-10px);
+    border-color: var(--primary);
+    box-shadow: 0 0 25px rgba(67, 129, 255, 0.3), 
+                0 0 50px rgba(67, 129, 255, 0.15),
+                var(--card-shadow-hover);
 }
 
+.feature-card::after, 
+.step-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(0, 90, 125, 0.268) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: -1;
+}
+
+.feature-card:hover::after,
+.step-card:hover::after {
+    opacity: 1;
+}
 .feature-icon {
     font-size: 48px;
     margin-bottom: 20px;
@@ -1367,4 +1408,16 @@ section {
     justify-content: center;
     font-size: 10px;
     cursor: pointer;
+}
+#careers-page, 
+#learning-page, 
+#community-page, 
+#dashboard-page, 
+#resume-page {
+    margin-top: 40px; 
+    padding-top: 20px; 
+}
+
+#home-page {
+    margin-top: 0;
 }
