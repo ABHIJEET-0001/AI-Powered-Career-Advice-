@@ -1,5 +1,6 @@
-<h1 align="center">🎯 AI Career Advisor</h1>
-<h3 align="center">Personalized Career & Skills Guidance using AI</h3>
+# 🎯 AI Career Advisor
+
+### Personalized Career & Skills Guidance using AI
 
 <p align="center">
   <a href="https://sunny-rabanadas-bd1f6f.netlify.app/" target="_blank">
@@ -15,72 +16,58 @@
   <img src="https://img.shields.io/badge/Status-Prototype%20%2F%20Active-blue" />
 </p>
 
-<p align="center">
-  <b>
-    Empowering students and professionals with AI-driven career insights,  
-    personalized learning paths, and data-backed skill recommendations.
-  </b>
-</p>
+**Empowering students and professionals with AI-driven career insights,  
+personalized learning paths, and data-backed skill recommendations.**
 
-<hr/>
+---
 
-<h2>✨ Overview</h2>
+## ✨ Overview
 
-<p>
-  <b>AI Career Advisor</b> is an intelligent web application designed to provide
-  <b>personalized career guidance</b> using <b>Artificial Intelligence (AI)</b> and
-  <b>Natural Language Processing (NLP)</b>.
-</p>
+**AI Career Advisor** is an intelligent web application designed to provide  
+**personalized career guidance** using **Artificial Intelligence (AI)** and  
+**Natural Language Processing (NLP)**.
 
-<p>
-  Built as part of <b>Smart India Hackathon 2025</b>, the platform helps users
-  analyze their skills, interests, and career goals, and maps them to
-  relevant career paths, learning roadmaps, and growth opportunities.
-</p>
+Built as part of **Smart India Hackathon 2025**, the platform helps users  
+analyze their skills, interests, and career goals, and maps them to  
+relevant career paths, learning roadmaps, and growth opportunities.
 
-<p>
-  The core vision is to <b>bridge the gap between education and employability</b>
-  through explainable, data-driven recommendations.
-</p>
+The core vision is to **bridge the gap between education and employability**  
+through explainable, data-driven recommendations.
 
-<hr/>
+---
 
-<h2>🚀 Key Features</h2>
+## 🚀 Key Features
 
-<ul>
-  <li>💬 <b>AI-powered Career Chat Assistant</b><br/>
-      Interactive chat interface for career-related queries and guidance.</li>
+- 💬 **AI-powered Career Chat Assistant**  
+  Interactive chat interface for career-related queries and guidance.
 
-  <li>🧭 <b>Personalized Career Roadmaps</b><br/>
-      Tailored learning paths, skill recommendations, and certification guidance.</li>
+- 🧭 **Personalized Career Roadmaps**  
+  Tailored learning paths, skill recommendations, and certification guidance.
 
-  <li>📊 <b>Data-Driven Insights</b><br/>
-      Structured foundation for job-market trend and skill-demand analysis.</li>
+- 📊 **Data-Driven Insights**  
+  Structured foundation for job-market trend and skill-demand analysis.
 
-  <li>🌐 <b>Responsive & Modern UI</b><br/>
-      Clean, accessible design optimized for desktop and mobile devices.</li>
+- 🌐 **Responsive & Modern UI**  
+  Clean, accessible design optimized for desktop and mobile devices.
 
-  <li>⚡ <b>AI-based Recommendations</b><br/>
-      NLP-powered responses with scope for deeper personalization.</li>
-</ul>
+- ⚡ **AI-based Recommendations**  
+  NLP-powered responses with scope for deeper personalization.
 
-<hr/>
+---
 
-<h2>🧠 Tech Stack</h2>
+## 🧠 Tech Stack
 
-<ul>
-  <li>💻 <b>Frontend:</b> React.js, HTML5, CSS3, JavaScript</li>
-  <li>🧩 <b>Backend:</b> Node.js, FastAPI</li>
-  <li>🤖 <b>AI & NLP:</b> OpenAI API (LLM-based recommendation engine)</li>
-  <li>🔥 <b>Database & Authentication:</b> Firebase</li>
-  <li>📱 <b>Deployment:</b> Netlify</li>
-</ul>
+- 💻 **Frontend:** React.js, HTML5, CSS3, JavaScript  
+- 🧩 **Backend:** Node.js, FastAPI  
+- 🤖 **AI & NLP:** OpenAI API (LLM-based recommendation engine)  
+- 🔥 **Database & Authentication:** Firebase  
+- 📱 **Deployment:** Netlify  
 
-<hr/>
+---
 
-<h2>🧩 System Workflow</h2>
+## 🧩 System Workflow
 
-<pre>
+```text
 User Interface (React)
         ↓
 Skill & Goal Inputs
@@ -92,68 +79,55 @@ AI Recommendation Engine (OpenAI)
 Career Insights & Roadmaps
         ↓
 Results Rendered on UI
-</pre>
+```
 
-<p>
-  This modular architecture allows scalability, clearer AI visibility,
-  and seamless future integrations.
-</p>
+This modular architecture allows scalability, clearer AI visibility,  
+and seamless future integrations.
 
-<hr/>
+---
 
-<h2>📘 How It Works</h2>
+## 📘 How It Works
 
-<ol>
-  <li>Visit the <a href="https://sunny-rabanadas-bd1f6f.netlify.app/" target="_blank">Live Demo</a>.</li>
-  <li>Enter your skills, interests, and career goals.</li>
-  <li>The backend processes inputs and triggers AI analysis.</li>
-  <li>AI generates career suggestions and learning directions.</li>
-  <li>Users explore roadmaps and actionable insights.</li>
-</ol>
+1. Visit the [Live Demo](https://sunny-rabanadas-bd1f6f.netlify.app/).
+2. Enter your skills, interests, and career goals.
+3. The backend processes inputs and triggers AI analysis.
+4. AI generates career suggestions and learning directions.
+5. Users explore roadmaps and actionable insights.
 
-<hr/>
+---
 
-<h2>🔮 Future Enhancements</h2>
+## 🔮 Future Enhancements
 
-<ul>
-  <li>🔗 LinkedIn & GitHub integration for automatic skill extraction</li>
-  <li>🗂️ Persistent user profiles and saved career journeys</li>
-  <li>🎙️ AI Voice Assistant for conversational guidance</li>
-  <li>🏆 Gamified dashboard for skill and progress tracking</li>
-  <li>📊 Advanced job-market analytics and insights</li>
-</ul>
+- 🔗 LinkedIn & GitHub integration for automatic skill extraction
+- 🗂️ Persistent user profiles and saved career journeys
+- 🎙️ AI Voice Assistant for conversational guidance
+- 🏆 Gamified dashboard for skill and progress tracking
+- 📊 Advanced job-market analytics and insights
 
-<hr/>
+---
 
-<h2>🤝 Contributing</h2>
+## 🤝 Contributing
 
-<p>
-  Contributions are welcome and appreciated.
-</p>
+Contributions are welcome and appreciated.
 
-<ul>
-  <li>Fork the repository</li>
-  <li>Create a feature or documentation branch</li>
-  <li>Submit a well-described pull request</li>
-</ul>
+- Fork the repository
+- Create a feature or documentation branch
+- Submit a well-described pull request
 
-<p>
-  Let’s build smarter, AI-powered career guidance together 🚀
-</p>
+Let’s build smarter, AI-powered career guidance together 🚀
 
-<hr/>
+---
 
-<h2>📜 License</h2>
+## 📜 License
 
-<p>
-  This project is licensed under the <b>MIT License</b> — free to use,
-  modify, and distribute with proper attribution.
-</p>
+This project is licensed under the **MIT License** — free to use,  
+modify, and distribute with proper attribution.
 
-<hr/>
+---
 
 <h3 align="center">
-  ⭐ Developed with passion by
-  <a href="https://github.com/ABHIJEET-0001" target="_blank">Abhijeet Kasera</a><br/>
-  <sub>Always building intelligent systems that matter.</sub>
+⭐ Developed with passion by  
+<a href="https://github.com/ABHIJEET-0001" target="_blank">Abhijeet Kasera</a>  
+<br/>
+<sub>Always building intelligent systems that matter.</sub>
 </h3>
