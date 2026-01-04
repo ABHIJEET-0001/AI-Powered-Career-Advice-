@@ -1024,6 +1024,50 @@ section {
     font-weight: bold;
 }
 
+/* ===== ATS Resume Templates ===== */
+.resume-template {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #000;
+  line-height: 1.6;
+}
+
+.resume-template h2,
+.resume-template h3 {
+  border-bottom: 1px solid #000;
+  padding-bottom: 4px;
+  margin-top: 20px;
+}
+
+.resume-template.modern h2,
+.resume-template.modern h3 {
+  border-bottom: 2px solid #000;
+}
+
+.resume-template.minimal h2,
+.resume-template.minimal h3 {
+  border-bottom: none;
+  text-transform: uppercase;
+}
+
+.resume-template p,
+.resume-template li {
+  font-size: 14px;
+}
+
+.resume-template .skills-list {
+  display: block;
+}
+
+.resume-template .skill-tag {
+  display: inline;
+  padding: 0;
+  margin-right: 8px;
+  background: none;
+  border: none;
+  font-size: 14px;
+}
+
+
 /* Resume Preview Modal */
 #resume-preview-content {
     font-family: 'Poppins', sans-serif;
