@@ -463,14 +463,25 @@ function toggleMobileMenu() {
   const navMenu = document.getElementById("nav-menu");
   const navToggle = document.getElementById("nav-toggle");
   
+  if (!navMenu || !navToggle) return;
+  
+  const isActive = navMenu.classList.contains("active");
+  
   navMenu.classList.toggle("active");
   navToggle.classList.toggle("active");
   
+  // Update ARIA attributes
+  navToggle.setAttribute("aria-expanded", !isActive);
+  
   // Prevent body scroll when mobile menu is open
-  if (navMenu.classList.contains("active")) {
+  if (!isActive) {
     document.body.style.overflow = "hidden";
+    document.body.style.position = "fixed";
+    document.body.style.width = "100%";
   } else {
     document.body.style.overflow = "";
+    document.body.style.position = "";
+    document.body.style.width = "";
   }
 }
 
@@ -480,24 +491,59 @@ document.addEventListener("click", (e) => {
   const navToggle = document.getElementById("nav-toggle");
   const navbar = document.getElementById("navbar");
   
+  if (!navMenu || !navToggle || !navbar) return;
+  
   if (navMenu.classList.contains("active") && 
       !navbar.contains(e.target)) {
     toggleMobileMenu();
   }
 });
 
-// Close mobile menu on window resize to desktop size
+// Close mobile menu on window resize and reset layout
+let resizeTimer;
 window.addEventListener("resize", () => {
-  if (window.innerWidth > 768) {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
     const navMenu = document.getElementById("nav-menu");
     const navToggle = document.getElementById("nav-toggle");
     
-    if (navMenu.classList.contains("active")) {
+    if (!navMenu || !navToggle) return;
+    
+    // Close mobile menu when resizing to desktop
+    if (window.innerWidth > 768) {
+      if (navMenu.classList.contains("active")) {
+        navMenu.classList.remove("active");
+        navToggle.classList.remove("active");
+        document.body.style.overflow = "";
+        document.body.style.position = "";
+        document.body.style.width = "";
+      }
+    }
+  }, 250);
+});
+
+// Handle orientation change
+window.addEventListener("orientationchange", () => {
+  const navMenu = document.getElementById("nav-menu");
+  const navToggle = document.getElementById("nav-toggle");
+  
+  if (!navMenu || !navToggle) return;
+  
+  if (navMenu.classList.contains("active")) {
+    setTimeout(() => {
       navMenu.classList.remove("active");
       navToggle.classList.remove("active");
       document.body.style.overflow = "";
-    }
+      document.body.style.position = "";
+      document.body.style.width = "";
+    }, 100);
   }
+});
+
+// Prevent horizontal scroll
+document.addEventListener("DOMContentLoaded", () => {
+  document.body.style.overflowX = "hidden";
+  document.documentElement.style.overflowX = "hidden";
 });
 
 // ===== END OF NAVBAR ENHANCEMENTS =====
