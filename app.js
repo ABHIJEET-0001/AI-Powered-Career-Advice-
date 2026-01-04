@@ -1337,6 +1337,13 @@ function debounce(func, wait) {
 const debouncedSearch = debounce(searchCareers, 300);
 const debouncedJobSearch = debounce(simulateJobSearch, 300);
 
+// ---Start Dynamic Copyright
+function setDynamicCopyright(companyName){
+  const currYear = new Date().getFullYear();
+  document.getElementById("copyright").textContent=`© ${currYear} ${companyName}. All rights reserved.`;
+}
+//----End Dynamic Copyright----
+
 // Global Access
 window.showPage = showPage;
 window.toggleMobileMenu = toggleMobileMenu;
@@ -1369,3 +1376,4 @@ window.downloadResume = downloadResume;
 window.enrollInCourse = enrollInCourse;
 window.unEnrollCourse = unEnrollCourse;
 window.handleGetStartedClick = handleGetStartedClick;
+window.setDynamicCopyright=setDynamicCopyright('AI Career Advisor');
