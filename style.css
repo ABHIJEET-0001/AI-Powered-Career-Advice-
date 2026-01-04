@@ -1630,19 +1630,76 @@ section {
     height: 16px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    font-size: 10px;
-    cursor: pointer;
 }
-#careers-page, 
-#learning-page, 
-#community-page, 
-#dashboard-page, 
+
+/* Testimonials Section */
+.testimonials {
+  padding: 60px 20px;
+  text-align: center;
+  background: #f9fafb;
+}
+
+.testimonial-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  max-width: 900px;
+  margin: 30px auto;
+}
+
+.testimonial-card {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.testimonial-card h4 {
+  margin-bottom: 5px;
+}
+
+.testimonial-card span {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.add-testimonial-btn {
+  margin: 25px auto;
+  padding: 10px 20px;
+  cursor: pointer;
+  display: block;
+}
+
+.testimonial-form {
+  max-width: 400px;
+  margin: 30px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.testimonial-form input,
+.testimonial-form textarea {
+  width: 100%;
+  padding: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Page Layout Spacing */
+#careers-page,
+#learning-page,
+#community-page,
+#dashboard-page,
 #resume-page {
-    margin-top: 40px; 
-    padding-top: 20px; 
+  margin-top: 40px;
+  padding-top: 20px;
 }
 
 #home-page {
-    margin-top: 0;
+  margin-top: 0;
 }
+
