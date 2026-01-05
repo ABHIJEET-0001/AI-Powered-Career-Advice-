@@ -124,45 +124,39 @@ Results Rendered on UI
 </ul>
 
 <hr/>
+---
 
-<h2>🤝 Contributing</h2>
+## 🌐 Live Experience
 
-<p>
-  Contributions are welcome and appreciated.
-</p>
+> **Ready to see it in action?** Access the AI Career Advisor for real-time guidance, personalized skill recommendations, and AI-powered insights.
+>
+> [**🔗 Launch Live Demo**](https://sunny-rabanadas-bd1f6f.netlify.app)
 
-<ul>
-  <li>Fork the repository</li>
-  <li>Create a feature or documentation branch</li>
-  <li>Submit a well-described pull request</li>
-</ul>
+---
 
-<p>
-  Let’s build smarter, AI-powered career guidance together 🚀
-</p>
+## 🤝 Contributing
 
-<hr/>
+Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-<h2>📜 License</h2>
+1. **Fork** the Project 🍴
+2. **Create** your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. **Commit** your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. **Push** to the Branch (`git push origin feature/AmazingFeature`)
+5. **Open** a Pull Request 🚀
 
-<p>
-  This project is licensed under the <b>MIT License</b> — free to use,
-  modify, and distribute with proper attribution.
-</p>
+---
 
-<hr/>
+## 📜 License
 
-<h3 align="center">⭐ Developed with passion by <a href="https://github.com/ABHIJEET-0001">Abhijeet Kasera</a> — Always building intelligent systems that matter.</h3>
+Distributed under the **MIT License**. See `LICENSE` for more information.
 
+---
 
-## 🌐 Live Demo
+<div align="center">
 
-🔗 https://sunny-rabanadas-bd1f6f.netlify.app
+### ⭐ Developed with passion by [Abhijeet Kasera](https://github.com/ABHIJEET-0001)
+**Always building intelligent systems that matter.**
 
-Experience the AI Career Advisor in action with real-time career guidance, personalized skill recommendations, and AI-powered insights.
+[![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ABHIJEET-0001)
 
-<h3 align="center">
-  ⭐ Developed with passion by
-  <a href="https://github.com/ABHIJEET-0001" target="_blank">Abhijeet Kasera</a><br/>
-  <sub>Always building intelligent systems that matter.</sub>
-</h3>
+</div>
