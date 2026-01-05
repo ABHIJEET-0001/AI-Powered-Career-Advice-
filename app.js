@@ -1420,74 +1420,56 @@ function generateResume() {
   const email = document.getElementById("resume-email").value;
   const phone = document.getElementById("resume-phone").value;
   const summary = document.getElementById("resume-summary").value;
+  const template = document.getElementById("resume-template").value;
 
   const experiences = Array.from(
     document.querySelectorAll("#experience-container .experience-item")
-  ).map((item) => {
-    return {
-      title: item.children[0].value,
-      company: item.children[1].value,
-      desc: item.children[2].value,
-    };
-  });
+  ).map((item) => ({
+    title: item.children[0].value,
+    company: item.children[1].value,
+    desc: item.children[2].value,
+  }));
 
   const educations = Array.from(
     document.querySelectorAll("#education-container .education-item")
-  ).map((item) => {
-    return {
-      degree: item.children[0].value,
-      school: item.children[1].value,
-      years: item.children[2].value,
-    };
-  });
+  ).map((item) => ({
+    degree: item.children[0].value,
+    school: item.children[1].value,
+    years: item.children[2].value,
+  }));
 
   const skills = Array.from(
     document.querySelectorAll("#resume-skills .skill-tag")
   ).map((tag) => tag.textContent);
 
   const previewContent = document.getElementById("resume-preview-content");
+
+  previewContent.className = `resume-template ${template}`;
+
   previewContent.innerHTML = `
-                <h2 style="text-align: center;">${name}</h2>
-                <p style="text-align: center; margin-bottom: 20px;">${email} | ${phone}</p>
-                
-                <h3>Professional Summary</h3>
-                <p>${summary}</p>
+    <h2>${name}</h2>
+    <p>${email} | ${phone}</p>
 
-                <h3>Work Experience</h3>
-                ${experiences
-                  .map(
-                    (exp) => `
-                    <div class="experience-item">
-                        <h4>${exp.title}</h4>
-                        <p style="font-style: italic;">${exp.company}</p>
-                        <p>${exp.desc}</p>
-                    </div>
-                `
-                  )
-                  .join("")}
+    <h3>Professional Summary</h3>
+    <p>${summary}</p>
 
-                <h3>Education</h3>
-                ${educations
-                  .map(
-                    (edu) => `
-                    <div class="education-item">
-                        <h4>${edu.degree}</h4>
-                        <p>${edu.school} (${edu.years})</p>
-                    </div>
-                `
-                  )
-                  .join("")}
+    <h3>Work Experience</h3>
+    ${experiences.map(exp => `
+      <p><strong>${exp.title}</strong> – ${exp.company}</p>
+      <p>${exp.desc}</p>
+    `).join("")}
 
-                <h3>Skills</h3>
-                <div class="skills-list">
-                    ${skills
-                      .map((skill) => `<span class="skill-tag">${skill}</span>`)
-                      .join("")}
-                </div>
-            `;
+    <h3>Education</h3>
+    ${educations.map(edu => `
+      <p><strong>${edu.degree}</strong>, ${edu.school} (${edu.years})</p>
+    `).join("")}
+
+    <h3>Skills</h3>
+    <p>${skills.join(", ")}</p>
+  `;
 
   openModal("resume-preview-modal");
-}
+} 
 
 function downloadResume() {
   const { jsPDF } = window.jspdf;
