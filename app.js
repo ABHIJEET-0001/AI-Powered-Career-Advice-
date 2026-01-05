@@ -1480,3 +1480,23 @@ window.enrollInCourse = enrollInCourse;
 window.unEnrollCourse = unEnrollCourse;
 window.handleGetStartedClick = handleGetStartedClick;
 window.setDynamicCopyright=setDynamicCopyright('AI Career Advisor');
+
+
+
+
+
+// Password toggle function
+function togglePassword(inputId) {
+    const input = document.getElementById(inputId);
+    const toggleBtn = input.nextElementSibling;
+    
+    if (input.type === 'password') {
+        input.type = 'text';
+        toggleBtn.innerHTML = '👁‍🗨'; // Eye with slash
+        toggleBtn.title = "Hide password";
+    } else {
+        input.type = 'password';
+        toggleBtn.innerHTML = '👁'; // Eye open
+        toggleBtn.title = "Show password";
+    }
+}

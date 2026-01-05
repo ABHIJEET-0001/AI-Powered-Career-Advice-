@@ -171,11 +171,20 @@
                         <label class="form-label">Email</label>
                         <input type="email" class="form-control" id="login-email" placeholder="Enter your email">
                     </div>
-                    <div class="form-group">
-                        <label class="form-label">Password</label>
-                        <input type="password" class="form-control" id="login-password"
-                            placeholder="Enter your password">
-                    </div>
+
+              <div class="form-group">
+    <label class="form-label">Password</label>
+    <div style="position: relative;">
+        <input type="password" class="form-control" id="login-password" placeholder="Enter your password">
+        <button type="button" class="password-toggle" onclick="togglePassword('login-password')" 
+                style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 1.1rem;">
+            👁
+        </button>
+    </div>
+              </div>
+
+
+
                     <button class="btn btn--primary btn--full-width" onclick="login()">Login</button>
                     <div class="auth-switch">
                         <p>Don't have an account? <a href="#" onclick="showRegisterForm()">Register</a></p>
@@ -192,11 +201,20 @@
                         <label class="form-label">Email</label>
                         <input type="email" class="form-control" id="register-email" placeholder="Enter your email">
                     </div>
+
+
                     <div class="form-group">
-                        <label class="form-label">Password</label>
-                        <input type="password" class="form-control" id="register-password"
-                            placeholder="Create a password">
-                    </div>
+    <label class="form-label">Password</label>
+    <div style="position: relative;">
+        <input type="password" class="form-control" id="register-password" placeholder="Create a password">
+        <button type="button" class="password-toggle" onclick="togglePassword('register-password')" 
+                style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 1.1rem;">
+            👁
+        </button>
+    </div>
+</div>
+
+
                     <button class="btn btn--primary btn--full-width" onclick="register()">Register</button>
                     <div class="auth-switch">
                         <p>Already have an account? <a href="#" onclick="showLoginForm()">Login</a></p>
