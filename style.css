@@ -1443,6 +1443,10 @@ section {
         font-size: 2rem;
     }
 
+    .nav-brand h2 {
+        font-size: 1.5rem;
+    }
+
     section {
         padding: 60px 0;
     }
