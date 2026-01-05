@@ -925,7 +925,50 @@ function displayCareers(careers) {
   const container = document.getElementById("careers-grid");
   if (!container) return;
   container.innerHTML = careers
-    .map(
+    .map(function nextQuestion(isSkipping = false) {
+  if (!isSkipping && assessmentData.answers[assessmentData.currentQuestion] === undefined) {
+    alert("Please select or skip.");function nextQuestion(isSkipping = false) {
+  if (!isSkipping && assessmentData.answers[assessmentData.currentQuestion] === undefined) {
+    alert("Please select or skip.");
+    return;
+  }
+function nextQuestion(isSkipping = false) {
+  if (!isSkipping && assessmentData.answers[assessmentData.currentQuestion] === undefined) {
+    alert("Please select or skip.");
+    return;
+  }
+
+  assessmentData.currentQuestion++;
+
+  if (assessmentData.currentQuestion >= appData.assessmentQuestions.length) {
+    finishAssessment();
+  } else {
+    loadQuestion();
+  }
+}
+
+
+  assessmentData.currentQuestion++;
+
+  if (assessmentData.currentQuestion >= appData.assessmentQuestions.length) {
+    finishAssessment();
+  } else {
+    loadQuestion();
+  }
+}
+
+    return;
+  }
+
+  assessmentData.currentQuestion++;
+
+  if (assessmentData.currentQuestion >= appData.assessmentQuestions.length) {
+    finishAssessment();
+  } else {
+    loadQuestion();
+  }
+}
+
       (career) => `
                 <div class="career-card">
                     <div>
@@ -933,7 +976,21 @@ function displayCareers(careers) {
                         <div class="skills-list">
                             ${career.required_skills
                               .slice(0, 3)
-                              .map(
+                              .map(function nextQuestion(isSkipping = false) {
+  if (!isSkipping && assessmentData.answers[assessmentData.currentQuestion] === undefined) {
+    alert("Please select or skip.");
+    return;
+  }
+
+  assessmentData.currentQuestion++;
+
+  if (assessmentData.currentQuestion >= appData.assessmentQuestions.length) {
+    finishAssessment();
+  } else {
+    loadQuestion();
+  }
+}
+
                                 (skill) =>
                                   `<span class="skill-tag">${skill}</span>`
                               )
@@ -1046,10 +1103,34 @@ function loadCareerRecommendations() {
     )
     .join("");
 }
-
 function calculateCareerMatches() {
   if (!currentUser || !currentUser.profile) return appData.careers.slice(0, 3);
-  return appData.careers.sort(() => 0.5 - Math.random()); // Simple random for demo
+
+  // Score careers based on profile match
+  const userSkills = currentUser.profile.skills || [];
+  const userInterests = currentUser.profile.interests || [];
+
+  const scored = appData.careers.map(career => {
+    let score = 0;
+
+    // Add points for skill matches
+    career.required_skills.forEach(skill => {
+      if (userSkills.includes(skill)) score += 2;
+    });
+
+    // Add points for interest matches
+    userInterests.forEach(interest => {
+      if (career.title.toLowerCase().includes(interest.toLowerCase())) {
+        score += 3;
+      }
+    });
+
+    return { ...career, score };
+  });
+
+  return scored
+    .sort((a, b) => b.score - a.score) // highest score first
+    .map(item => item);
 }
 
 function initializeSkillGapChart() {
