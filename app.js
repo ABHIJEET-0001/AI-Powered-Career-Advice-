@@ -650,13 +650,13 @@ function updateLoginStateUI() {
 function addSkill() {
   const skillInput = document.getElementById("skill-input");
   const skill = skillInput.value.trim();
-  
+
   // Validate skill length
   if (!skill) {
     showValidationError("skills-error", "Please enter a skill");
     return;
   }
-  
+
   if (skill.length < 3) {
     showValidationError("skills-error", "Skill must be at least 3 characters long");
     return;
@@ -668,17 +668,17 @@ function addSkill() {
   // store the actual skill text in a data attribute to avoid serializing the remove button
   skillTag.dataset.skill = skill;
   skillTag.appendChild(document.createTextNode(skill));
-  
+
   // Add remove button
   const removeButton = document.createElement("span");
   removeButton.className = "remove-skill";
   removeButton.innerHTML = "&times;";
   skillTag.appendChild(removeButton);
-  
+
   skillsList.appendChild(skillTag);
   skillInput.value = "";
   clearValidationError("skills-error");
-  
+
   // Validate form after adding skill
   validateProfileForm();
 }
@@ -687,7 +687,7 @@ function addSkill() {
 function setupSkillRemoval() {
   const skillsList = document.getElementById("skills-list");
   if (skillsList) {
-    skillsList.addEventListener("click", function(event) {
+    skillsList.addEventListener("click", function (event) {
       if (event.target.classList.contains("remove-skill")) {
         const parent = event.target.parentElement;
         if (parent) parent.remove();
@@ -759,9 +759,9 @@ function setupProfileFormValidation() {
 
   if (education) education.addEventListener("change", validateProfileForm);
   if (skillInput) {
-    skillInput.addEventListener("input", function() { clearValidationError("skills-error"); });
+    skillInput.addEventListener("input", function () { clearValidationError("skills-error"); });
     // allow Enter to add
-    skillInput.addEventListener("keypress", function(e) {
+    skillInput.addEventListener("keypress", function (e) {
       if (e.key === "Enter") {
         e.preventDefault();
         addSkill();
@@ -851,11 +851,10 @@ function loadQuestion() {
 
   document.getElementById("current-question").textContent =
     assessmentData.currentQuestion + 1;
-  document.getElementById("assessment-progress").style.width = `${
-    ((assessmentData.currentQuestion + 1) /
-      appData.assessmentQuestions.length) *
+  document.getElementById("assessment-progress").style.width = `${((assessmentData.currentQuestion + 1) /
+    appData.assessmentQuestions.length) *
     100
-  }%`;
+    }%`;
 
   // Button visibility
   document
@@ -924,6 +923,17 @@ function loadCareers() {
 function displayCareers(careers) {
   const container = document.getElementById("careers-grid");
   if (!container) return;
+
+  if (!careers || careers.length === 0) {
+    container.innerHTML = `
+       <div class="empty-state" style="text-align: center;">
+        <h3>No career paths found</h3>
+        <p>Try a different keyword or explore other career options.</p>
+      </div>
+    `;
+    return;
+  }
+
   container.innerHTML = careers
     .map(
       (career) => `
@@ -932,20 +942,19 @@ function displayCareers(careers) {
                         <h3>${career.title}</h3>
                         <div class="skills-list">
                             ${career.required_skills
-                              .slice(0, 3)
-                              .map(
-                                (skill) =>
-                                  `<span class="skill-tag">${skill}</span>`
-                              )
-                              .join("")}
+          .slice(0, 3)
+          .map(
+            (skill) =>
+              `<span class="skill-tag">${skill}</span>`
+          )
+          .join("")}
                         </div>
                     </div>
                     <p style="flex-grow: 1;">${career.description}</p>
                     <div class="career-card-info">
                         <span class="salary-range">${career.salary_range}</span>
-                        <button class="btn btn--primary btn--sm" onclick="showCareerDetails(${
-                          career.id
-                        })">Learn More</button>
+                        <button class="btn btn--primary btn--sm" onclick="showCareerDetails(${career.id
+        })">Learn More</button>
                     </div>
                 </div>
             `
@@ -978,26 +987,22 @@ function showCareerDetails(careerId) {
   if (!career) return;
   document.getElementById("modal-career-title").textContent = career.title;
   document.getElementById("career-details").innerHTML = `
-                <div class="career-detail-section"><h4>Overview</h4><p>${
-                  career.description
-                }</p></div>
+                <div class="career-detail-section"><h4>Overview</h4><p>${career.description
+    }</p></div>
                 <div class="career-detail-section"><h4>Required Skills</h4><div class="skills-list">${career.required_skills
-                  .map((skill) => `<span class="skill-tag">${skill}</span>`)
-                  .join("")}</div></div>
-                <div class="career-detail-section"><h4>Salary Range</h4><p class="salary-range">${
-                  career.salary_range
-                }</p></div>
-                <div class="career-detail-section"><h4>Future Outlook</h4><p>${
-                  career.growth_outlook
-                }</p></div>
+      .map((skill) => `<span class="skill-tag">${skill}</span>`)
+      .join("")}</div></div>
+                <div class="career-detail-section"><h4>Salary Range</h4><p class="salary-range">${career.salary_range
+    }</p></div>
+                <div class="career-detail-section"><h4>Future Outlook</h4><p>${career.growth_outlook
+    }</p></div>
                 <div class="career-detail-section"><h4>Learning Path</h4><div class="learning-path">${career.learning_path
-                  .map(
-                    (step, index) =>
-                      `<div class="learning-step"><div class="step-number-small">${
-                        index + 1
-                      }</div><span>${step}</span></div>`
-                  )
-                  .join("")}</div></div>
+      .map(
+        (step, index) =>
+          `<div class="learning-step"><div class="step-number-small">${index + 1
+          }</div><span>${step}</span></div>`
+      )
+      .join("")}</div></div>
             `;
   openModal("career-modal");
 }
@@ -1017,8 +1022,8 @@ function updateDashboardStats() {
     currentUser && currentUser.assessment
       ? "100%"
       : currentUser && currentUser.profile
-      ? "75%"
-      : "25%";
+        ? "75%"
+        : "25%";
   document.getElementById("profile-completion").textContent = completion;
   document.getElementById("career-matches").textContent =
     calculateCareerMatches().length;
@@ -1111,25 +1116,22 @@ function loadCourses() {
                     <p>${course.description}</p>
                     <div class="course-card-features">
                         ${course.features
-                          .map(
-                            (feature) =>
-                              `<span><i class="fas fa-check-circle" style="color: var(--accent);"></i> ${feature}</span>`
-                          )
-                          .join(" &bull; ")}
+          .map(
+            (feature) =>
+              `<span><i class="fas fa-check-circle" style="color: var(--accent);"></i> ${feature}</span>`
+          )
+          .join(" &bull; ")}
                     </div>
                     <div class="course-card-info">
                         <div>
-                            <span>${course.duration} • ${
-        course.level
-      }</span><br>
-                             <span class="course-card-rating">Rating: ${
-                               course.rating
-                             } ★</span>
+                            <span>${course.duration} • ${course.level
+        }</span><br>
+                             <span class="course-card-rating">Rating: ${course.rating
+        } ★</span>
                         </div>
                         <button 
-                            class="btn btn--primary btn--sm ${
-                              isEnrolled ? "enrolled" : ""
-                            }" 
+                            class="btn btn--primary btn--sm ${isEnrolled ? "enrolled" : ""
+        }" 
                             onclick="enrollInCourse(this, ${course.id})"
                             ${isEnrolled ? "disabled" : ""}>
                             ${isEnrolled ? "Enrolled" : "Enroll Now"}
@@ -1217,17 +1219,14 @@ function addExperience(isExample = false) {
   const item = document.createElement("div");
   item.className = "form-group experience-item";
   item.innerHTML = `
-                <input type="text" class="form-control mb-4" placeholder="Job Title" value="${
-                  isExample ? "Data Analyst Intern" : ""
-                }">
-                <input type="text" class="form-control mb-4" placeholder="Company" value="${
-                  isExample ? "Tech Solutions Inc." : ""
-                }">
-                <textarea class="form-control" rows="2" placeholder="Responsibilities...">${
-                  isExample
-                    ? "Analyzed sales data to identify trends, creating dashboards that improved decision-making."
-                    : ""
-                }</textarea>
+                <input type="text" class="form-control mb-4" placeholder="Job Title" value="${isExample ? "Data Analyst Intern" : ""
+    }">
+                <input type="text" class="form-control mb-4" placeholder="Company" value="${isExample ? "Tech Solutions Inc." : ""
+    }">
+                <textarea class="form-control" rows="2" placeholder="Responsibilities...">${isExample
+      ? "Analyzed sales data to identify trends, creating dashboards that improved decision-making."
+      : ""
+    }</textarea>
             `;
   container.appendChild(item);
 }
@@ -1237,15 +1236,12 @@ function addEducation(isExample = false) {
   const item = document.createElement("div");
   item.className = "form-group education-item";
   item.innerHTML = `
-                <input type="text" class="form-control mb-4" placeholder="Degree" value="${
-                  isExample ? "B.Tech in Computer Science" : ""
-                }">
-                <input type="text" class="form-control mb-4" placeholder="Institution" value="${
-                  isExample ? "University of Technology" : ""
-                }">
-                <input type="text" class="form-control" placeholder="Years Attended" value="${
-                  isExample ? "2019 - 2023" : ""
-                }">
+                <input type="text" class="form-control mb-4" placeholder="Degree" value="${isExample ? "B.Tech in Computer Science" : ""
+    }">
+                <input type="text" class="form-control mb-4" placeholder="Institution" value="${isExample ? "University of Technology" : ""
+    }">
+                <input type="text" class="form-control" placeholder="Years Attended" value="${isExample ? "2019 - 2023" : ""
+    }">
             `;
   container.appendChild(item);
 }
@@ -1316,7 +1312,7 @@ function generateResume() {
   `;
 
   openModal("resume-preview-modal");
-} 
+}
 
 function downloadResume() {
   const { jsPDF } = window.jspdf;
@@ -1441,9 +1437,9 @@ const debouncedSearch = debounce(searchCareers, 300);
 const debouncedJobSearch = debounce(simulateJobSearch, 300);
 
 // ---Start Dynamic Copyright
-function setDynamicCopyright(companyName){
+function setDynamicCopyright(companyName) {
   const currYear = new Date().getFullYear();
-  document.getElementById("copyright").textContent=`© ${currYear} ${companyName}. All rights reserved.`;
+  document.getElementById("copyright").textContent = `© ${currYear} ${companyName}. All rights reserved.`;
 }
 //----End Dynamic Copyright----
 
@@ -1479,4 +1475,4 @@ window.downloadResume = downloadResume;
 window.enrollInCourse = enrollInCourse;
 window.unEnrollCourse = unEnrollCourse;
 window.handleGetStartedClick = handleGetStartedClick;
-window.setDynamicCopyright=setDynamicCopyright('AI Career Advisor');
+window.setDynamicCopyright = setDynamicCopyright('AI Career Advisor');
