@@ -1146,7 +1146,27 @@ section {
 #resume-preview-content .education-item {
     margin-bottom: 15px;
 }
+/* Back to top button styles*/
+#btn{
+    position: fixed;
+     bottom: 15px;
+    right: 100px;
+    z-index: 100;
+    font-size: larger;
+    border-radius: 50%;
+    font-size: 20px;
+    padding: 10px 20px;
+    background-color:var(--primary-dark) ;
+    border: none;
+    color: whitesmoke;
+    cursor: pointer;
+    transform: scale(1) 0.4s ease;
 
+}
+#btn:hover{
+    scale: 1.2;
+    transition: smooth;
+}
 /* Chatbot */
 .chatbot-container {
     position: fixed;
