@@ -747,6 +747,10 @@ section {
     cursor: pointer;
     color: white;
 }
+.selected-career {
+  border: 2px solid var(--accent);
+  background: rgba(67, 97, 238, 0.08);
+}
 
 .modal-body {
     padding: 24px;

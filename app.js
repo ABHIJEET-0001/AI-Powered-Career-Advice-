@@ -1166,8 +1166,14 @@ function loadDashboard() {
   loadCareerRecommendations();
   initializeSkillGapChart();
   loadEnrolledCourses();
-  renderCodingProfiles(); // ✅ NEW
+  renderCodingProfiles();
+  renderChosenCareer(); 
 }
+ function openChosenCareer() {
+  if (!currentUser?.selectedCareerPath) return;
+  showCareerDetails(currentUser.selectedCareerPath);
+}
+
 
 
 function updateDashboardStats() {
@@ -1187,6 +1193,27 @@ function updateDashboardStats() {
     currentUser.enrolledCourses?.length || 0;
 }// Dashboard Functions
 
+function renderChosenCareer() {
+  const card = document.getElementById("chosen-career-card");
+  const titleEl = document.getElementById("chosen-career-title");
+
+  if (!card || !currentUser?.selectedCareerPath) {
+    card?.classList.add("hidden");
+    return;
+  }
+
+  const career = appData.careers.find(
+    c => c.id === currentUser.selectedCareerPath
+  );
+
+  if (!career) {
+    card.classList.add("hidden");
+    return;
+  }
+
+  titleEl.textContent = career.title;
+  card.classList.remove("hidden");
+}
 
 function renderCodingProfiles() {
   const container = document.getElementById("coding-profiles-list");
@@ -1230,20 +1257,30 @@ function renderCodingProfiles() {
 function loadCareerRecommendations() {
   const container = document.getElementById("career-recommendations");
   if (!container) return;
+
   const recommendations = calculateCareerMatches().slice(0, 3);
+
   container.innerHTML = recommendations
-    .map(
-      (career) => `
-                <div class="topic-item" style="cursor: pointer;" onclick="showCareerDetails(${career.id})">
-                     <div>
-                           <h4>${career.title}</h4>
-                           <span>${career.salary_range}</span>
-                     </div>
-                </div>
-            `
-    )
+    .map((career) => {
+      const isSelected = career.id === currentUser?.selectedCareerPath;
+
+      return `
+        <div class="topic-item ${isSelected ? "selected-career" : ""}"
+             style="cursor: pointer;"
+             onclick="showCareerDetails(${career.id})">
+          <div>
+            <h4>
+              ${career.title}
+              ${isSelected ? " ⭐" : ""}
+            </h4>
+            <span>${career.salary_range}</span>
+          </div>
+        </div>
+      `;
+    })
     .join("");
 }
+
 
 function calculateCareerMatches() {
   if (!currentUser || !currentUser.profile) return appData.careers.slice(0, 3);
@@ -1720,3 +1757,4 @@ window.unEnrollCourse = unEnrollCourse;
 window.handleGetStartedClick = handleGetStartedClick;
 window.setDynamicCopyright=setDynamicCopyright('AI Career Advisor');
 window.openEditProfile = openEditProfile;
+window.openChosenCareer = openChosenCareer;
