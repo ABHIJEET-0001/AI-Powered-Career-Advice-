@@ -263,6 +263,14 @@
                         </div>
                         <div id="interests-error" class="validation-error"></div>
                     </div>
+                    <div class="form-group">
+                        <label class="form-label">Coding Profiles (Optional)</label>
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <input type="url" class="form-control" id="github-profile" placeholder="GitHub Profile URL" style="margin-bottom: 0;">
+                            <input type="url" class="form-control" id="leetcode-profile" placeholder="LeetCode Profile URL" style="margin-bottom: 0;">
+                            <input type="url" class="form-control" id="codeforces-profile" placeholder="Codeforces Profile URL">
+                        </div>
+                    </div>
                     <button class="btn btn--primary btn--full-width" onclick="saveProfile()" disabled>Save Profile & Start Assessment</button>
                 </div>
             </div>
@@ -428,6 +436,15 @@
                         <div class="action-content">
                             <h4>Job Search Simulator</h4>
                             <p>Practice finding jobs that match your skills</p>
+                        </div>
+                    </div>
+                    <div class="action-card" onclick="showPage('profile-setup')">
+                        <div class="action-icon">
+                            <i class="fas fa-user-edit"></i>
+                        </div>
+                        <div class="action-content">
+                            <h4>Edit Profile</h4>
+                            <p>Update your skills and coding profiles</p>
                         </div>
                     </div>
                     <div class="action-card" onclick="showPage('community')">
