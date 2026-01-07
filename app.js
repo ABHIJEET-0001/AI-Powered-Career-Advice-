@@ -776,30 +776,95 @@ function setupProfileFormValidation() {
 
 function saveProfile() {
   const educationLevel = document.getElementById("education-level").value;
+
   const skills = Array.from(
     document.getElementById("skills-list").children
-  ).map((el) => el.dataset && el.dataset.skill ? el.dataset.skill : (el.firstChild && el.firstChild.nodeValue ? el.firstChild.nodeValue.trim() : el.textContent.trim()));
+  ).map((el) =>
+    el.dataset && el.dataset.skill
+      ? el.dataset.skill
+      : el.textContent.trim()
+  );
+
   const interests = Array.from(
-    document.querySelectorAll('input[type="checkbox"]:checked')
+    document.querySelectorAll('.interests-grid input[type="checkbox"]:checked')
   ).map((cb) => cb.value);
 
-  if (!educationLevel || skills.length === 0 || interests.length === 0)
-    return alert("Please complete all profile fields");
+  // ✅ Optional coding profiles (NEW FEATURE)
+  const codingProfiles = {
+    github: document.getElementById("github-profile")?.value.trim() || "",
+    linkedin: document.getElementById("linkedin-profile")?.value.trim() || "",
+    leetcode: document.getElementById("leetcode-profile")?.value.trim() || "",
+    codeforces: document.getElementById("codeforces-profile")?.value.trim() || "",
+  };
 
+  // Validation (unchanged behavior)
+  if (!educationLevel || skills.length === 0 || interests.length === 0) {
+    return alert("Please complete required profile fields");
+  }
+
+  // ✅ Store everything together
   currentUser.profile = {
     educationLevel,
     skills,
     interests,
+    codingProfiles,
   };
+
   const users = JSON.parse(localStorage.getItem("users") || "[]");
   const userIndex = users.findIndex((u) => u.id === currentUser.id);
+
   if (userIndex !== -1) {
     users[userIndex] = currentUser;
     localStorage.setItem("users", JSON.stringify(users));
     localStorage.setItem("currentUser", JSON.stringify(currentUser));
   }
+
   showPage("assessment");
 }
+function openEditProfile() {
+  if (!currentUser || !currentUser.profile) {
+    return showPage("profile-setup");
+  }
+
+  // Prefill education
+  document.getElementById("education-level").value =
+    currentUser.profile.educationLevel || "";
+
+  // Prefill skills
+  const skillsList = document.getElementById("skills-list");
+  skillsList.innerHTML = "";
+  (currentUser.profile.skills || []).forEach((skill) => {
+    const skillTag = document.createElement("span");
+    skillTag.className = "skill-tag";
+    skillTag.dataset.skill = skill;
+    skillTag.appendChild(document.createTextNode(skill));
+
+    const removeButton = document.createElement("span");
+    removeButton.className = "remove-skill";
+    removeButton.innerHTML = "&times;";
+    skillTag.appendChild(removeButton);
+
+    skillsList.appendChild(skillTag);
+  });
+
+  // Prefill interests
+  document
+    .querySelectorAll('.interests-grid input[type="checkbox"]')
+    .forEach((cb) => {
+      cb.checked = currentUser.profile.interests.includes(cb.value);
+    });
+
+  // ✅ Prefill coding profiles
+  const profiles = currentUser.profile.codingProfiles || {};
+  document.getElementById("github-profile").value = profiles.github || "";
+  document.getElementById("linkedin-profile").value = profiles.linkedin || "";
+  document.getElementById("leetcode-profile").value = profiles.leetcode || "";
+  document.getElementById("codeforces-profile").value = profiles.codeforces || "";
+
+  validateProfileForm();
+  showPage("profile-setup");
+}
+
 
 // Assessment Functions
 function resetAssessment() {
@@ -1002,7 +1067,6 @@ function showCareerDetails(careerId) {
   openModal("career-modal");
 }
 
-// Dashboard Functions
 function loadDashboard() {
   if (!currentUser) return showPage("auth");
   document.getElementById("user-name").textContent = currentUser.name;
@@ -1010,7 +1074,9 @@ function loadDashboard() {
   loadCareerRecommendations();
   initializeSkillGapChart();
   loadEnrolledCourses();
+  renderCodingProfiles(); // ✅ NEW
 }
+
 
 function updateDashboardStats() {
   const completion =
@@ -1027,7 +1093,47 @@ function updateDashboardStats() {
     : "N/A";
   document.getElementById("enrolled-courses-count").textContent =
     currentUser.enrolledCourses?.length || 0;
+}// Dashboard Functions
+
+
+function renderCodingProfiles() {
+  const container = document.getElementById("coding-profiles-list");
+  const card = document.getElementById("coding-profiles-card");
+
+  if (!container || !currentUser?.profile?.codingProfiles) {
+    if (card) card.style.display = "none";
+    return;
+  }
+
+  const profiles = currentUser.profile.codingProfiles;
+
+  const links = [
+    { label: "GitHub", url: profiles.github },
+    { label: "LinkedIn", url: profiles.linkedin },
+    { label: "LeetCode", url: profiles.leetcode },
+    { label: "Codeforces", url: profiles.codeforces },
+  ].filter((p) => p.url);
+
+  if (links.length === 0) {
+    card.style.display = "none";
+    return;
+  }
+
+  card.style.display = "block";
+
+  container.innerHTML = links
+    .map(
+      (p) => `
+        <div class="topic-item">
+          <a href="${p.url}" target="_blank" rel="noopener">
+            <strong>${p.label}</strong>
+          </a>
+        </div>
+      `
+    )
+    .join("");
 }
+
 
 function loadCareerRecommendations() {
   const container = document.getElementById("career-recommendations");
@@ -1480,3 +1586,4 @@ window.enrollInCourse = enrollInCourse;
 window.unEnrollCourse = unEnrollCourse;
 window.handleGetStartedClick = handleGetStartedClick;
 window.setDynamicCopyright=setDynamicCopyright('AI Career Advisor');
+window.openEditProfile = openEditProfile;

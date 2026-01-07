@@ -263,8 +263,48 @@
                         </div>
                         <div id="interests-error" class="validation-error"></div>
                     </div>
+                    <!-- Optional Coding Profiles -->
+<div class="form-group">
+  <label class="form-label">
+    Professional / Coding Profiles (Optional)
+  </label>
+
+  <input
+    type="url"
+    class="form-control mb-4"
+    id="github-profile"
+    placeholder="GitHub Profile URL (https://github.com/username)"
+  />
+
+  <input
+    type="url"
+    class="form-control mb-4"
+    id="linkedin-profile"
+    placeholder="LinkedIn Profile URL (https://linkedin.com/in/username)"
+  />
+
+  <input
+    type="url"
+    class="form-control mb-4"
+    id="leetcode-profile"
+    placeholder="LeetCode Profile URL (https://leetcode.com/username)"
+  />
+
+  <input
+    type="url"
+    class="form-control"
+    id="Optional Profiles if any"
+    placeholder="Optional Profile"
+  />
+
+  <p style="font-size: 0.85rem; margin-top: 8px; color: var(--text-light);">
+    These links are optional. You can skip now and add them later from your profile.
+  </p>
+</div>
+
                     <button class="btn btn--primary btn--full-width" onclick="saveProfile()" disabled>Save Profile & Start Assessment</button>
                 </div>
+                
             </div>
         </div>
 
@@ -361,6 +401,14 @@
         <div class="container">
             <div class="dashboard-container">
                 <div class="dashboard-header">
+                    <button
+  class="btn btn--outline btn--sm"
+  onclick="openEditProfile()"
+  style="margin-top: 12px;"
+>
+  Edit Profile
+</button>
+
                     <h1>Welcome back, <span id="user-name">User</span>!</h1>
                     <p>Here's your personalized career guidance</p>
                 </div>
@@ -442,6 +490,11 @@
                 </div>
 
                 <div class="dashboard-main-content">
+                    <div class="dashboard-card" id="coding-profiles-card">
+  <h3>Coding Profiles</h3>
+  <div id="coding-profiles-list"></div>
+</div>
+
                     <div class="dashboard-card">
                         <h3>Career Recommendations</h3>
                         <div id="career-recommendations">
