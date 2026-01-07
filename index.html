@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Career Advisor - Find Your Perfect Career Path</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<link rel="stylesheet" href="assets/styles/style.css"></head>
+
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h2>AI Career Advisor</h2>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="#" class="nav-link" onclick="showPage('home')">Home</a>
+                <a href="#" class="nav-link" onclick="showPage('careers')">Explore Careers</a>
+                <a href="#" class="nav-link" onclick="showPage('learning')">Learning Hub</a>
+                <a href="#" class="nav-link" onclick="showPage('community')">Community</a>
+                <a href="help.html" class="nav-link" onclick="showPage('help')">Help</a>
+                <a href="#" id="dashboard-link" class="nav-link hidden" onclick="showPage('dashboard')">Dashboard</a>
+                <button id="auth-button" class="btn btn--primary" onclick="handleGetStartedClick()">Get Started</button>
+                <button class="theme-toggle" id="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+            <div class="nav-toggle" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div id="home-page" class="page active">
+        <section class="hero" style="background-image: none;">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Find the Right Career Path with AI</h1>
+                    <p class="hero-subtitle">Personalized guidance for students & professionals</p>
+                    <button class="btn btn--primary btn--lg" onclick="handleGetStartedClick()">Get Started</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="container">
+                <h2 class="section-title">Why Choose AI Career Advisor?</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-route"></i></div>
+                        <h3>Personalized Career Roadmap</h3>
+                        <p>Get a customized learning path based on your goals and current skills.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                        <h3>AI Skill Gap Analysis</h3>
+                        <p>Identify skill gaps and get recommendations to bridge them effectively.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-file-alt"></i></div>
+                        <h3>Resume & Interview Guidance</h3>
+                        <p>AI-powered resume building and interview preparation tools.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-industry"></i></div>
+                        <h3>Industry Insights</h3>
+                        <p>Stay updated with latest industry trends and salary benchmarks.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-users"></i></div>
+                        <h3>Community & Mentorship</h3>
+                        <p>Connect with peers and industry experts for guidance and networking.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-magnifying-glass-chart"></i></div>
+                        <h3>Job Market Analysis</h3>
+                        <p>Get real-time insights into job demand, required skills, and salary expectations.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="how-it-works">
+            <div class="container">
+                <h2 class="section-title">How It Works</h2>
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h3>Take Assessment</h3>
+                        <p>Complete our comprehensive skill and interest assessment.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h3>AI Analysis</h3>
+                        <p>Our AI analyzes your results and career preferences.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h3>Get Roadmap</h3>
+                        <p>Receive personalized career recommendations and learning paths.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <h3>Learn & Develop</h3>
+                        <p>Engage with curated courses to build in-demand skills.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">5</div>
+                        <h3>Build Your Brand</h3>
+                        <p>Use our tools to create a standout resume and prepare for interviews.</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">6</div>
+                        <h3>Apply & Grow</h3>
+                        <p>Find job opportunities and advance your professional career.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials">
+            <div class="container">
+                <h2 class="section-title">Success Stories</h2>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <p>"This platform helped me transition from mechanical engineering to data science. The
+                                personalized roadmap was incredibly helpful!"</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <strong>Priya Sharma</strong>
+                            <span>Data Scientist at TCS</span>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <p>"The AI mentor guided me through my career change journey. Now I'm working at my dream
+                                company!"</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <strong>Rahul Kumar</strong>
+                            <span>UX Designer at Flipkart</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <h2>Start Your Free Career Assessment Today</h2>
+                <button class="btn btn--primary btn--lg" onclick="handleGetStartedClick()">Get Started Now</button>
+            </div>
+        </section>
+    </div>
+
+    <div id="auth-page" class="page">
+        <div class="container">
+            <div class="auth-container">
+                <div class="auth-form" id="login-form">
+                    <h2>Login to Your Account</h2>
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" id="login-email" placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-control" id="login-password"
+                            placeholder="Enter your password">
+                    </div>
+                    <button class="btn btn--primary btn--full-width" onclick="login()">Login</button>
+                    <div class="auth-switch">
+                        <p>Don't have an account? <a href="#" onclick="showRegisterForm()">Register</a></p>
+                    </div>
+                </div>
+
+                <div class="auth-form hidden" id="register-form">
+                    <h2>Create an Account</h2>
+                    <div class="form-group">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="register-name" placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" id="register-email" placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-control" id="register-password"
+                            placeholder="Create a password">
+                    </div>
+                    <button class="btn btn--primary btn--full-width" onclick="register()">Register</button>
+                    <div class="auth-switch">
+                        <p>Already have an account? <a href="#" onclick="showLoginForm()">Login</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <div id="profile-setup-page" class="page">
+            <div class="container">
+                <div class="profile-setup">
+                    <h2>Complete Your Profile</h2>
+                    <div class="form-group">
+                        <label class="form-label">Education Level</label>
+                        <select class="form-control" id="education-level">
+                            <option value="">Select your education level</option>
+                            <option value="highschool">High School</option>
+                            <option value="bachelor">Bachelor's Degree</option>
+                            <option value="master">Master's Degree</option>
+                            <option value="phd">PhD</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <div id="education-error" class="validation-error"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Current Skills (minimum 3 characters)</label>
+                        <div class="skills-input">
+                            <div class="skill-item">
+                                <input type="text" class="form-control" id="skill-input" placeholder="Add a skill">
+                                <button class="btn btn--primary" onclick="addSkill()">Add</button>
+                            </div>
+                            <div id="skills-list" class="skills-list"></div>
+                            <div id="skills-error" class="validation-error"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Interests</label>
+                        <div class="interests-grid">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="tech" value="technology">
+                                <label for="tech">Technology</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="business" value="business">
+                                <label for="business">Business</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="design" value="design">
+                                <label for="design">Design</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="healthcare" value="healthcare">
+                                <label for="healthcare">Healthcare</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="education" value="education">
+                                <label for="education">Education</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="arts" value="arts">
+                                <label for="arts">Arts</label>
+                            </div>
+                        </div>
+                        <div id="interests-error" class="validation-error"></div>
+                    </div>
+                    <button class="btn btn--primary btn--full-width" onclick="saveProfile()" disabled>Save Profile & Start Assessment</button>
+                </div>
+            </div>
+        </div>
+
+    <div id="assessment-page" class="page">
+        <div class="container">
+            <div class="assessment-container">
+                <div class="assessment-header">
+                    <h2>Career Assessment</h2>
+                    <p>Answer these questions to help us understand your skills and interests.</p>
+                </div>
+                <div class="progress-text">
+                    <span>Question <span id="current-question">1</span> of <span id="total-questions">10</span></span>
+                    <a href="#" style="font-size: 0.9rem;" onclick="skipAssessment()">Skip All</a>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="assessment-progress" style="width: 10%;"></div>
+                </div>
+                <div class="question-container">
+                    <h3 id="question-text"></h3>
+                    <div class="answer-options" id="answer-options">
+                    </div>
+                </div>
+                <div class="assessment-buttons">
+                    <button class="btn btn--outline" id="prev-button" onclick="prevQuestion()">Previous</button>
+                    <button class="btn btn--outline" id="skip-button" onclick="skipQuestion()">Skip</button>
+                    <button class="btn btn--primary" id="next-button" onclick="nextQuestion()">Next</button>
+                    <button class="btn btn--primary hidden" id="finish-button" onclick="finishAssessment()">See
+                        Results</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="careers-page" class="page">
+        <div class="container">
+            <div class="page-header">
+                <h2>Explore Career Paths</h2>
+                <p>Discover various career options and find the perfect match for your skills and interests</p>
+            </div>
+
+            <div class="search-bar">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" placeholder="Search careers..." class="form-control"
+                    onkeyup="debouncedSearch(this.value)">
+            </div>
+
+            <div class="filters">
+                <div class="filter-group">
+                    <span class="filter-label">Filter by:</span>
+                    <select class="form-control" onchange="filterCareers('salary', this.value)">
+                        <option value="">Salary Range</option>
+                        <option value="high">High Salary</option>
+                        <option value="medium">Medium Salary</option>
+                        <option value="low">Entry Level</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <select class="form-control" onchange="filterCareers('growth', this.value)">
+                        <option value="">Growth Potential</option>
+                        <option value="high">High Growth</option>
+                        <option value="medium">Medium Growth</option>
+                        <option value="low">Stable</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <select class="form-control" onchange="filterCareers('skills', this.value)">
+                        <option value="">Skill Level</option>
+                        <option value="beginner">Beginner Friendly</option>
+                        <option value="intermediate">Intermediate</option>
+                        <option value="advanced">Advanced</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="careers-grid" id="careers-grid">
+            </div>
+        </div>
+    </div>
+
+    <div id="career-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-career-title"></h3>
+                <button class="modal-close" onclick="closeModal('career-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="career-details" id="career-details">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="dashboard-page" class="page">
+        <div class="container">
+            <div class="dashboard-container">
+                <div class="dashboard-header">
+                    <h1>Welcome back, <span id="user-name">User</span>!</h1>
+                    <p>Here's your personalized career guidance</p>
+                </div>
+
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <h3 id="profile-completion">75%</h3>
+                        <p>Profile Completion</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="career-matches">3</h3>
+                        <p>Career Matches</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="skills-to-develop">12</h3>
+                        <p>Skills to Develop</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="enrolled-courses-count">0</h3>
+                        <p>Courses Enrolled</p>
+                    </div>
+                </div>
+
+                <div class="dashboard-actions">
+                    <div class="action-card" onclick="showPage('assessment')">
+                        <div class="action-icon">
+                            <i class="fas fa-clipboard-list"></i>
+                        </div>
+                        <div class="action-content">
+                            <h4>Career Assessment</h4>
+                            <p>Get personalized recommendations</p>
+                        </div>
+                    </div>
+                    <div class="action-card" onclick="showPage('learning')">
+                        <div class="action-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <div class="action-content">
+                            <h4>Learning Hub</h4>
+                            <p>Explore courses and grow your skills</p>
+                        </div>
+                    </div>
+                    <div class="action-card" onclick="showPage('resume')">
+                        <div class="action-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="action-content">
+                            <h4>Resume Builder</h4>
+                            <p>Create a professional resume with AI</p>
+                        </div>
+                    </div>
+                    <div class="action-card" onclick="showPage('community')">
+                        <div class="action-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="action-content">
+                            <h4>Community</h4>
+                            <p>Connect with mentors and peers</p>
+                        </div>
+                    </div>
+                    <div class="action-card" onclick="openModal('job-search-modal')">
+                        <div class="action-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <div class="action-content">
+                            <h4>Job Search Simulator</h4>
+                            <p>Practice finding jobs that match your skills</p>
+                        </div>
+                    </div>
+                    <div class="action-card" onclick="showPage('community')">
+                        <div class="action-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <div class="action-content">
+                            <h4>Mentor Connect</h4>
+                            <p>Find and connect with industry mentors</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-main-content">
+                    <div class="dashboard-card">
+                        <h3>Career Recommendations</h3>
+                        <div id="career-recommendations">
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <h3>Skill Gap Analysis</h3>
+                        <div class="skill-gap-chart">
+                            <canvas id="skillGapChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <h3>Learning Roadmap</h3>
+                        <div class="roadmap-timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-content">
+                                    <h4>Short-term (0-6 months)</h4>
+                                    <p>Complete Python fundamentals and basic statistics</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-content">
+                                    <h4>Medium-term (6-12 months)</h4>
+                                    <p>Learn machine learning and data visualization</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-content">
+                                    <h4>Long-term (1-2 years)</h4>
+                                    <p>Advanced ML, deep learning, and domain expertise</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dashboard-card">
+                        <h3>My Enrolled Courses</h3>
+                        <div id="enrolled-courses-list">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="learning-page" class="page">
+        <div class="container">
+            <div class="page-header">
+                <h2>Learning Hub</h2>
+                <p>Explore courses and resources to develop your skills</p>
+            </div>
+
+            <div class="courses-grid" id="courses-grid">
+            </div>
+        </div>
+    </div>
+
+    <div id="community-page" class="page">
+        <div class="container">
+            <div class="page-header">
+                <h2>Career Community</h2>
+                <p>Connect with mentors and peers in your field</p>
+            </div>
+
+            <div class="community-grid">
+                <div class="community-card">
+                    <div class="community-card-header">
+                        <div class="community-card-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div>
+                            <h3>Discussion Forums</h3>
+                            <p>Join conversations about career paths</p>
+                        </div>
+                    </div>
+                    <div class="topic-list">
+                        <div class="topic-item">
+                            <div>
+                                <h4>Transitioning to Data Science</h4>
+                                <span>128 comments • 2 days ago</span>
+                            </div>
+                        </div>
+                        <div class="topic-item">
+                            <div>
+                                <h4>UX Design Portfolio Tips</h4>
+                                <span>64 comments • 5 days ago</span>
+                            </div>
+                        </div>
+                        <div class="topic-item">
+                            <div>
+                                <h4>Cloud Certifications Worth It?</h4>
+                                <span>42 comments • 1 week ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="community-card">
+                    <div class="community-card-header">
+                        <div class="community-card-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div>
+                            <h3>Career Mentors</h3>
+                            <p>Connect with experienced professionals</p>
+                        </div>
+                    </div>
+                    <div class="mentor-list">
+                        <div class="mentor-item">
+                            <div class="mentor-avatar">AS</div>
+                            <div>
+                                <h4>Anjali Sharma</h4>
+                                <span>Data Scientist • 8 years experience</span>
+                            </div>
+                        </div>
+                        <div class="mentor-item">
+                            <div class="mentor-avatar">RK</div>
+                            <div>
+                                <h4>Rahul Kapoor</h4>
+                                <span>UX Lead • 10 years experience</span>
+                            </div>
+                        </div>
+                        <div class="mentor-item">
+                            <div class="mentor-avatar">PS</div>
+                            <div>
+                                <h4>Priya Singh</h4>
+                                <span>Software Engineer • 6 years experience</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="community-card">
+                    <div class="community-card-header">
+                        <div class="community-card-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div>
+                            <h3>Upcoming Events</h3>
+                            <p>Webinars and workshops to boost your career</p>
+                        </div>
+                    </div>
+                    <div class="topic-list">
+                        <div class="topic-item">
+                            <div>
+                                <h4>AI Career Fair</h4>
+                                <span>June 15, 2023 • Virtual</span>
+                            </div>
+                        </div>
+                        <div class="topic-item">
+                            <div>
+                                <h4>Resume Review Workshop</h4>
+                                <span>June 22, 2023 • 2:00 PM IST</span>
+                            </div>
+                        </div>
+                        <div class="topic-item">
+                            <div>
+                                <h4>Tech Interview Preparation</h4>
+                                <span>July 5, 2023 • 4:00 PM IST</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="resume-page" class="page">
+        <div class="container">
+            <div class="page-header">
+                <h2>Resume Builder</h2>
+                <p>Create a professional resume with AI-powered suggestions</p>
+            </div>
+             
+             <div class="form-group">
+  <label><strong>Select Resume Template (ATS Friendly)</strong></label>
+  <select id="resume-template" class="form-control">
+    <option value="classic">Classic ATS</option>
+    <option value="modern">Modern ATS</option>
+    <option value="minimal">Minimal ATS</option>
+  </select>
+</div>
+
+
+            <div class="profile-setup">
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" class="form-control" id="resume-name" placeholder="Your full name"
+                        value="Priya Sharma">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Contact Info</label>
+                    <input type="email" class="form-control" id="resume-email" placeholder="Email"
+                        value="priya.sharma@email.com">
+                    <input type="tel" class="form-control mt-4" id="resume-phone" placeholder="Phone"
+                        value="+91-9876543210">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Professional Summary</label>
+                    <textarea class="form-control" id="resume-summary" rows="3"
+                        placeholder="Brief professional summary">Results-driven professional with experience in data analysis and machine learning, seeking to leverage analytical skills to drive business solutions.</textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Work Experience</label>
+                    <div id="experience-container">
+                    </div>
+                    <button class="btn btn--outline btn--sm mt-4" onclick="addExperience()">+ Add Experience</button>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Education</label>
+                    <div id="education-container">
+                    </div>
+                    <button class="btn btn--outline btn--sm mt-4" onclick="addEducation()">+ Add Education</button>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Skills</label>
+                    <div class="skills-input">
+                        <div class="skill-item">
+                            <input type="text" class="form-control" id="resume-skill-input"
+                                placeholder="Add a skill (e.g., Python)">
+                            <button class="btn btn--primary btn--sm" onclick="addResumeSkill()">Add</button>
+                        </div>
+                        <div id="resume-skills" class="skills-list"></div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn--primary btn--lg" onclick="generateResume()">Preview Resume</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="resume-preview-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Resume Preview</h3>
+                <button class="modal-close" onclick="closeModal('resume-preview-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="resume-preview-content">
+                </div>
+                <div class="text-center mt-4">
+                    <button class="btn btn--primary btn--lg" onclick="downloadResume()">Download as PDF</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="job-search-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Job Search Simulator</h3>
+                <button class="modal-close" onclick="closeModal('job-search-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="search-bar" style="margin-bottom: 24px;">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" placeholder="Search for jobs (e.g., 'Data Scientist')" class="form-control"
+                        onkeyup="debouncedJobSearch(this.value)">
+                </div>
+                <div id="job-listings">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Voiceflow Chatbot Integration -->
+<script type="text/javascript">
+  (function(d, t) {
+      var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+      v.onload = function() {
+        window.voiceflow.chat.load({
+          verify: { projectID: '695a584af022b1214685d01f' },
+          url: 'https://general-runtime.voiceflow.com',
+          versionID: 'production',
+          voice: {
+            url: "https://runtime-api.voiceflow.com"
+          }
+        });
+      };
+      v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+  })(document, 'script');
+</script>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>AI Career Advisor</h4>
+                    <p>Your personalized career guidance platform powered by AI</p>
+                </div>
+                <div class="footer-section">
+                    <h5>Quick Links</h5>
+                    <a href="#" onclick="showPage('home')">Home</a>
+                    <a href="#" onclick="showPage('careers')">Explore Careers</a>
+                    <a href="#" onclick="showPage('learning')">Learning Hub</a>
+                    <a href="#" onclick="showPage('community')">Community</a>
+                </div>
+                <div class="footer-section">
+                    <h5>Resources</h5>
+                    <a href="#">Career Blog</a>
+                    <a href="#">Skill Assessment</a>
+                    <a href="#">Resume Templates</a>
+                    <a href="#">Interview Prep</a>
+                </div>
+                <div class="footer-section">
+                    <h5>Support</h5>
+                    <a href="help.html">Help Center</a>
+                    <a href="help.html">Contact Us</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <!-- <p id="copyright">&copy; 2023 AI Career Advisor. All rights reserved.</p> -->
+                 <p id="copyright"></p> 
+            </div>
+        </div>
+    </footer>
+
+<script src="assets/scripts/app.js"></script></body>
+
+</html>
