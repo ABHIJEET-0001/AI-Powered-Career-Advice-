@@ -778,6 +778,15 @@ section {
     font-size: 0.85rem;
     font-weight: 500;
 }
+.skill-owned {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.skill-missing {
+  background: #fee2e2;
+  color: #991b1b;
+}
 
 .learning-path {
     display: grid;

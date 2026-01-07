@@ -704,6 +704,16 @@ function showValidationError(id, message) {
   el.textContent = message;
   el.style.display = "block";
 }
+function chooseCareerPath(careerId) {
+  if (!currentUser) return;
+
+  currentUser.selectedCareerPath = careerId;
+  updateUserInStorage();
+  alert("Career path selected successfully!");
+  closeModal("career-modal");
+  showPage("dashboard");
+}
+
 
 function clearValidationError(id) {
   const el = document.getElementById(id);
@@ -1041,31 +1051,113 @@ function filterCareers(type, value) {
 function showCareerDetails(careerId) {
   const career = appData.careers.find((c) => c.id === careerId);
   if (!career) return;
+
+  const fit = calculateCareerFit(career);
+
   document.getElementById("modal-career-title").textContent = career.title;
+
   document.getElementById("career-details").innerHTML = `
-                <div class="career-detail-section"><h4>Overview</h4><p>${
-                  career.description
-                }</p></div>
-                <div class="career-detail-section"><h4>Required Skills</h4><div class="skills-list">${career.required_skills
-                  .map((skill) => `<span class="skill-tag">${skill}</span>`)
-                  .join("")}</div></div>
-                <div class="career-detail-section"><h4>Salary Range</h4><p class="salary-range">${
-                  career.salary_range
-                }</p></div>
-                <div class="career-detail-section"><h4>Future Outlook</h4><p>${
-                  career.growth_outlook
-                }</p></div>
-                <div class="career-detail-section"><h4>Learning Path</h4><div class="learning-path">${career.learning_path
-                  .map(
-                    (step, index) =>
-                      `<div class="learning-step"><div class="step-number-small">${
-                        index + 1
-                      }</div><span>${step}</span></div>`
-                  )
-                  .join("")}</div></div>
-            `;
+    <!-- Career Fit Summary -->
+    <div class="career-detail-section">
+      <h4>Career Fit Summary</h4>
+      <p><strong>${fit.score}% Match</strong></p>
+      <p><strong>Strengths:</strong> ${
+        fit.matchedSkills.length
+          ? fit.matchedSkills.join(", ")
+          : "No strong matches yet"
+      }</p>
+      <p><strong>Skills to Improve:</strong> ${
+        fit.missingSkills.join(", ")
+      }</p>
+      <p><strong>Estimated Time to Job-Ready:</strong> ${fit.timeToReady}</p>
+
+      <button class="btn btn--primary mt-4"
+        onclick="chooseCareerPath(${career.id})">
+        Choose This Career Path
+      </button>
+    </div>
+
+    <!-- Required Skills with Status -->
+    <div class="career-detail-section">
+      <h4>Required Skills</h4>
+      <div class="skills-list">
+        ${career.required_skills
+          .map((skill) => {
+            const skillLower = skill.toLowerCase();
+const exact = fit.matchedSkills.includes(skill);
+const partial = currentUser?.profile?.skills.some(
+  s =>
+    s.toLowerCase().includes(skillLower) ||
+    skillLower.includes(s.toLowerCase())
+);
+
+let cls = "skill-missing";
+let symbol = "✗";
+
+if (exact) {
+  cls = "skill-owned";
+  symbol = "✓";
+} else if (partial) {
+  cls = "skill-partial";
+  symbol = "~";
+}
+
+return `
+  <span class="skill-tag ${cls}">
+    ${skill} ${symbol}
+  </span>`;
+
+          })
+          .join("")}
+      </div>
+    </div>
+
+   <!-- Salary Breakdown -->
+<div class="career-detail-section">
+  <h4>Salary Range</h4>
+  ${
+    (() => {
+      const cleaned = career.salary_range
+        .replace("₹", "")
+        .replace(" LPA", "");
+      const [min, max] = cleaned.split("-");
+      return `
+        <ul>
+          <li><strong>Entry-level:</strong> ₹${min} LPA</li>
+          <li><strong>Mid-level:</strong> ₹${cleaned} LPA</li>
+          <li><strong>Senior-level:</strong> ₹${max} LPA</li>
+        </ul>
+      `;
+    })()
+  }
+</div>
+
+
+    <!-- Learning Path -->
+    <div class="career-detail-section">
+      <h4>Actionable Learning Path</h4>
+      ${career.learning_path
+        .map(
+          (step, index) => `
+          <div class="topic-item">
+            <div>
+              <strong>${step}</strong>
+              <span>Estimated: 4–6 weeks</span>
+            </div>
+            <button class="btn btn--outline btn--sm"
+              onclick="showPage('learning')">
+              Start Learning
+            </button>
+          </div>
+        `
+        )
+        .join("")}
+    </div>
+  `;
+
   openModal("career-modal");
 }
+
 
 function loadDashboard() {
   if (!currentUser) return showPage("auth");
@@ -1203,6 +1295,47 @@ function initializeSkillGapChart() {
     },
   });
 }
+function calculateCareerFit(career) {
+  if (!currentUser || !currentUser.profile) {
+    return {
+      score: 0,
+      matchedSkills: [],
+      missingSkills: career.required_skills,
+      timeToReady: "N/A",
+    };
+  }
+
+  const userSkills = currentUser.profile.skills.map(s => s.toLowerCase());
+
+  const matchedSkills = career.required_skills.filter(skill =>
+    userSkills.includes(skill.toLowerCase())
+  );
+
+  const missingSkills = career.required_skills.filter(
+    skill => !userSkills.includes(skill.toLowerCase())
+  );
+
+  const score =
+  career.required_skills.length === 0
+    ? 0
+    : Math.round(
+        (matchedSkills.length / career.required_skills.length) * 100
+      );
+
+
+  return {
+    score,
+    matchedSkills,
+    missingSkills,
+    timeToReady:
+      missingSkills.length <= 2
+        ? "3–6 months"
+        : missingSkills.length <= 4
+        ? "6–9 months"
+        : "9–12 months",
+  };
+}
+
 
 // Learning Hub & Enrollment Functions
 function loadCourses() {
