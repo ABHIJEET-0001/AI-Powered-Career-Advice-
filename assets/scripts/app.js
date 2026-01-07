@@ -1480,3 +1480,11 @@ window.enrollInCourse = enrollInCourse;
 window.unEnrollCourse = unEnrollCourse;
 window.handleGetStartedClick = handleGetStartedClick;
 window.setDynamicCopyright=setDynamicCopyright('AI Career Advisor');
+
+window.addEventListener("scroll", () => {
+  const navbar = document.querySelector(".navbar");
+  if (!navbar) return;
+
+  navbar.classList.toggle("scrolled", window.scrollY > 10);
+});
+
