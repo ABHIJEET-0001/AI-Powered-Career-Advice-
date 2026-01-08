@@ -391,6 +391,12 @@ document.addEventListener("DOMContentLoaded", function () {
   if (document.getElementById("profile-setup-page")) {
     validateProfileForm();
   }
+
+   // Chatbot auto-greeting (FIXED)
+  const chatbotMessages = document.getElementById("chatbot-messages");
+  if (chatbotMessages) {
+    addChatMessage(chatbotResponses.greetings, "bot");
+  }
 });
 
 // Theme Toggle Functionality
@@ -517,10 +523,6 @@ function addChatMessage(message, sender) {
   messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
 
-// ===== Auto greet on load =====
-window.onload = () => {
-  addChatMessage(chatbotResponses.greetings, "bot");
-};
 
 // Navigation Functions
 function handleGetStartedClick() {
