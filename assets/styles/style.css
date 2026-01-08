@@ -747,6 +747,10 @@ section {
     cursor: pointer;
     color: white;
 }
+.selected-career {
+  border: 2px solid var(--accent);
+  background: rgba(67, 97, 238, 0.08);
+}
 
 .modal-body {
     padding: 24px;
@@ -777,6 +781,15 @@ section {
     border-radius: 20px;
     font-size: 0.85rem;
     font-weight: 500;
+}
+.skill-owned {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.skill-missing {
+  background: #fee2e2;
+  color: #991b1b;
 }
 
 .learning-path {
