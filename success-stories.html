@@ -1,21 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Success Stories</title>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <link rel="stylesheet" href="assets/styles/style.css">
+
+    <style>
+        .page-header {
+            position: relative;
+            padding-left: 56px;
+        }
+
+        .back-button {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-weight: 600;
+            font-family: inherit;
+        }
+
+        .back-button i { font-size: 14px; }
+
+        .back-button:focus {
+            outline: 2px solid rgba(0,0,0,0.12);
+            outline-offset: 2px;
+        }
+
+        .sr-only {
+            position: absolute !important;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+    </style>
 </head>
+
 <body>
-    <div id="success-stories-page" class="page">
+    <div id="success-stories-page" class="page active">
         <div class="container">
+
             <div class="page-header">
+                <button id="backBtn" class="back-button" aria-label="Go back">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span class="sr-only">Back</span>
+                </button>
+
                 <h2>Success Stories</h2>
                 <p>Real stories from students and professionals who achieved their goals</p>
             </div>
@@ -31,6 +82,7 @@
                         <span>Data Scientist at TCS</span>
                     </div>
                 </div>
+
                 <div class="testimonial-card">
                     <div class="testimonial-content">
                         <p>"The AI mentor guided me through my career change journey. Now I'm working at my dream
@@ -41,6 +93,7 @@
                         <span>UX Designer at Flipkart</span>
                     </div>
                 </div>
+
                 <div class="testimonial-card">
                     <div class="testimonial-content">
                         <p>"I was confused about which certification to take for Cloud Computing. The AI analysis gave me the exact path I needed."</p>
@@ -50,8 +103,33 @@
                         <span>Cloud Engineer at AWS</span>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
+
+    <script>
+        (function() {
+            const backBtn = document.getElementById('backBtn');
+            backBtn.addEventListener('click', function () {
+                if (window.history.length > 1) {
+                    window.history.back();
+                } else {
+                    window.location.href = 'index.html';
+                }
+            });
+
+            try {
+                const isSameAsCurrent = (location.pathname.endsWith('index.html') || location.pathname === '/' || location.pathname === '');
+                if (isSameAsCurrent && window.history.length <= 1) {
+                    backBtn.style.display = 'none';
+                    document.querySelector('.page-header').style.paddingLeft = '0';
+                }
+            } catch (e) {
+                console.log(e);
+            }
+        })();
+    </script>
 </body>
+
 </html>
