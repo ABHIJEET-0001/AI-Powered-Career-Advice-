@@ -1,0 +1,35 @@
+body {
+  margin: 0;
+  background-color: #0f172a;
+  color: #ffffff;
+}
+
+.help-title {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 50px;
+}
+
+.help-container {
+    line-height: 0.5;
+  max-width: 800px;
+  margin: auto;
+  padding: 40px 20px;
+  font-style: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {
+  color: #38bdf8;
+}
+
+h3 {
+  margin-top: 20px;
+  font-size: 30px;
+  font-weight: 400;
+}
+
+p {
+  line-height: 1.6;
+  font-size: 26px;
+  font-weight: 300;
+}
