@@ -11,7 +11,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<link rel="stylesheet" href="assets/styles/style.css"></head>
+    <link rel="stylesheet" href="assets/styles/style.css">
+</head>
 
 <body>
     <nav class="navbar">
@@ -23,6 +24,7 @@
                 <a href="#" class="nav-link" onclick="showPage('home')">Home</a>
                 <a href="#" class="nav-link" onclick="showPage('careers')">Explore Careers</a>
                 <a href="#" class="nav-link" onclick="showPage('learning')">Learning Hub</a>
+                <a href="success-stories.html" class="nav-link" onclick="showPage('success-stories')">Success Stories</a>
                 <a href="#" class="nav-link" onclick="showPage('community')">Community</a>
                 <a href="help.html" class="nav-link" onclick="showPage('help')">Help</a>
                 <a href="#" id="dashboard-link" class="nav-link hidden" onclick="showPage('dashboard')">Dashboard</a>
@@ -126,30 +128,18 @@
             </div>
         </section>
 
-        <section class="testimonials">
+        <section class="testimonials-preview">
             <div class="container">
                 <h2 class="section-title">Success Stories</h2>
-                <div class="testimonials-grid">
-                    <div class="testimonial-card">
-                        <div class="testimonial-content">
-                            <p>"This platform helped me transition from mechanical engineering to data science. The
-                                personalized roadmap was incredibly helpful!"</p>
-                        </div>
-                        <div class="testimonial-author">
-                            <strong>Priya Sharma</strong>
-                            <span>Data Scientist at TCS</span>
-                        </div>
-                    </div>
-                    <div class="testimonial-card">
-                        <div class="testimonial-content">
-                            <p>"The AI mentor guided me through my career change journey. Now I'm working at my dream
-                                company!"</p>
-                        </div>
-                        <div class="testimonial-author">
-                            <strong>Rahul Kumar</strong>
-                            <span>UX Designer at Flipkart</span>
-                        </div>
-                    </div>
+                <div class="text-center">
+                    <p style="font-size: 1.1rem; margin-bottom: 24px;">
+                        See how thousands of students and professionals are transforming their careers with AI Career Advisor.
+                    </p>
+                    <a href="success-stories.html">
+                        <button class="btn btn--primary btn--outline" onclick="showPage('success-stories')">
+                            Read Inspiring Stories
+                        </button>
+                    </a>
                 </div>
             </div>
         </section>
@@ -848,7 +838,8 @@
         </div>
     </footer>
 
-<script src="assets/scripts/app.js"></script>
-<script src="assets/scripts/backtoTop.js"></script></body>
+    <script src="assets/scripts/app.js"></script>
+    <script src="assets/scripts/backtoTop.js"></script>
+</body>
 
 </html>

@@ -204,7 +204,7 @@ p {
 
 .btn--outline:hover {
     border-color: var(--primary);
-    color: var(--primary);
+    color: white;
     transform: translateY(-2px);
 }
 
