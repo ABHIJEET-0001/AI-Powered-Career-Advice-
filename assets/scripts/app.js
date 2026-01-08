@@ -704,6 +704,16 @@ function showValidationError(id, message) {
   el.textContent = message;
   el.style.display = "block";
 }
+function chooseCareerPath(careerId) {
+  if (!currentUser) return;
+
+  currentUser.selectedCareerPath = careerId;
+  updateUserInStorage();
+  alert("Career path selected successfully!");
+  closeModal("career-modal");
+  showPage("dashboard");
+}
+
 
 function clearValidationError(id) {
   const el = document.getElementById(id);
@@ -776,30 +786,95 @@ function setupProfileFormValidation() {
 
 function saveProfile() {
   const educationLevel = document.getElementById("education-level").value;
+
   const skills = Array.from(
     document.getElementById("skills-list").children
-  ).map((el) => el.dataset && el.dataset.skill ? el.dataset.skill : (el.firstChild && el.firstChild.nodeValue ? el.firstChild.nodeValue.trim() : el.textContent.trim()));
+  ).map((el) =>
+    el.dataset && el.dataset.skill
+      ? el.dataset.skill
+      : el.textContent.trim()
+  );
+
   const interests = Array.from(
-    document.querySelectorAll('input[type="checkbox"]:checked')
+    document.querySelectorAll('.interests-grid input[type="checkbox"]:checked')
   ).map((cb) => cb.value);
 
-  if (!educationLevel || skills.length === 0 || interests.length === 0)
-    return alert("Please complete all profile fields");
+  // ✅ Optional coding profiles (NEW FEATURE)
+  const codingProfiles = {
+    github: document.getElementById("github-profile")?.value.trim() || "",
+    linkedin: document.getElementById("linkedin-profile")?.value.trim() || "",
+    leetcode: document.getElementById("leetcode-profile")?.value.trim() || "",
+    codeforces: document.getElementById("codeforces-profile")?.value.trim() || "",
+  };
 
+  // Validation (unchanged behavior)
+  if (!educationLevel || skills.length === 0 || interests.length === 0) {
+    return alert("Please complete required profile fields");
+  }
+
+  // ✅ Store everything together
   currentUser.profile = {
     educationLevel,
     skills,
     interests,
+    codingProfiles,
   };
+
   const users = JSON.parse(localStorage.getItem("users") || "[]");
   const userIndex = users.findIndex((u) => u.id === currentUser.id);
+
   if (userIndex !== -1) {
     users[userIndex] = currentUser;
     localStorage.setItem("users", JSON.stringify(users));
     localStorage.setItem("currentUser", JSON.stringify(currentUser));
   }
+
   showPage("assessment");
 }
+function openEditProfile() {
+  if (!currentUser || !currentUser.profile) {
+    return showPage("profile-setup");
+  }
+
+  // Prefill education
+  document.getElementById("education-level").value =
+    currentUser.profile.educationLevel || "";
+
+  // Prefill skills
+  const skillsList = document.getElementById("skills-list");
+  skillsList.innerHTML = "";
+  (currentUser.profile.skills || []).forEach((skill) => {
+    const skillTag = document.createElement("span");
+    skillTag.className = "skill-tag";
+    skillTag.dataset.skill = skill;
+    skillTag.appendChild(document.createTextNode(skill));
+
+    const removeButton = document.createElement("span");
+    removeButton.className = "remove-skill";
+    removeButton.innerHTML = "&times;";
+    skillTag.appendChild(removeButton);
+
+    skillsList.appendChild(skillTag);
+  });
+
+  // Prefill interests
+  document
+    .querySelectorAll('.interests-grid input[type="checkbox"]')
+    .forEach((cb) => {
+      cb.checked = currentUser.profile.interests.includes(cb.value);
+    });
+
+  // ✅ Prefill coding profiles
+  const profiles = currentUser.profile.codingProfiles || {};
+  document.getElementById("github-profile").value = profiles.github || "";
+  document.getElementById("linkedin-profile").value = profiles.linkedin || "";
+  document.getElementById("leetcode-profile").value = profiles.leetcode || "";
+  document.getElementById("codeforces-profile").value = profiles.codeforces || "";
+
+  validateProfileForm();
+  showPage("profile-setup");
+}
+
 
 // Assessment Functions
 function resetAssessment() {
@@ -976,33 +1051,114 @@ function filterCareers(type, value) {
 function showCareerDetails(careerId) {
   const career = appData.careers.find((c) => c.id === careerId);
   if (!career) return;
+
+  const fit = calculateCareerFit(career);
+
   document.getElementById("modal-career-title").textContent = career.title;
+
   document.getElementById("career-details").innerHTML = `
-                <div class="career-detail-section"><h4>Overview</h4><p>${
-                  career.description
-                }</p></div>
-                <div class="career-detail-section"><h4>Required Skills</h4><div class="skills-list">${career.required_skills
-                  .map((skill) => `<span class="skill-tag">${skill}</span>`)
-                  .join("")}</div></div>
-                <div class="career-detail-section"><h4>Salary Range</h4><p class="salary-range">${
-                  career.salary_range
-                }</p></div>
-                <div class="career-detail-section"><h4>Future Outlook</h4><p>${
-                  career.growth_outlook
-                }</p></div>
-                <div class="career-detail-section"><h4>Learning Path</h4><div class="learning-path">${career.learning_path
-                  .map(
-                    (step, index) =>
-                      `<div class="learning-step"><div class="step-number-small">${
-                        index + 1
-                      }</div><span>${step}</span></div>`
-                  )
-                  .join("")}</div></div>
-            `;
+    <!-- Career Fit Summary -->
+    <div class="career-detail-section">
+      <h4>Career Fit Summary</h4>
+      <p><strong>${fit.score}% Match</strong></p>
+      <p><strong>Strengths:</strong> ${
+        fit.matchedSkills.length
+          ? fit.matchedSkills.join(", ")
+          : "No strong matches yet"
+      }</p>
+      <p><strong>Skills to Improve:</strong> ${
+        fit.missingSkills.join(", ")
+      }</p>
+      <p><strong>Estimated Time to Job-Ready:</strong> ${fit.timeToReady}</p>
+
+      <button class="btn btn--primary mt-4"
+        onclick="chooseCareerPath(${career.id})">
+        Choose This Career Path
+      </button>
+    </div>
+
+    <!-- Required Skills with Status -->
+    <div class="career-detail-section">
+      <h4>Required Skills</h4>
+      <div class="skills-list">
+        ${career.required_skills
+          .map((skill) => {
+            const skillLower = skill.toLowerCase();
+const exact = fit.matchedSkills.includes(skill);
+const partial = currentUser?.profile?.skills.some(
+  s =>
+    s.toLowerCase().includes(skillLower) ||
+    skillLower.includes(s.toLowerCase())
+);
+
+let cls = "skill-missing";
+let symbol = "✗";
+
+if (exact) {
+  cls = "skill-owned";
+  symbol = "✓";
+} else if (partial) {
+  cls = "skill-partial";
+  symbol = "~";
+}
+
+return `
+  <span class="skill-tag ${cls}">
+    ${skill} ${symbol}
+  </span>`;
+
+          })
+          .join("")}
+      </div>
+    </div>
+
+   <!-- Salary Breakdown -->
+<div class="career-detail-section">
+  <h4>Salary Range</h4>
+  ${
+    (() => {
+      const cleaned = career.salary_range
+        .replace("₹", "")
+        .replace(" LPA", "");
+      const [min, max] = cleaned.split("-");
+      return `
+        <ul>
+          <li><strong>Entry-level:</strong> ₹${min} LPA</li>
+          <li><strong>Mid-level:</strong> ₹${cleaned} LPA</li>
+          <li><strong>Senior-level:</strong> ₹${max} LPA</li>
+        </ul>
+      `;
+    })()
+  }
+</div>
+
+
+    <!-- Learning Path -->
+    <div class="career-detail-section">
+      <h4>Actionable Learning Path</h4>
+      ${career.learning_path
+        .map(
+          (step, index) => `
+          <div class="topic-item">
+            <div>
+              <strong>${step}</strong>
+              <span>Estimated: 4–6 weeks</span>
+            </div>
+            <button class="btn btn--outline btn--sm"
+              onclick="showPage('learning')">
+              Start Learning
+            </button>
+          </div>
+        `
+        )
+        .join("")}
+    </div>
+  `;
+
   openModal("career-modal");
 }
 
-// Dashboard Functions
+
 function loadDashboard() {
   if (!currentUser) return showPage("auth");
   document.getElementById("user-name").textContent = currentUser.name;
@@ -1010,7 +1166,15 @@ function loadDashboard() {
   loadCareerRecommendations();
   initializeSkillGapChart();
   loadEnrolledCourses();
+  renderCodingProfiles();
+  renderChosenCareer(); 
 }
+ function openChosenCareer() {
+  if (!currentUser?.selectedCareerPath) return;
+  showCareerDetails(currentUser.selectedCareerPath);
+}
+
+
 
 function updateDashboardStats() {
   const completion =
@@ -1027,25 +1191,96 @@ function updateDashboardStats() {
     : "N/A";
   document.getElementById("enrolled-courses-count").textContent =
     currentUser.enrolledCourses?.length || 0;
+}// Dashboard Functions
+
+function renderChosenCareer() {
+  const card = document.getElementById("chosen-career-card");
+  const titleEl = document.getElementById("chosen-career-title");
+
+  if (!card || !currentUser?.selectedCareerPath) {
+    card?.classList.add("hidden");
+    return;
+  }
+
+  const career = appData.careers.find(
+    c => c.id === currentUser.selectedCareerPath
+  );
+
+  if (!career) {
+    card.classList.add("hidden");
+    return;
+  }
+
+  titleEl.textContent = career.title;
+  card.classList.remove("hidden");
 }
+
+function renderCodingProfiles() {
+  const container = document.getElementById("coding-profiles-list");
+  const card = document.getElementById("coding-profiles-card");
+
+  if (!container || !currentUser?.profile?.codingProfiles) {
+    if (card) card.style.display = "none";
+    return;
+  }
+
+  const profiles = currentUser.profile.codingProfiles;
+
+  const links = [
+    { label: "GitHub", url: profiles.github },
+    { label: "LinkedIn", url: profiles.linkedin },
+    { label: "LeetCode", url: profiles.leetcode },
+    { label: "Codeforces", url: profiles.codeforces },
+  ].filter((p) => p.url);
+
+  if (links.length === 0) {
+    card.style.display = "none";
+    return;
+  }
+
+  card.style.display = "block";
+
+  container.innerHTML = links
+    .map(
+      (p) => `
+        <div class="topic-item">
+          <a href="${p.url}" target="_blank" rel="noopener">
+            <strong>${p.label}</strong>
+          </a>
+        </div>
+      `
+    )
+    .join("");
+}
+
 
 function loadCareerRecommendations() {
   const container = document.getElementById("career-recommendations");
   if (!container) return;
+
   const recommendations = calculateCareerMatches().slice(0, 3);
+
   container.innerHTML = recommendations
-    .map(
-      (career) => `
-                <div class="topic-item" style="cursor: pointer;" onclick="showCareerDetails(${career.id})">
-                     <div>
-                           <h4>${career.title}</h4>
-                           <span>${career.salary_range}</span>
-                     </div>
-                </div>
-            `
-    )
+    .map((career) => {
+      const isSelected = career.id === currentUser?.selectedCareerPath;
+
+      return `
+        <div class="topic-item ${isSelected ? "selected-career" : ""}"
+             style="cursor: pointer;"
+             onclick="showCareerDetails(${career.id})">
+          <div>
+            <h4>
+              ${career.title}
+              ${isSelected ? " ⭐" : ""}
+            </h4>
+            <span>${career.salary_range}</span>
+          </div>
+        </div>
+      `;
+    })
     .join("");
 }
+
 
 function calculateCareerMatches() {
   if (!currentUser || !currentUser.profile) return appData.careers.slice(0, 3);
@@ -1097,6 +1332,47 @@ function initializeSkillGapChart() {
     },
   });
 }
+function calculateCareerFit(career) {
+  if (!currentUser || !currentUser.profile) {
+    return {
+      score: 0,
+      matchedSkills: [],
+      missingSkills: career.required_skills,
+      timeToReady: "N/A",
+    };
+  }
+
+  const userSkills = currentUser.profile.skills.map(s => s.toLowerCase());
+
+  const matchedSkills = career.required_skills.filter(skill =>
+    userSkills.includes(skill.toLowerCase())
+  );
+
+  const missingSkills = career.required_skills.filter(
+    skill => !userSkills.includes(skill.toLowerCase())
+  );
+
+  const score =
+  career.required_skills.length === 0
+    ? 0
+    : Math.round(
+        (matchedSkills.length / career.required_skills.length) * 100
+      );
+
+
+  return {
+    score,
+    matchedSkills,
+    missingSkills,
+    timeToReady:
+      missingSkills.length <= 2
+        ? "3–6 months"
+        : missingSkills.length <= 4
+        ? "6–9 months"
+        : "9–12 months",
+  };
+}
+
 
 // Learning Hub & Enrollment Functions
 function loadCourses() {
@@ -1480,3 +1756,5 @@ window.enrollInCourse = enrollInCourse;
 window.unEnrollCourse = unEnrollCourse;
 window.handleGetStartedClick = handleGetStartedClick;
 window.setDynamicCopyright=setDynamicCopyright('AI Career Advisor');
+window.openEditProfile = openEditProfile;
+window.openChosenCareer = openChosenCareer;
