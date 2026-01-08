@@ -747,6 +747,10 @@ section {
     cursor: pointer;
     color: white;
 }
+.selected-career {
+  border: 2px solid var(--accent);
+  background: rgba(67, 97, 238, 0.08);
+}
 
 .modal-body {
     padding: 24px;
@@ -777,6 +781,15 @@ section {
     border-radius: 20px;
     font-size: 0.85rem;
     font-weight: 500;
+}
+.skill-owned {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.skill-missing {
+  background: #fee2e2;
+  color: #991b1b;
 }
 
 .learning-path {
@@ -1146,7 +1159,27 @@ section {
 #resume-preview-content .education-item {
     margin-bottom: 15px;
 }
+/* Back to top button styles*/
+#btn{
+    position: fixed;
+     bottom: 15px;
+    right: 100px;
+    z-index: 100;
+    font-size: larger;
+    border-radius: 50%;
+    font-size: 20px;
+    padding: 10px 20px;
+    background-color:var(--primary-dark) ;
+    border: none;
+    color: whitesmoke;
+    cursor: pointer;
+    transform: scale(1) 0.4s ease;
 
+}
+#btn:hover{
+    scale: 1.2;
+    transition: smooth;
+}
 /* Chatbot */
 .chatbot-container {
     position: fixed;
