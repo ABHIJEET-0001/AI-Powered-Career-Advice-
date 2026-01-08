@@ -1679,3 +1679,204 @@ section {
 #home-page {
     margin-top: 0;
 }
+/* =========================================
+   BLOG PAGE STYLES (LEARNING HUB)
+   ========================================= */
+
+/* Base Typography for Blog */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f8fafc; /* Softer background */
+}
+
+/* Navbar (Consistent with Home) */
+.navbar {
+    background: white;
+    padding: 1rem 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.nav-brand h2 { 
+    color: #2563eb;  /* Blue color */
+    margin: 0; 
+    font-size: 1.5rem; 
+    font-weight: 700;
+}
+
+.nav-menu { 
+    display: flex; 
+    align-items: center; 
+    gap: 2rem; 
+}
+
+.nav-link { 
+    text-decoration: none; 
+    color: #4b5563; 
+    font-weight: 500; 
+    transition: color 0.3s;
+}
+
+.nav-link:hover, .nav-link.active { 
+    color: #2563eb; 
+}
+
+.btn--primary {
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.btn--primary:hover { 
+    background-color: #1d4ed8; 
+}
+
+/* Header Section */
+.blog-header {
+    background-color: #2563eb; /* Primary Blue */
+    color: white;
+    text-align: center;
+    padding: 5rem 1rem 8rem 1rem; /* Extra bottom padding for overlap */
+}
+
+.blog-header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.blog-header p {
+    font-size: 1.2rem;
+    color: #dbeafe; /* Light blue text */
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Daily Tip Card (Floating) */
+.daily-tip-container {
+    max-width: 800px;
+    margin: -4rem auto 4rem auto; /* Negative margin pulls it up */
+    padding: 0 1rem;
+    position: relative;
+    z-index: 10;
+}
+
+.tip-card {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    text-align: center;
+    border-top: 6px solid #f59e0b; /* Orange Accent */
+}
+
+.tip-header {
+    color: #f59e0b;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+#daily-tip-text {
+    color: #1f2937;
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+/* Blog Grid Layout */
+.blog-grid {
+    max-width: 1200px;
+    margin: 0 auto 5rem auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    padding: 0 20px;
+}
+
+/* Blog Cards */
+.blog-card {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.blog-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border-color: #bfdbfe;
+}
+
+.card-content { 
+    padding: 2rem; 
+    flex: 1; 
+    display: flex; 
+    flex-direction: column; 
+}
+
+/* Tags */
+.tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 99px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    width: fit-content;
+}
+
+.tag-career { background-color: #eff6ff; color: #2563eb; }
+.tag-skills { background-color: #f0fdf4; color: #16a34a; }
+
+.blog-card h3 {
+    font-size: 1.25rem;
+    color: #111827;
+    margin-bottom: 0.75rem;
+    font-weight: 700;
+}
+
+.blog-card p {
+    color: #6b7280;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    flex-grow: 1;
+}
+
+/* Read More Link */
+.read-more {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: auto;
+}
+
+.read-more:hover { 
+    gap: 8px; 
+    transition: gap 0.2s; 
+}

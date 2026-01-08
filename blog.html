@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Career Advisor - Learning Hub</title>
+    <link rel="stylesheet" href="./assets/styles/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h2>AI Career Advisor</h2>
+            </div>
+            
+            <div class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="blog.html" class="nav-link active">Learning Hub</a>
+                <a href="help.html" class="nav-link">Help</a>
+                
+                <button class="btn btn--primary" onclick="window.location.href='index.html#get-started'">Get Started</button>
+            </div>
+
+            <div class="nav-toggle" id="nav-toggle">
+                <i class="ri-menu-3-line"></i>
+            </div>
+        </div>
+    </nav>
+
+    <header class="blog-header">
+        <div class="header-content">
+            <h1>Learning Hub & Insights</h1>
+            <p>Daily motivation and deep dives into the world of AI careers.</p>
+        </div>
+    </header>
+
+    <section class="daily-tip-container">
+        <div class="tip-card">
+            <div class="tip-header">
+                <i class="ri-lightbulb-flash-fill"></i> DAILY INSIGHT
+            </div>
+            <h2 id="daily-tip-text">Loading motivation...</h2>
+        </div>
+    </section>
+
+    <section class="blog-grid">
+        
+        <article class="blog-card">
+            <div class="card-content">
+                <span class="tag tag-career">Career Growth</span>
+                <h3>Top AI Career Trends for 2026</h3>
+                <p>Discover which AI roles are growing the fastest this year and how to prepare.</p>
+                <a href="article.html?post=ai-career-trends-2026" class="read-more">
+                    Read Article <i class="ri-arrow-right-line"></i>
+                </a>
+            </div>
+        </article>
+        
+        <article class="blog-card">
+            <div class="card-content">
+                <span class="tag tag-skills">Skills</span>
+                <h3>Python vs. R for AI?</h3>
+                <p>A quick breakdown of which language you should prioritize.</p>
+                <a href="article.html?post=python-vs-r" class="read-more">
+                    Read Article <i class="ri-arrow-right-line"></i>
+                </a>
+            </div>
+        </article>
+
+        <article class="blog-card">
+            <div class="card-content">
+                <span class="tag tag-career">Career Growth</span>
+                <h3>Networking for Introverts in Tech</h3>
+                <p>How to build connections without draining your social battery.</p>
+                <a href="article.html?post=networking-introverts" class="read-more">
+                    Read Article <i class="ri-arrow-right-line"></i>
+                </a>
+            </div>
+        </article>
+
+        <article class="blog-card">
+            <div class="card-content">
+                <span class="tag tag-skills">Skills</span>
+                <h3>The Prompt Engineering Guide</h3>
+                <p>Stop asking generic questions. Learn the structure of a perfect prompt.</p>
+                <a href="article.html?post=prompt-engineering-guide" class="read-more">
+                    Read Article <i class="ri-arrow-right-line"></i>
+                </a>
+            </div>
+        </article>
+
+    </section>
+
+    <script type="module">
+        import { getDailyTip } from './lib/dailyTips.js';
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            // Load Tip
+            const tipTextElement = document.getElementById('daily-tip-text');
+            if (tipTextElement) {
+                tipTextElement.textContent = `"${getDailyTip()}"`;
+            }
+
+            // Mobile Menu Logic (Simple toggle)
+            const navToggle = document.getElementById('nav-toggle');
+            const navMenu = document.getElementById('nav-menu');
+            
+            if(navToggle){
+                navToggle.addEventListener('click', () => {
+                    navMenu.classList.toggle('show-menu');
+                });
+            }
+        });
+    </script>
+
+    <style>
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background: white;
+                padding: 1rem;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            }
+            .nav-menu.show-menu {
+                display: flex;
+            }
+            .nav-toggle {
+                display: block;
+                font-size: 1.5rem;
+                cursor: pointer;
+            }
+        }
+        @media (min-width: 769px) {
+            .nav-toggle { display: none; }
+        }
+    </style>
+</body>
+</html>
