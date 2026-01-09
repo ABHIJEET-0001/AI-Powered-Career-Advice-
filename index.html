@@ -22,13 +22,29 @@
                     <span class="logo-icon">🤖</span>
                     <a href="index.html" class="brand-text"> AI Career Advisor</a>
                 </h2>
+                <div class="brand-tagline">Smart Career Guidance</div>
             </div>
             <div class="nav-menu" id="nav-menu">
-                <a href="#" class="nav-link active" data-page="home" onclick="showPage('home')">Home</a>
-                <a href="#" class="nav-link" data-page="careers" onclick="showPage('careers')">Explore Careers</a>
-                <a href="#" class="nav-link" data-page="learning" onclick="showPage('learning')">Learning Hub</a>
-                <a href="#" class="nav-link" data-page="community" onclick="showPage('community')">Community</a>
-                <a href="#" id="dashboard-link" class="nav-link hidden" data-page="dashboard" onclick="showPage('dashboard')">Dashboard</a>
+                <a href="#" class="nav-link active" data-page="home" onclick="showPage('home')">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="#" class="nav-link" data-page="careers" onclick="showPage('careers')">
+                    <i class="fas fa-briefcase"></i>
+                    <span>Explore Careers</span>
+                </a>
+                <a href="#" class="nav-link" data-page="learning" onclick="showPage('learning')">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Learning Hub</span>
+                </a>
+                <a href="#" class="nav-link" data-page="community" onclick="showPage('community')">
+                    <i class="fas fa-users"></i>
+                    <span>Community</span>
+                </a>
+                <a href="#" id="dashboard-link" class="nav-link hidden" data-page="dashboard" onclick="showPage('dashboard')">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Dashboard</span>
+                </a>
                 <div class="nav-actions-mobile">
                     <button id="auth-button-mobile" class="btn btn--cta" onclick="handleGetStartedClick()">
                         <span>Get Started</span>
@@ -40,6 +56,9 @@
                 </div>
             </div>
             <div class="nav-actions">
+                <button class="nav-search-btn" aria-label="Search">
+                    <i class="fas fa-search"></i>
+                </button>
                 <button id="auth-button" class="btn btn--cta" onclick="handleGetStartedClick()">
                     <span>Get Started</span>
                     <i class="fas fa-arrow-right"></i>
@@ -58,11 +77,48 @@
 
     <div id="home-page" class="page active">
         <section class="hero" style="background-image: none;">
+            <div class="hero-particles">
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+            </div>
             <div class="container">
                 <div class="hero-content">
-                    <h1 class="hero-title">Find the Right Career Path with AI</h1>
-                    <p class="hero-subtitle">Personalized guidance for students & professionals</p>
-                    <button class="btn btn--primary btn--lg" onclick="handleGetStartedClick()">Get Started</button>
+                    <div class="hero-badge">
+                        <i class="fas fa-star"></i>
+                        <span>AI-Powered Career Guidance</span>
+                    </div>
+                    <h1 class="hero-title">
+                        Find Your <span class="gradient-text">Dream Career</span>
+                        <br>with AI Intelligence
+                    </h1>
+                    <p class="hero-subtitle">Personalized guidance, skill assessments, and career roadmaps for students & professionals worldwide</p>
+                    <div class="hero-cta-group">
+                        <button class="btn btn--primary btn--lg" onclick="handleGetStartedClick()">
+                            <span>Get Started Free</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                        <button class="btn btn--secondary btn--lg" style="color: black;">
+                            <i class="fas fa-play-circle"></i>
+                            <span>Watch Demo</span>
+                        </button>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">50K+</div>
+                            <div class="stat-label">Users Helped</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">100+</div>
+                            <div class="stat-label">Career Paths</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">95%</div>
+                            <div class="stat-label">Success Rate</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -746,9 +802,15 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-section">
-                    <h4>AI Career Advisor</h4>
-                    <p>Your personalized career guidance platform powered by AI</p>
+                <div class="footer-section footer-about">
+                    <h4><span class="logo-icon">🤖</span> AI Career Advisor</h4>
+                    <p>Your personalized career guidance platform powered by AI technology.</p>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
                 </div>
                 <div class="footer-section">
                     <h5>Quick Links</h5>
@@ -756,13 +818,6 @@
                     <a href="#" onclick="showPage('careers')">Explore Careers</a>
                     <a href="#" onclick="showPage('learning')">Learning Hub</a>
                     <a href="#" onclick="showPage('community')">Community</a>
-                </div>
-                <div class="footer-section">
-                    <h5>Resources</h5>
-                    <a href="#">Career Blog</a>
-                    <a href="#">Skill Assessment</a>
-                    <a href="#">Resume Templates</a>
-                    <a href="#">Interview Prep</a>
                 </div>
                 <div class="footer-section">
                     <h5>Support</h5>
@@ -773,8 +828,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <!-- <p id="copyright">&copy; 2023 AI Career Advisor. All rights reserved.</p> -->
-                 <p id="copyright"></p> 
+                <p id="copyright"></p>
             </div>
         </div>
     </footer>
