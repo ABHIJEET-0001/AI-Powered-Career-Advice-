@@ -5,19 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Career Advisor - Find Your Perfect Career Path</title>
+    <meta name="description" content="AI-powered career guidance platform helping students and professionals find their perfect career path with personalized recommendations and learning resources.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<link rel="stylesheet" href="assets/styles/style.css"></head>
+    <link rel="stylesheet" href="assets/styles/style.css">
+</head>
 
 <body>
-    <nav class="navbar">
+    <!-- Skip Navigation Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
         <div class="container">
             <div class="nav-brand">
-                <h2>AI Career Advisor</h2>
+                <h2><a href="#" onclick="showPage('home')" aria-label="AI Career Advisor - Go to homepage">AI Career Advisor</a></h2>
             </div>
               <div class="nav-menu" id="nav-menu">
                  <div class="nav-close" onclick="toggleMobileMenu()">
@@ -34,56 +39,57 @@
                     <i class="fas fa-moon"></i>
                 </button>
             </div>
-            <div class="nav-toggle" onclick="toggleMobileMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+            <button class="nav-toggle" onclick="toggleMobileMenu()" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="nav-menu">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </button>
         </div>
     </nav>
 
-    <div id="home-page" class="page active">
-        <section class="hero" style="background-image: none;">
+    <main id="main-content">
+    <div id="home-page" class="page active" role="main" aria-label="Home page content">
+        <section class="hero" style="background-image: none;" aria-labelledby="hero-title">
             <div class="container">
                 <div class="hero-content">
-                    <h1 class="hero-title">Find the Right Career Path with AI</h1>
+                    <h1 class="hero-title" id="hero-title">Find the Right Career Path with AI</h1>
                     <p class="hero-subtitle">Personalized guidance for students & professionals</p>
-                    <button class="btn btn--primary btn--lg" onclick="handleGetStartedClick()">Get Started</button>
+                    <button class="btn btn--primary btn--lg" onclick="handleGetStartedClick()" aria-label="Get started with personalized career guidance">Get Started</button>
                 </div>
             </div>
         </section>
 
-        <section class="features">
+        <section class="features" aria-labelledby="features-title">
             <div class="container">
-                <h2 class="section-title">Why Choose AI Career Advisor?</h2>
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon"><i class="fas fa-route"></i></div>
+                <h2 class="section-title" id="features-title">Why Choose AI Career Advisor?</h2>
+                <div class="features-grid" role="list" aria-label="Platform features">
+                    <div class="feature-card" role="listitem">
+                        <div class="feature-icon" aria-hidden="true"><i class="fas fa-route"></i></div>
                         <h3>Personalized Career Roadmap</h3>
                         <p>Get a customized learning path based on your goals and current skills.</p>
                     </div>
-                    <div class="feature-card">
-                        <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                    <div class="feature-card" role="listitem">
+                        <div class="feature-icon" aria-hidden="true"><i class="fas fa-chart-line"></i></div>
                         <h3>AI Skill Gap Analysis</h3>
                         <p>Identify skill gaps and get recommendations to bridge them effectively.</p>
                     </div>
-                    <div class="feature-card">
-                        <div class="feature-icon"><i class="fas fa-file-alt"></i></div>
+                    <div class="feature-card" role="listitem">
+                        <div class="feature-icon" aria-hidden="true"><i class="fas fa-file-alt"></i></div>
                         <h3>Resume & Interview Guidance</h3>
                         <p>AI-powered resume building and interview preparation tools.</p>
                     </div>
-                    <div class="feature-card">
-                        <div class="feature-icon"><i class="fas fa-industry"></i></div>
+                    <div class="feature-card" role="listitem">
+                        <div class="feature-icon" aria-hidden="true"><i class="fas fa-industry"></i></div>
                         <h3>Industry Insights</h3>
                         <p>Stay updated with latest industry trends and salary benchmarks.</p>
                     </div>
-                    <div class="feature-card">
-                        <div class="feature-icon"><i class="fas fa-users"></i></div>
+                    <div class="feature-card" role="listitem">
+                        <div class="feature-icon" aria-hidden="true"><i class="fas fa-users"></i></div>
                         <h3>Community & Mentorship</h3>
                         <p>Connect with peers and industry experts for guidance and networking.</p>
                     </div>
-                    <div class="feature-card">
-                        <div class="feature-icon"><i class="fas fa-magnifying-glass-chart"></i></div>
+                    <div class="feature-card" role="listitem">
+                        <div class="feature-icon" aria-hidden="true"><i class="fas fa-magnifying-glass-chart"></i></div>
                         <h3>Job Market Analysis</h3>
                         <p>Get real-time insights into job demand, required skills, and salary expectations.</p>
                     </div>
@@ -91,37 +97,37 @@
             </div>
         </section>
 
-        <section class="how-it-works">
+        <section class="how-it-works" aria-labelledby="how-it-works-title">
             <div class="container">
-                <h2 class="section-title">How It Works</h2>
-                <div class="steps-grid">
-                    <div class="step-card">
-                        <div class="step-number">1</div>
+                <h2 class="section-title" id="how-it-works-title">How It Works</h2>
+                <div class="steps-grid" role="list" aria-label="How the platform works - step by step process">
+                    <div class="step-card" role="listitem">
+                        <div class="step-number" aria-label="Step 1">1</div>
                         <h3>Take Assessment</h3>
                         <p>Complete our comprehensive skill and interest assessment.</p>
                     </div>
-                    <div class="step-card">
-                        <div class="step-number">2</div>
+                    <div class="step-card" role="listitem">
+                        <div class="step-number" aria-label="Step 2">2</div>
                         <h3>AI Analysis</h3>
                         <p>Our AI analyzes your results and career preferences.</p>
                     </div>
-                    <div class="step-card">
-                        <div class="step-number">3</div>
+                    <div class="step-card" role="listitem">
+                        <div class="step-number" aria-label="Step 3">3</div>
                         <h3>Get Roadmap</h3>
                         <p>Receive personalized career recommendations and learning paths.</p>
                     </div>
-                    <div class="step-card">
-                        <div class="step-number">4</div>
+                    <div class="step-card" role="listitem">
+                        <div class="step-number" aria-label="Step 4">4</div>
                         <h3>Learn & Develop</h3>
                         <p>Engage with curated courses to build in-demand skills.</p>
                     </div>
-                    <div class="step-card">
-                        <div class="step-number">5</div>
+                    <div class="step-card" role="listitem">
+                        <div class="step-number" aria-label="Step 5">5</div>
                         <h3>Build Your Brand</h3>
                         <p>Use our tools to create a standout resume and prepare for interviews.</p>
                     </div>
-                    <div class="step-card">
-                        <div class="step-number">6</div>
+                    <div class="step-card" role="listitem">
+                        <div class="step-number" aria-label="Step 6">6</div>
                         <h3>Apply & Grow</h3>
                         <p>Find job opportunities and advance your professional career.</p>
                     </div>
@@ -129,11 +135,11 @@
             </div>
         </section>
 
-        <section class="testimonials">
+        <section class="testimonials" aria-labelledby="testimonials-title">
             <div class="container">
-                <h2 class="section-title">Success Stories</h2>
-                <div class="testimonials-grid">
-                    <div class="testimonial-card">
+                <h2 class="section-title" id="testimonials-title">Success Stories</h2>
+                <div class="testimonials-grid" role="list" aria-label="User testimonials and success stories">
+                    <div class="testimonial-card" role="listitem">
                         <div class="testimonial-content">
                             <p>"This platform helped me transition from mechanical engineering to data science. The
                                 personalized roadmap was incredibly helpful!"</p>
@@ -143,7 +149,7 @@
                             <span>Data Scientist at TCS</span>
                         </div>
                     </div>
-                    <div class="testimonial-card">
+                    <div class="testimonial-card" role="listitem">
                         <div class="testimonial-content">
                             <p>"The AI mentor guided me through my career change journey. Now I'm working at my dream
                                 company!"</p>
@@ -157,169 +163,141 @@
             </div>
         </section>
 
-        <section class="cta-section">
+        <section class="cta-section" aria-labelledby="cta-title">
             <div class="container">
-                <h2>Start Your Free Career Assessment Today</h2>
-                <button class="btn btn--primary btn--lg" onclick="handleGetStartedClick()">Get Started Now</button>
+                <h2 id="cta-title">Start Your Free Career Assessment Today</h2>
+                <button class="btn btn--primary btn--lg" onclick="handleGetStartedClick()" aria-label="Start your free career assessment now">Get Started Now</button>
             </div>
         </section>
     </div>
 
-    <div id="auth-page" class="page">
+    <div id="auth-page" class="page" role="main" aria-label="Authentication page">
         <div class="container">
             <div class="auth-container">
-                <div class="auth-form" id="login-form">
-                    <h2>Login to Your Account</h2>
+                <form class="auth-form" id="login-form" role="form" aria-labelledby="login-title">
+                    <h2 id="login-title">Login to Your Account</h2>
                     <div class="form-group">
-                        <label class="form-label">Email</label>
-                        <input type="email" class="form-control" id="login-email" placeholder="Enter your email">
+                        <label class="form-label" for="login-email">Email</label>
+                        <input type="email" class="form-control" id="login-email" placeholder="Enter your email" required aria-describedby="email-help">
+                        <div id="email-help" class="sr-only">Enter your registered email address</div>
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Password</label>
-                        <input type="password" class="form-control" id="login-password"
-                            placeholder="Enter your password">
+                        <label class="form-label" for="login-password">Password</label>
+                        <input type="password" class="form-control" id="login-password" placeholder="Enter your password" required aria-describedby="password-help">
+                        <div id="password-help" class="sr-only">Enter your account password</div>
                     </div>
-                    <button class="btn btn--primary btn--full-width" onclick="login()">Login</button>
+                    <button type="button" class="btn btn--primary btn--full-width" onclick="login()" aria-label="Login to your account">Login</button>
                     <div class="auth-switch">
-                        <p>Don't have an account? <a href="#" onclick="showRegisterForm()">Register</a></p>
+                        <p>Don't have an account? <button type="button" class="btn-link" onclick="showRegisterForm()" aria-label="Switch to registration form">Register here</button></p>
                     </div>
-                </div>
+                </form>
 
-                <div class="auth-form hidden" id="register-form">
-                    <h2>Create an Account</h2>
+                <form class="auth-form hidden" id="register-form" role="form" aria-labelledby="register-title">
+                    <h2 id="register-title">Create Your Account</h2>
                     <div class="form-group">
-                        <label class="form-label">Full Name</label>
-                        <input type="text" class="form-control" id="register-name" placeholder="Enter your full name">
+                        <label class="form-label" for="register-name">Full Name</label>
+                        <input type="text" class="form-control" id="register-name" placeholder="Enter your full name" required aria-describedby="name-help">
+                        <div id="name-help" class="sr-only">Enter your full name as you'd like it to appear</div>
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Email</label>
-                        <input type="email" class="form-control" id="register-email" placeholder="Enter your email">
+                        <label class="form-label" for="register-email">Email</label>
+                        <input type="email" class="form-control" id="register-email" placeholder="Enter your email" required aria-describedby="register-email-help">
+                        <div id="register-email-help" class="sr-only">Enter a valid email address for your account</div>
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Password</label>
-                        <input type="password" class="form-control" id="register-password"
-                            placeholder="Create a password">
+                        <label class="form-label" for="register-password">Password</label>
+                        <input type="password" class="form-control" id="register-password" placeholder="Create a password" required aria-describedby="register-password-help">
+                        <div id="register-password-help" class="sr-only">Create a strong password with at least 8 characters</div>
                     </div>
-                    <button class="btn btn--primary btn--full-width" onclick="register()">Register</button>
+                    <button type="button" class="btn btn--primary btn--full-width" onclick="register()" aria-label="Create your account">Register</button>
                     <div class="auth-switch">
-                        <p>Already have an account? <a href="#" onclick="showLoginForm()">Login</a></p>
+                        <p>Already have an account? <button type="button" class="btn-link" onclick="showLoginForm()" aria-label="Switch to login form">Login here</button></p>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
 
-        <div id="profile-setup-page" class="page">
-            <div class="container">
-                <div class="profile-setup">
-                    <h2>Complete Your Profile</h2>
-                    <div class="form-group">
-                        <label class="form-label">Education Level</label>
-                        <select class="form-control" id="education-level">
-                            <option value="">Select your education level</option>
-                            <option value="highschool">High School</option>
-                            <option value="bachelor">Bachelor's Degree</option>
-                            <option value="master">Master's Degree</option>
-                            <option value="phd">PhD</option>
-                            <option value="other">Other</option>
-                        </select>
-                        <div id="education-error" class="validation-error"></div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Current Skills (minimum 3 characters)</label>
-                        <div class="skills-input">
-                            <div class="skill-item">
-                                <input type="text" class="form-control" id="skill-input" placeholder="Add a skill">
-                                <button class="btn btn--primary" onclick="addSkill()">Add</button>
-                            </div>
-                            <div id="skills-list" class="skills-list"></div>
-                            <div id="skills-error" class="validation-error"></div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Interests</label>
-                        <div class="interests-grid">
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="tech" value="technology">
-                                <label for="tech">Technology</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="business" value="business">
-                                <label for="business">Business</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="design" value="design">
-                                <label for="design">Design</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="healthcare" value="healthcare">
-                                <label for="healthcare">Healthcare</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="education" value="education">
-                                <label for="education">Education</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="arts" value="arts">
-                                <label for="arts">Arts</label>
-                            </div>
-                        </div>
-                        <div id="interests-error" class="validation-error"></div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Coding Profiles (Optional)</label>
-                        <div style="display: flex; flex-direction: column; gap: 10px;">
-                            <input type="url" class="form-control" id="github-profile" placeholder="GitHub Profile URL" style="margin-bottom: 0;">
-                            <input type="url" class="form-control" id="leetcode-profile" placeholder="LeetCode Profile URL" style="margin-bottom: 0;">
-                            <input type="url" class="form-control" id="codeforces-profile" placeholder="Codeforces Profile URL">
-                        </div>
-                    </div>
-                    <!-- Optional Coding Profiles -->
-<div class="form-group">
-  <label class="form-label">
-    Professional / Coding Profiles (Optional)
-  </label>
-
-  <input
-    type="url"
-    class="form-control mb-4"
-    id="github-profile"
-    placeholder="GitHub Profile URL (https://github.com/username)"
-  />
-
-  <input
-    type="url"
-    class="form-control mb-4"
-    id="linkedin-profile"
-    placeholder="LinkedIn Profile URL (https://linkedin.com/in/username)"
-  />
-
-  <input
-    type="url"
-    class="form-control mb-4"
-    id="leetcode-profile"
-    placeholder="LeetCode Profile URL (https://leetcode.com/username)"
-  />
-
-  <input
-    type="url"
-    class="form-control"
-    id="Optional-Profiles(if-any)"
-    placeholder="Other profiles (optional)"
-  />
-
-  <p style="font-size: 0.85rem; margin-top: 8px; color: var(--text-light);">
-    These links are optional. You can skip now and add them later from your profile.
-  </p>
-</div>
-
-                    <button class="btn btn--primary btn--full-width" onclick="saveProfile()" disabled>Save Profile & Start Assessment</button>
+    <div id="profile-setup-page" class="page" role="main" aria-label="Profile setup page">
+        <div class="container">
+            <form class="profile-setup" role="form" aria-labelledby="profile-title">
+                <h2 id="profile-title">Complete Your Profile</h2>
+                <div class="form-group">
+                    <label class="form-label" for="education-level">Education Level</label>
+                    <select class="form-control" id="education-level" required aria-describedby="education-help">
+                        <option value="">Select your education level</option>
+                        <option value="highschool">High School</option>
+                        <option value="bachelor">Bachelor's Degree</option>
+                        <option value="master">Master's Degree</option>
+                        <option value="phd">PhD</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <div id="education-help" class="sr-only">Select your highest level of education completed</div>
+                    <div id="education-error" class="validation-error" role="alert"></div>
                 </div>
-                
-            </div>
+                <div class="form-group">
+                    <label class="form-label" for="skill-input">Current Skills (minimum 3 characters)</label>
+                    <div class="skills-input">
+                        <div class="skill-item">
+                            <input type="text" class="form-control" id="skill-input" placeholder="Add a skill" aria-describedby="skills-help">
+                            <button type="button" class="btn btn--primary" onclick="addSkill()" aria-label="Add skill to your profile">Add</button>
+                        </div>
+                        <div id="skills-help" class="sr-only">Enter skills you currently have, then click Add to include them in your profile</div>
+                        <div id="skills-list" class="skills-list" role="list" aria-label="Your current skills"></div>
+                        <div id="skills-error" class="validation-error" role="alert"></div>
+                    </div>
+                </div>
+                <fieldset class="form-group">
+                    <legend class="form-label">Interests</legend>
+                    <div class="interests-grid" role="group" aria-describedby="interests-help">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="tech" value="technology">
+                            <label for="tech">Technology</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="business" value="business">
+                            <label for="business">Business</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="design" value="design">
+                            <label for="design">Design</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="healthcare" value="healthcare">
+                            <label for="healthcare">Healthcare</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="education" value="education">
+                            <label for="education">Education</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="arts" value="arts">
+                            <label for="arts">Arts</label>
+                        </div>
+                    </div>
+                    <div id="interests-help" class="sr-only">Select areas that interest you to help us recommend suitable career paths</div>
+                    <div id="interests-error" class="validation-error" role="alert"></div>
+                </fieldset>
+                <div class="form-group">
+                    <label class="form-label">Professional / Coding Profiles (Optional)</label>
+                    <input type="url" class="form-control mb-4" id="github-profile" placeholder="GitHub Profile URL (https://github.com/username)" aria-describedby="github-help">
+                    <div id="github-help" class="sr-only">Optional: Enter your GitHub profile URL</div>
+                    <input type="url" class="form-control mb-4" id="linkedin-profile" placeholder="LinkedIn Profile URL (https://linkedin.com/in/username)" aria-describedby="linkedin-help">
+                    <div id="linkedin-help" class="sr-only">Optional: Enter your LinkedIn profile URL</div>
+                    <input type="url" class="form-control mb-4" id="leetcode-profile" placeholder="LeetCode Profile URL (https://leetcode.com/username)" aria-describedby="leetcode-help">
+                    <div id="leetcode-help" class="sr-only">Optional: Enter your LeetCode profile URL</div>
+                    <input type="url" class="form-control" id="codeforces-profile" placeholder="Codeforces Profile URL" aria-describedby="codeforces-help">
+                    <div id="codeforces-help" class="sr-only">Optional: Enter your Codeforces profile URL</div>
+                    <p style="font-size: 0.85rem; margin-top: 8px; color: var(--text-light);">
+                        These links are optional. You can skip now and add them later from your profile.
+                    </p>
+                </div>
+                <button type="button" class="btn btn--primary btn--full-width" onclick="saveProfile()" disabled aria-label="Save profile and start assessment">Save Profile & Start Assessment</button>
+            </form>
         </div>
+    </div>
 
-    <div id="assessment-page" class="page">
+    <div id="assessment-page" class="page" role="main" aria-label="Career assessment page">
         <div class="container">
             <div class="assessment-container">
                 <div class="assessment-header">
@@ -328,28 +306,27 @@
                 </div>
                 <div class="progress-text">
                     <span>Question <span id="current-question">1</span> of <span id="total-questions">10</span></span>
-                    <a href="#" style="font-size: 0.9rem;" onclick="skipAssessment()">Skip All</a>
+                    <button type="button" style="font-size: 0.9rem; background: none; border: none; color: var(--primary); cursor: pointer;" onclick="skipAssessment()" aria-label="Skip entire assessment">Skip All</button>
                 </div>
-                <div class="progress-bar">
+                <div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" aria-label="Assessment progress">
                     <div class="progress-fill" id="assessment-progress" style="width: 10%;"></div>
                 </div>
                 <div class="question-container">
                     <h3 id="question-text"></h3>
-                    <div class="answer-options" id="answer-options">
+                    <div class="answer-options" id="answer-options" role="radiogroup" aria-labelledby="question-text">
                     </div>
                 </div>
                 <div class="assessment-buttons">
-                    <button class="btn btn--outline" id="prev-button" onclick="prevQuestion()">Previous</button>
-                    <button class="btn btn--outline" id="skip-button" onclick="skipQuestion()">Skip</button>
-                    <button class="btn btn--primary" id="next-button" onclick="nextQuestion()">Next</button>
-                    <button class="btn btn--primary hidden" id="finish-button" onclick="finishAssessment()">See
-                        Results</button>
+                    <button type="button" class="btn btn--outline" id="prev-button" onclick="prevQuestion()" aria-label="Go to previous question">Previous</button>
+                    <button type="button" class="btn btn--outline" id="skip-button" onclick="skipQuestion()" aria-label="Skip current question">Skip</button>
+                    <button type="button" class="btn btn--primary" id="next-button" onclick="nextQuestion()" aria-label="Go to next question">Next</button>
+                    <button type="button" class="btn btn--primary hidden" id="finish-button" onclick="finishAssessment()" aria-label="Complete assessment and see results">See Results</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="careers-page" class="page">
+    <div id="careers-page" class="page" role="main" aria-label="Career exploration page">
         <div class="container">
             <div class="page-header">
                 <h2>Explore Career Paths</h2>
@@ -357,15 +334,16 @@
             </div>
 
             <div class="search-bar">
-                <i class="fas fa-search search-icon"></i>
-                <input type="text" placeholder="Search careers..." class="form-control"
-                    onkeyup="debouncedSearch(this.value)">
+                <label for="career-search" class="sr-only">Search careers</label>
+                <i class="fas fa-search search-icon" aria-hidden="true"></i>
+                <input type="text" id="career-search" placeholder="Search careers..." class="form-control" onkeyup="debouncedSearch(this.value)" aria-describedby="search-help">
+                <div id="search-help" class="sr-only">Type to search for specific career paths</div>
             </div>
 
-            <div class="filters">
+            <div class="filters" role="group" aria-label="Career filters">
                 <div class="filter-group">
-                    <span class="filter-label">Filter by:</span>
-                    <select class="form-control" onchange="filterCareers('salary', this.value)">
+                    <label for="salary-filter" class="filter-label">Filter by:</label>
+                    <select id="salary-filter" class="form-control" onchange="filterCareers('salary', this.value)" aria-label="Filter by salary range">
                         <option value="">Salary Range</option>
                         <option value="high">High Salary</option>
                         <option value="medium">Medium Salary</option>
@@ -373,7 +351,8 @@
                     </select>
                 </div>
                 <div class="filter-group">
-                    <select class="form-control" onchange="filterCareers('growth', this.value)">
+                    <label for="growth-filter" class="sr-only">Filter by growth potential</label>
+                    <select id="growth-filter" class="form-control" onchange="filterCareers('growth', this.value)" aria-label="Filter by growth potential">
                         <option value="">Growth Potential</option>
                         <option value="high">High Growth</option>
                         <option value="medium">Medium Growth</option>
@@ -381,7 +360,8 @@
                     </select>
                 </div>
                 <div class="filter-group">
-                    <select class="form-control" onchange="filterCareers('skills', this.value)">
+                    <label for="skills-filter" class="sr-only">Filter by skill level</label>
+                    <select id="skills-filter" class="form-control" onchange="filterCareers('skills', this.value)" aria-label="Filter by required skill level">
                         <option value="">Skill Level</option>
                         <option value="beginner">Beginner Friendly</option>
                         <option value="intermediate">Intermediate</option>
@@ -390,16 +370,16 @@
                 </div>
             </div>
 
-            <div class="careers-grid" id="careers-grid">
+            <div class="careers-grid" id="careers-grid" role="list" aria-label="Available career paths">
             </div>
         </div>
     </div>
 
-    <div id="career-modal" class="modal hidden">
+    <div id="career-modal" class="modal hidden" role="dialog" aria-labelledby="modal-career-title" aria-modal="true">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 id="modal-career-title"></h3>
-                <button class="modal-close" onclick="closeModal('career-modal')">&times;</button>
+                <button class="modal-close" onclick="closeModal('career-modal')" aria-label="Close career details modal">&times;</button>
             </div>
             <div class="modal-body">
                 <div class="career-details" id="career-details">
@@ -408,23 +388,16 @@
         </div>
     </div>
 
-    <div id="dashboard-page" class="page">
+    <div id="dashboard-page" class="page" role="main" aria-label="User dashboard">
         <div class="container">
             <div class="dashboard-container">
                 <div class="dashboard-header">
-                    <button
-  class="btn btn--outline btn--sm"
-  onclick="openEditProfile()"
-  style="margin-top: 12px;"
->
-  Edit Profile
-</button>
-
+                    <button class="btn btn--outline btn--sm" onclick="openEditProfile()" style="margin-top: 12px;" aria-label="Edit your profile">Edit Profile</button>
                     <h1>Welcome back, <span id="user-name">User</span>!</h1>
                     <p>Here's your personalized career guidance</p>
                 </div>
 
-                <div class="dashboard-stats">
+                <div class="dashboard-stats" role="region" aria-label="Profile statistics">
                     <div class="stat-card">
                         <h3 id="profile-completion">75%</h3>
                         <p>Profile Completion</p>
@@ -442,120 +415,99 @@
                         <p>Courses Enrolled</p>
                     </div>
                 </div>
-                <!-- Chosen Career Path -->
-<div id="chosen-career-card" class="dashboard-card hidden">
-  <h3>Your Chosen Career Path</h3>
-  <p id="chosen-career-title"></p>
-  <button class="btn btn--outline btn--sm" onclick="openChosenCareer()">
-    View Details
-  </button>
-</div>
 
+                <div id="chosen-career-card" class="dashboard-card hidden">
+                    <h3>Your Chosen Career Path</h3>
+                    <p id="chosen-career-title"></p>
+                    <button class="btn btn--outline btn--sm" onclick="openChosenCareer()" aria-label="View details of your chosen career path">View Details</button>
+                </div>
 
-                <div class="dashboard-actions">
-                    <div class="action-card" onclick="showPage('assessment')">
-                        <div class="action-icon">
+                <div class="dashboard-actions" role="region" aria-label="Quick actions">
+                    <button class="action-card" onclick="showPage('assessment')" aria-label="Take career assessment">
+                        <div class="action-icon" aria-hidden="true">
                             <i class="fas fa-clipboard-list"></i>
                         </div>
                         <div class="action-content">
                             <h4>Career Assessment</h4>
                             <p>Get personalized recommendations</p>
                         </div>
-                    </div>
-                    <div class="action-card" onclick="showPage('learning')">
-                        <div class="action-icon">
+                    </button>
+                    <button class="action-card" onclick="showPage('learning')" aria-label="Explore learning resources">
+                        <div class="action-icon" aria-hidden="true">
                             <i class="fas fa-book-open"></i>
                         </div>
                         <div class="action-content">
                             <h4>Learning Hub</h4>
                             <p>Explore courses and grow your skills</p>
                         </div>
-                    </div>
-                    <div class="action-card" onclick="showPage('resume')">
-                        <div class="action-icon">
+                    </button>
+                    <button class="action-card" onclick="showPage('resume')" aria-label="Build your resume">
+                        <div class="action-icon" aria-hidden="true">
                             <i class="fas fa-file-alt"></i>
                         </div>
                         <div class="action-content">
                             <h4>Resume Builder</h4>
                             <p>Create a professional resume with AI</p>
                         </div>
-                    </div>
-                    <div class="action-card" onclick="showPage('community')">
-                        <div class="action-icon">
+                    </button>
+                    <button class="action-card" onclick="showPage('community')" aria-label="Connect with community">
+                        <div class="action-icon" aria-hidden="true">
                             <i class="fas fa-users"></i>
                         </div>
                         <div class="action-content">
                             <h4>Community</h4>
                             <p>Connect with mentors and peers</p>
                         </div>
-                    </div>
-                    <div class="action-card" onclick="openModal('job-search-modal')">
-                        <div class="action-icon">
+                    </button>
+                    <button class="action-card" onclick="openModal('job-search-modal')" aria-label="Search for jobs">
+                        <div class="action-icon" aria-hidden="true">
                             <i class="fas fa-briefcase"></i>
                         </div>
                         <div class="action-content">
                             <h4>Job Search Simulator</h4>
                             <p>Practice finding jobs that match your skills</p>
                         </div>
-                    </div>
-                    <div class="action-card" onclick="showPage('profile-setup')">
-                        <div class="action-icon">
-                            <i class="fas fa-user-edit"></i>
-                        </div>
-                        <div class="action-content">
-                            <h4>Edit Profile</h4>
-                            <p>Update your skills and coding profiles</p>
-                        </div>
-                    </div>
-                    <div class="action-card" onclick="showPage('community')">
-                        <div class="action-icon">
-                            <i class="fas fa-handshake"></i>
-                        </div>
-                        <div class="action-content">
-                            <h4>Mentor Connect</h4>
-                            <p>Find and connect with industry mentors</p>
-                        </div>
-                    </div>
+                    </button>
                 </div>
 
                 <div class="dashboard-main-content">
                     <div class="dashboard-card" id="coding-profiles-card">
-  <h3>Coding Profiles</h3>
-  <div id="coding-profiles-list"></div>
-</div>
+                        <h3>Coding Profiles</h3>
+                        <div id="coding-profiles-list"></div>
+                    </div>
 
                     <div class="dashboard-card">
                         <h3>Career Recommendations</h3>
-                        <div id="career-recommendations">
+                        <div id="career-recommendations" role="list" aria-label="Recommended career paths">
                         </div>
                     </div>
 
                     <div class="dashboard-card">
                         <h3>Skill Gap Analysis</h3>
                         <div class="skill-gap-chart">
-                            <canvas id="skillGapChart"></canvas>
+                            <canvas id="skillGapChart" aria-label="Chart showing skill gaps between current and required skills"></canvas>
                         </div>
                     </div>
 
                     <div class="dashboard-card">
                         <h3>Learning Roadmap</h3>
-                        <div class="roadmap-timeline">
-                            <div class="timeline-item">
-                                <div class="timeline-marker"></div>
+                        <div class="roadmap-timeline" role="list" aria-label="Learning roadmap timeline">
+                            <div class="timeline-item" role="listitem">
+                                <div class="timeline-marker" aria-hidden="true"></div>
                                 <div class="timeline-content">
                                     <h4>Short-term (0-6 months)</h4>
                                     <p>Complete Python fundamentals and basic statistics</p>
                                 </div>
                             </div>
-                            <div class="timeline-item">
-                                <div class="timeline-marker"></div>
+                            <div class="timeline-item" role="listitem">
+                                <div class="timeline-marker" aria-hidden="true"></div>
                                 <div class="timeline-content">
                                     <h4>Medium-term (6-12 months)</h4>
                                     <p>Learn machine learning and data visualization</p>
                                 </div>
                             </div>
-                            <div class="timeline-item">
-                                <div class="timeline-marker"></div>
+                            <div class="timeline-item" role="listitem">
+                                <div class="timeline-marker" aria-hidden="true"></div>
                                 <div class="timeline-content">
                                     <h4>Long-term (1-2 years)</h4>
                                     <p>Advanced ML, deep learning, and domain expertise</p>
@@ -565,7 +517,7 @@
                     </div>
                     <div class="dashboard-card">
                         <h3>My Enrolled Courses</h3>
-                        <div id="enrolled-courses-list">
+                        <div id="enrolled-courses-list" role="list" aria-label="Your enrolled courses">
                         </div>
                     </div>
                 </div>
@@ -573,20 +525,19 @@
         </div>
     </div>
 
-
-    <div id="learning-page" class="page">
+    <div id="learning-page" class="page" role="main" aria-label="Learning resources page">
         <div class="container">
             <div class="page-header">
                 <h2>Learning Hub</h2>
                 <p>Explore courses and resources to develop your skills</p>
             </div>
 
-            <div class="courses-grid" id="courses-grid">
+            <div class="courses-grid" id="courses-grid" role="list" aria-label="Available courses">
             </div>
         </div>
     </div>
 
-    <div id="community-page" class="page">
+    <div id="community-page" class="page" role="main" aria-label="Community page">
         <div class="container">
             <div class="page-header">
                 <h2>Career Community</h2>
@@ -596,7 +547,7 @@
             <div class="community-grid">
                 <div class="community-card">
                     <div class="community-card-header">
-                        <div class="community-card-icon">
+                        <div class="community-card-icon" aria-hidden="true">
                             <i class="fas fa-comments"></i>
                         </div>
                         <div>
@@ -604,20 +555,20 @@
                             <p>Join conversations about career paths</p>
                         </div>
                     </div>
-                    <div class="topic-list">
-                        <div class="topic-item">
+                    <div class="topic-list" role="list" aria-label="Discussion topics">
+                        <div class="topic-item" role="listitem">
                             <div>
                                 <h4>Transitioning to Data Science</h4>
                                 <span>128 comments • 2 days ago</span>
                             </div>
                         </div>
-                        <div class="topic-item">
+                        <div class="topic-item" role="listitem">
                             <div>
                                 <h4>UX Design Portfolio Tips</h4>
                                 <span>64 comments • 5 days ago</span>
                             </div>
                         </div>
-                        <div class="topic-item">
+                        <div class="topic-item" role="listitem">
                             <div>
                                 <h4>Cloud Certifications Worth It?</h4>
                                 <span>42 comments • 1 week ago</span>
@@ -628,7 +579,7 @@
 
                 <div class="community-card">
                     <div class="community-card-header">
-                        <div class="community-card-icon">
+                        <div class="community-card-icon" aria-hidden="true">
                             <i class="fas fa-user-graduate"></i>
                         </div>
                         <div>
@@ -636,23 +587,23 @@
                             <p>Connect with experienced professionals</p>
                         </div>
                     </div>
-                    <div class="mentor-list">
-                        <div class="mentor-item">
-                            <div class="mentor-avatar">AS</div>
+                    <div class="mentor-list" role="list" aria-label="Available mentors">
+                        <div class="mentor-item" role="listitem">
+                            <div class="mentor-avatar" aria-hidden="true">AS</div>
                             <div>
                                 <h4>Anjali Sharma</h4>
                                 <span>Data Scientist • 8 years experience</span>
                             </div>
                         </div>
-                        <div class="mentor-item">
-                            <div class="mentor-avatar">RK</div>
+                        <div class="mentor-item" role="listitem">
+                            <div class="mentor-avatar" aria-hidden="true">RK</div>
                             <div>
                                 <h4>Rahul Kapoor</h4>
                                 <span>UX Lead • 10 years experience</span>
                             </div>
                         </div>
-                        <div class="mentor-item">
-                            <div class="mentor-avatar">PS</div>
+                        <div class="mentor-item" role="listitem">
+                            <div class="mentor-avatar" aria-hidden="true">PS</div>
                             <div>
                                 <h4>Priya Singh</h4>
                                 <span>Software Engineer • 6 years experience</span>
@@ -663,7 +614,7 @@
 
                 <div class="community-card">
                     <div class="community-card-header">
-                        <div class="community-card-icon">
+                        <div class="community-card-icon" aria-hidden="true">
                             <i class="fas fa-calendar-alt"></i>
                         </div>
                         <div>
@@ -671,20 +622,20 @@
                             <p>Webinars and workshops to boost your career</p>
                         </div>
                     </div>
-                    <div class="topic-list">
-                        <div class="topic-item">
+                    <div class="topic-list" role="list" aria-label="Upcoming events">
+                        <div class="topic-item" role="listitem">
                             <div>
                                 <h4>AI Career Fair</h4>
                                 <span>June 15, 2023 • Virtual</span>
                             </div>
                         </div>
-                        <div class="topic-item">
+                        <div class="topic-item" role="listitem">
                             <div>
                                 <h4>Resume Review Workshop</h4>
                                 <span>June 22, 2023 • 2:00 PM IST</span>
                             </div>
                         </div>
-                        <div class="topic-item">
+                        <div class="topic-item" role="listitem">
                             <div>
                                 <h4>Tech Interview Preparation</h4>
                                 <span>July 5, 2023 • 4:00 PM IST</span>
@@ -696,126 +647,124 @@
         </div>
     </div>
 
-    <div id="resume-page" class="page">
+    <div id="resume-page" class="page" role="main" aria-label="Resume builder page">
         <div class="container">
             <div class="page-header">
                 <h2>Resume Builder</h2>
                 <p>Create a professional resume with AI-powered suggestions</p>
             </div>
              
-             <div class="form-group">
-  <label><strong>Select Resume Template (ATS Friendly)</strong></label>
-  <select id="resume-template" class="form-control">
-    <option value="classic">Classic ATS</option>
-    <option value="modern">Modern ATS</option>
-    <option value="minimal">Minimal ATS</option>
-  </select>
-</div>
+            <div class="form-group">
+                <label for="resume-template"><strong>Select Resume Template (ATS Friendly)</strong></label>
+                <select id="resume-template" class="form-control" aria-describedby="template-help">
+                    <option value="classic">Classic ATS</option>
+                    <option value="modern">Modern ATS</option>
+                    <option value="minimal">Minimal ATS</option>
+                </select>
+                <div id="template-help" class="sr-only">Choose a resume template that is optimized for Applicant Tracking Systems</div>
+            </div>
 
-
-            <div class="profile-setup">
+            <form class="profile-setup" role="form" aria-labelledby="resume-form-title">
+                <h3 id="resume-form-title" class="sr-only">Resume Information Form</h3>
                 <div class="form-group">
-                    <label class="form-label">Full Name</label>
-                    <input type="text" class="form-control" id="resume-name" placeholder="Your full name"
-                        value="Priya Sharma">
+                    <label class="form-label" for="resume-name">Full Name</label>
+                    <input type="text" class="form-control" id="resume-name" placeholder="Your full name" value="Priya Sharma" required>
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Contact Info</label>
-                    <input type="email" class="form-control" id="resume-email" placeholder="Email"
-                        value="priya.sharma@email.com">
-                    <input type="tel" class="form-control mt-4" id="resume-phone" placeholder="Phone"
-                        value="+91-9876543210">
+                    <label class="form-label" for="resume-email">Contact Info</label>
+                    <input type="email" class="form-control" id="resume-email" placeholder="Email" value="priya.sharma@email.com" required>
+                    <input type="tel" class="form-control mt-4" id="resume-phone" placeholder="Phone" value="+91-9876543210" required>
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Professional Summary</label>
-                    <textarea class="form-control" id="resume-summary" rows="3"
-                        placeholder="Brief professional summary">Results-driven professional with experience in data analysis and machine learning, seeking to leverage analytical skills to drive business solutions.</textarea>
+                    <label class="form-label" for="resume-summary">Professional Summary</label>
+                    <textarea class="form-control" id="resume-summary" rows="3" placeholder="Brief professional summary" required>Results-driven professional with experience in data analysis and machine learning, seeking to leverage analytical skills to drive business solutions.</textarea>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Work Experience</label>
-                    <div id="experience-container">
+                    <div id="experience-container" role="group" aria-label="Work experience entries">
                     </div>
-                    <button class="btn btn--outline btn--sm mt-4" onclick="addExperience()">+ Add Experience</button>
+                    <button type="button" class="btn btn--outline btn--sm mt-4" onclick="addExperience()" aria-label="Add work experience entry">+ Add Experience</button>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Education</label>
-                    <div id="education-container">
+                    <div id="education-container" role="group" aria-label="Education entries">
                     </div>
-                    <button class="btn btn--outline btn--sm mt-4" onclick="addEducation()">+ Add Education</button>
+                    <button type="button" class="btn btn--outline btn--sm mt-4" onclick="addEducation()" aria-label="Add education entry">+ Add Education</button>
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Skills</label>
+                    <label class="form-label" for="resume-skill-input">Skills</label>
                     <div class="skills-input">
                         <div class="skill-item">
-                            <input type="text" class="form-control" id="resume-skill-input"
-                                placeholder="Add a skill (e.g., Python)">
-                            <button class="btn btn--primary btn--sm" onclick="addResumeSkill()">Add</button>
+                            <input type="text" class="form-control" id="resume-skill-input" placeholder="Add a skill (e.g., Python)">
+                            <button type="button" class="btn btn--primary btn--sm" onclick="addResumeSkill()" aria-label="Add skill to resume">Add</button>
                         </div>
-                        <div id="resume-skills" class="skills-list"></div>
+                        <div id="resume-skills" class="skills-list" role="list" aria-label="Resume skills"></div>
                     </div>
                 </div>
                 <div class="text-center">
-                    <button class="btn btn--primary btn--lg" onclick="generateResume()">Preview Resume</button>
+                    <button type="button" class="btn btn--primary btn--lg" onclick="generateResume()" aria-label="Generate and preview resume">Preview Resume</button>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 
-    <div id="resume-preview-modal" class="modal hidden">
+    <div id="resume-preview-modal" class="modal hidden" role="dialog" aria-labelledby="resume-preview-title" aria-modal="true">
         <div class="modal-content">
             <div class="modal-header">
-                <h3>Resume Preview</h3>
-                <button class="modal-close" onclick="closeModal('resume-preview-modal')">&times;</button>
+                <h3 id="resume-preview-title">Resume Preview</h3>
+                <button class="modal-close" onclick="closeModal('resume-preview-modal')" aria-label="Close resume preview">&times;</button>
             </div>
             <div class="modal-body">
-                <div id="resume-preview-content">
+                <div id="resume-preview-content" role="document" aria-label="Resume preview content">
                 </div>
                 <div class="text-center mt-4">
-                    <button class="btn btn--primary btn--lg" onclick="downloadResume()">Download as PDF</button>
+                    <button class="btn btn--primary btn--lg" onclick="downloadResume()" aria-label="Download resume as PDF">Download as PDF</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="job-search-modal" class="modal hidden">
+    <div id="job-search-modal" class="modal hidden" role="dialog" aria-labelledby="job-search-title" aria-modal="true">
         <div class="modal-content">
             <div class="modal-header">
-                <h3>Job Search Simulator</h3>
-                <button class="modal-close" onclick="closeModal('job-search-modal')">&times;</button>
+                <h3 id="job-search-title">Job Search Simulator</h3>
+                <button class="modal-close" onclick="closeModal('job-search-modal')" aria-label="Close job search modal">&times;</button>
             </div>
             <div class="modal-body">
                 <div class="search-bar" style="margin-bottom: 24px;">
-                    <i class="fas fa-search search-icon"></i>
-                    <input type="text" placeholder="Search for jobs (e.g., 'Data Scientist')" class="form-control"
-                        onkeyup="debouncedJobSearch(this.value)">
+                    <label for="job-search-input" class="sr-only">Search for jobs</label>
+                    <i class="fas fa-search search-icon" aria-hidden="true"></i>
+                    <input type="text" id="job-search-input" placeholder="Search for jobs (e.g., 'Data Scientist')" class="form-control" onkeyup="debouncedJobSearch(this.value)">
                 </div>
-                <div id="job-listings">
+                <div id="job-listings" role="list" aria-label="Job search results">
                 </div>
             </div>
         </div>
     </div>
+    </main>
 
     <!--Back to top button-->
-        <button id="btn"><i class="fa-solid fa-arrow-up"></i></button>
+    <button id="btn" aria-label="Back to top"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></button>
+    
     <!-- Voiceflow Chatbot Integration -->
-<script type="text/javascript">
-  (function(d, t) {
-      var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
-      v.onload = function() {
-        window.voiceflow.chat.load({
-          verify: { projectID: '695a584af022b1214685d01f' },
-          url: 'https://general-runtime.voiceflow.com',
-          versionID: 'production',
-          voice: {
-            url: "https://runtime-api.voiceflow.com"
-          }
-        });
-      };
-      v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
-  })(document, 'script');
-</script>
+    <script type="text/javascript">
+      (function(d, t) {
+          var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+          v.onload = function() {
+            window.voiceflow.chat.load({
+              verify: { projectID: '695a584af022b1214685d01f' },
+              url: 'https://general-runtime.voiceflow.com',
+              versionID: 'production',
+              voice: {
+                url: "https://runtime-api.voiceflow.com"
+              }
+            });
+          };
+          v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+      })(document, 'script');
+    </script>
 
-    <footer class="footer">
+    <footer class="footer" role="contentinfo">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
@@ -824,33 +773,34 @@
                 </div>
                 <div class="footer-section">
                     <h5>Quick Links</h5>
-                    <a href="#" onclick="showPage('home')">Home</a>
-                    <a href="#" onclick="showPage('careers')">Explore Careers</a>
-                    <a href="#" onclick="showPage('learning')">Learning Hub</a>
-                    <a href="#" onclick="showPage('community')">Community</a>
+                    <a href="#" onclick="showPage('home')" aria-label="Go to home page">Home</a>
+                    <a href="#" onclick="showPage('careers')" aria-label="Explore career paths">Explore Careers</a>
+                    <a href="#" onclick="showPage('learning')" aria-label="Access learning resources">Learning Hub</a>
+                    <a href="#" onclick="showPage('community')" aria-label="Join the community">Community</a>
                 </div>
                 <div class="footer-section">
                     <h5>Resources</h5>
-                    <a href="#">Career Blog</a>
-                    <a href="#">Skill Assessment</a>
-                    <a href="#">Resume Templates</a>
-                    <a href="#">Interview Prep</a>
+                    <a href="#" aria-label="Read career blog">Career Blog</a>
+                    <a href="#" aria-label="Take skill assessment">Skill Assessment</a>
+                    <a href="#" aria-label="Download resume templates">Resume Templates</a>
+                    <a href="#" aria-label="Prepare for interviews">Interview Prep</a>
                 </div>
                 <div class="footer-section">
                     <h5>Support</h5>
-                    <a href="help.html">Help Center</a>
-                    <a href="help.html">Contact Us</a>
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
+                    <a href="help.html" aria-label="Get help and support">Help Center</a>
+                    <a href="help.html" aria-label="Contact customer support">Contact Us</a>
+                    <a href="#" aria-label="Read privacy policy">Privacy Policy</a>
+                    <a href="#" aria-label="Read terms of service">Terms of Service</a>
                 </div>
             </div>
             <div class="footer-bottom">
-                <!-- <p id="copyright">&copy; 2023 AI Career Advisor. All rights reserved.</p> -->
-                 <p id="copyright"></p> 
+                <p id="copyright"></p> 
             </div>
         </div>
     </footer>
 
+    <script src="assets/scripts/app.js"></script>
+    <script src="assets/scripts/backtoTop.js"></script>
 <script src="assets/scripts/app.js"></script>
 <script src="assets/scripts/backtoTop.js"></script>
 <script>
