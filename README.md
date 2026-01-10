@@ -63,4 +63,62 @@ Its mission is to **bridge the gap between education and employability** using A
 ---
 
 ## 🧩 System Architecture  
+User (React UI)
+↓
+Backend API (Node.js / FastAPI)
+↓
+AI Engine (OpenAI)
+↓
+Career Recommendations
+↓
+Displayed on UI
+
+
+---
+
+## 📘 How It Works  
+
+1. User enters skills, interests, and goals  
+2. Backend sends data to AI engine  
+3. AI analyzes profile  
+4. Career & skill recommendations are generated  
+5. Results are shown in real-time  
+
+---
+
+## 🔮 Future Enhancements  
+
+- LinkedIn & GitHub profile analysis  
+- User dashboards  
+- AI voice assistant  
+- Progress tracking  
+- Job market analytics  
+
+---
+
+## 🤝 Contributing  
+
+1. Fork the repo  
+2. Create a new branch  
+3. Add your feature  
+4. Open a Pull Request  
+
+---
+
+## 📜 License  
+
+This project is licensed under the **MIT License**.  
+You are free to use, modify, and distribute it.
+
+---
+
+## 🌐 Live Demo  
+
+🔗 https://ai-powered-career-advice-five.vercel.app/  
+
+---
+
+### ⭐ Developed with passion by  
+**[Abhijeet Kasera](https://github.com/ABHIJEET-0001)**  
+*Always building intelligent systems that matter.*
 
