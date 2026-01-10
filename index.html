@@ -24,16 +24,19 @@
             <div class="nav-brand">
                 <h2><a href="#" onclick="showPage('home')" aria-label="AI Career Advisor - Go to homepage">AI Career Advisor</a></h2>
             </div>
-            <div class="nav-menu" id="nav-menu" role="menubar">
-                <a href="#" class="nav-link" onclick="showPage('home')" role="menuitem" aria-label="Navigate to Home page">Home</a>
-                <a href="#" class="nav-link" onclick="showPage('careers')" role="menuitem" aria-label="Navigate to Explore Careers page">Explore Careers</a>
-                <a href="#" class="nav-link" onclick="showPage('learning')" role="menuitem" aria-label="Navigate to Learning Hub page">Learning Hub</a>
-                <a href="#" class="nav-link" onclick="showPage('community')" role="menuitem" aria-label="Navigate to Community page">Community</a>
-                <a href="help.html" class="nav-link" onclick="showPage('help')" role="menuitem" aria-label="Navigate to Help page">Help</a>
-                <a href="#" id="dashboard-link" class="nav-link hidden" onclick="showPage('dashboard')" role="menuitem" aria-label="Navigate to Dashboard page">Dashboard</a>
-                <button id="auth-button" class="btn btn--primary" onclick="handleGetStartedClick()" aria-label="Get started with AI Career Advisor">Get Started</button>
-                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light theme" title="Toggle theme">
-                    <i class="fas fa-moon" aria-hidden="true"></i>
+              <div class="nav-menu" id="nav-menu">
+                 <div class="nav-close" onclick="toggleMobileMenu()">
+                    <i class="fa-solid fa-xmark"></i>
+                 </div>
+                <a href="#" class="nav-link" onclick="showPage('home')">Home</a>
+                <a href="#" class="nav-link" onclick="showPage('careers')">Explore Careers</a>
+                <a href="#" class="nav-link" onclick="showPage('learning')">Learning Hub</a>
+                <a href="#" class="nav-link" onclick="showPage('community')">Community</a>
+                <a href="help.html" class="nav-link" onclick="showPage('help')">Help</a>
+                <a href="#" id="dashboard-link" class="nav-link hidden" onclick="showPage('dashboard')">Dashboard</a>
+                <button id="auth-button" class="btn btn--primary" onclick="handleGetStartedClick()">Get Started</button>
+                <button class="theme-toggle" id="theme-toggle">
+                    <i class="fas fa-moon"></i>
                 </button>
             </div>
             <button class="nav-toggle" onclick="toggleMobileMenu()" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="nav-menu">
@@ -798,6 +801,14 @@
 
     <script src="assets/scripts/app.js"></script>
     <script src="assets/scripts/backtoTop.js"></script>
+<script src="assets/scripts/app.js"></script>
+<script src="assets/scripts/backtoTop.js"></script>
+<script>
+    function toggleMobileMenu() {
+  document.getElementById("nav-menu").classList.toggle("active");
+}
+
+</script>
 </body>
 
 </html>
