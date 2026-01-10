@@ -2,7 +2,7 @@
 <h3 align="center">Personalized Career & Skills Guidance using AI</h3>
 
 <p align="center">
-  <a href=["https://sunny-rabanadas-bd1f6f.netlify.app/" target="_blank"](https://vercel.com/abhijeet-0001s-projects/ai-powered-career-advice/KcGQRQDor8HsqHNMW2gVUyaAupgr)>
+  <a href="(https://vercel.com/abhijeet-0001s-projects/ai-powered-career-advice/KcGQRQDor8HsqHNMW2gVUyaAupgr)>
     🚀 <b>Live Demo</b>
   </a>
   &nbsp;•&nbsp;
