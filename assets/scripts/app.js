@@ -1976,3 +1976,4 @@ window.showButtonLoading = showButtonLoading;
 window.hideButtonLoading = hideButtonLoading;
 window.showLoading = showLoading;
 window.hideLoading = hideLoading;
+window.showPageWithTransition = showPageWithTransition;

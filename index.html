@@ -13,6 +13,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <link rel="stylesheet" href="assets/styles/style.css">
+    <link rel="stylesheet" href="assets/styles/loading.css">
 </head>
 
 <body>
@@ -48,11 +49,29 @@
     </nav>
 
     <main id="main-content">
-    <!-- Loading Spinner -->
+    <!-- Advanced Loading Spinner -->
     <div id="loading-spinner" class="loading-spinner" role="status" aria-label="Loading content">
-        <div>
-            <div class="spinner" aria-hidden="true"></div>
-            <div class="loading-text">Loading...</div>
+        <div class="particles" id="particles"></div>
+        <div class="loading-container">
+            <div class="spinner-advanced">
+                <div class="spinner-ring"></div>
+                <div class="spinner-ring"></div>
+                <div class="spinner-ring"></div>
+            </div>
+            <div class="loading-text-advanced" id="loading-text">Loading...</div>
+            <div class="loading-progress">
+                <div class="loading-progress-fill"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Page Transition -->
+    <div id="page-transition" class="page-transition">
+        <div class="page-transition-content">
+            <div class="transition-icon" id="transition-icon">
+                <i class="fas fa-rocket"></i>
+            </div>
+            <div class="loading-text-advanced" id="transition-text">Navigating...</div>
         </div>
     </div>
     <div id="home-page" class="page active" role="main" aria-label="Home page content">
@@ -809,6 +828,7 @@
 
     <script src="assets/scripts/app.js"></script>
     <script src="assets/scripts/backtoTop.js"></script>
+    <script src="assets/scripts/advanced-loading.js"></script>
 <script src="assets/scripts/app.js"></script>
 <script src="assets/scripts/backtoTop.js"></script>
 <script>
