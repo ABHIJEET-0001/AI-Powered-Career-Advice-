@@ -19,7 +19,10 @@
             <div class="nav-brand">
                 <h2>AI Career Advisor</h2>
             </div>
-            <div class="nav-menu" id="nav-menu">
+              <div class="nav-menu" id="nav-menu">
+                 <div class="nav-close" onclick="toggleMobileMenu()">
+                    <i class="fa-solid fa-xmark"></i>
+                 </div>
                 <a href="#" class="nav-link" onclick="showPage('home')">Home</a>
                 <a href="#" class="nav-link" onclick="showPage('careers')">Explore Careers</a>
                 <a href="#" class="nav-link" onclick="showPage('learning')">Learning Hub</a>
@@ -849,6 +852,13 @@
     </footer>
 
 <script src="assets/scripts/app.js"></script>
-<script src="assets/scripts/backtoTop.js"></script></body>
+<script src="assets/scripts/backtoTop.js"></script>
+<script>
+    function toggleMobileMenu() {
+  document.getElementById("nav-menu").classList.toggle("active");
+}
+
+</script>
+</body>
 
 </html>

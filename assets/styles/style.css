@@ -160,7 +160,68 @@ p {
 .theme-toggle:hover {
     color: var(--primary-dark);
 }
+.nav-close {
+  display: none;
+  font-size: 28px;
+  color: #fff;
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  cursor: pointer;
+}
 
+/* MOBILE NAVBAR */
+@media (max-width: 768px) {
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    background: var(--bg-light);
+    flex-direction: column;
+    align-items: center;
+    padding: 70px 24px;
+    transition: 0.35s ease-in-out;
+    z-index: 10000;
+    font-size: 18px;
+  }
+
+  .nav-menu.active {
+    right: 0;
+  }
+
+
+  .nav-close {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  font-size: 26px;
+  color: var(--primary);
+  cursor: pointer;
+  z-index: 10001;
+  display: block;
+}
+.theme-toggle{
+    color:var(--primary);
+}
+#auth-button{
+   color: var(--primary-light);
+}
+
+  .nav-link{
+    color: var(--text-secondary);
+    transition: 0.3s ease-in-out;
+  }
+  .nav-link:hover{
+    color: var(--primary);
+  }
+}
 /* Buttons */
 .btn {
     display: inline-flex;
@@ -1480,7 +1541,7 @@ section {
         padding: 60px 0;
     }
 
-    .nav-menu {
+    /* .nav-menu {
         position: fixed;
         top: 70px;
         left: -100%;
@@ -1499,7 +1560,7 @@ section {
 
     .nav-toggle {
         display: flex;
-    }
+    } */
 
     .hero {
         padding: 60px 0;
