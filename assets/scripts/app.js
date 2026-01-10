@@ -531,6 +531,20 @@ function handleGetStartedClick() {
   }
 }
 
+function setActiveNav(pageName) {
+  // Remove active class from all nav links
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.classList.remove('active');
+  });
+  
+  // Add active class to the clicked link
+  if (pageName === 'home') {
+    document.querySelector('.nav-link[onclick*="showPage(\'home\')"]').classList.add('active');
+  } else {
+    document.querySelector(`.nav-link[onclick*="showPage('${pageName}')"]`).classList.add('active');
+  }
+}
+
 function showPage(pageName) {
   document
     .querySelectorAll(".page")
@@ -560,6 +574,9 @@ function showPage(pageName) {
     }
   }
   document.getElementById("nav-menu").classList.remove("active");
+  
+  // Set active navigation link
+  setActiveNav(pageName);
 }
 
 function toggleMobileMenu() {
@@ -1120,9 +1137,8 @@ function showCareerDetails(careerId) {
           }</div><span>${step}</span></div>`
       )
       .join("")}</div></div>
-            `;
-    <!-- Career Fit Summary -->
-    <div class="career-detail-section">
+            ` +
+    `<div class="career-detail-section">
       <h4>Career Fit Summary</h4>
       <p><strong>${fit.score}% Match</strong></p>
       <p><strong>Strengths:</strong> ${
@@ -1141,7 +1157,6 @@ function showCareerDetails(careerId) {
       </button>
     </div>
 
-    <!-- Required Skills with Status -->
     <div class="career-detail-section">
       <h4>Required Skills</h4>
       <div class="skills-list">
@@ -1176,7 +1191,6 @@ return `
       </div>
     </div>
 
-   <!-- Salary Breakdown -->
 <div class="career-detail-section">
   <h4>Salary Range</h4>
   ${
@@ -1197,7 +1211,6 @@ return `
 </div>
 
 
-    <!-- Learning Path -->
     <div class="career-detail-section">
       <h4>Actionable Learning Path</h4>
       ${career.learning_path
@@ -1814,3 +1827,40 @@ window.setDynamicCopyright = setDynamicCopyright('AI Career Advisor');
 window.setDynamicCopyright=setDynamicCopyright('AI Career Advisor');
 window.openEditProfile = openEditProfile;
 window.openChosenCareer = openChosenCareer;
+
+// Newsletter Subscription
+function subscribeToNewsletter() {
+  const emailInput = document.querySelector('.newsletter-input');
+  const email = emailInput.value;
+  
+  if (!email || !isValidEmail(email)) {
+    alert('Please enter a valid email address');
+    return;
+  }
+  
+  alert('Thank you for subscribing to our newsletter!');
+  emailInput.value = '';
+}
+
+function isValidEmail(email) {
+  const emailRegex = /^[\w+\.-]+@[\w+\.-]+\.\w+$/;
+  return emailRegex.test(email);
+}
+
+// Add event listener to newsletter button
+document.addEventListener('DOMContentLoaded', function() {
+  const newsletterButton = document.querySelector('.newsletter-button');
+  if (newsletterButton) {
+    newsletterButton.addEventListener('click', subscribeToNewsletter);
+    
+    // Also allow subscription on pressing Enter in the email field
+    const newsletterInput = document.querySelector('.newsletter-input');
+    if (newsletterInput) {
+      newsletterInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          subscribeToNewsletter();
+        }
+      });
+    }
+  }
+});
