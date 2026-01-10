@@ -436,6 +436,30 @@ function setupKeyboardNavigation() {
   });
 }
 
+// Loading Spinner Functions
+function showLoading(message = 'Loading...') {
+  const spinner = document.getElementById('loading-spinner');
+  const loadingText = spinner.querySelector('.loading-text');
+  if (loadingText) loadingText.textContent = message;
+  spinner.classList.add('show');
+  announceToScreenReader(message);
+}
+
+function hideLoading() {
+  const spinner = document.getElementById('loading-spinner');
+  spinner.classList.remove('show');
+}
+
+function showButtonLoading(buttonElement) {
+  buttonElement.classList.add('loading');
+  buttonElement.disabled = true;
+}
+
+function hideButtonLoading(buttonElement) {
+  buttonElement.classList.remove('loading');
+  buttonElement.disabled = false;
+}
+
 // Enhanced Mobile Menu Toggle
 function toggleMobileMenu() {
   const navMenu = document.getElementById('nav-menu');
@@ -1645,12 +1669,17 @@ function enrollInCourse(button, courseId) {
 
   if (currentUser.enrolledCourses.includes(courseId)) return;
 
-  currentUser.enrolledCourses.push(courseId);
-  updateUserInStorage();
+  showButtonLoading(button);
+  
+  setTimeout(() => {
+    currentUser.enrolledCourses.push(courseId);
+    updateUserInStorage();
 
-  button.textContent = "Enrolled";
-  button.classList.add("enrolled");
-  button.disabled = true;
+    button.textContent = "Enrolled";
+    button.classList.add("enrolled");
+    button.disabled = true;
+    hideButtonLoading(button);
+  }, 600);
 }
 
 function unEnrollCourse(courseId) {
@@ -1718,59 +1747,65 @@ function addResumeSkill() {
 }
 
 function generateResume() {
+  const generateBtn = document.querySelector('.btn--lg');
   const name = document.getElementById("resume-name").value;
   const email = document.getElementById("resume-email").value;
   const phone = document.getElementById("resume-phone").value;
   const summary = document.getElementById("resume-summary").value;
   const template = document.getElementById("resume-template").value;
 
-  const experiences = Array.from(
-    document.querySelectorAll("#experience-container .experience-item")
-  ).map((item) => ({
-    title: item.children[0].value,
-    company: item.children[1].value,
-    desc: item.children[2].value,
-  }));
+  showButtonLoading(generateBtn);
+  
+  setTimeout(() => {
+    const experiences = Array.from(
+      document.querySelectorAll("#experience-container .experience-item")
+    ).map((item) => ({
+      title: item.children[0].value,
+      company: item.children[1].value,
+      desc: item.children[2].value,
+    }));
 
-  const educations = Array.from(
-    document.querySelectorAll("#education-container .education-item")
-  ).map((item) => ({
-    degree: item.children[0].value,
-    school: item.children[1].value,
-    years: item.children[2].value,
-  }));
+    const educations = Array.from(
+      document.querySelectorAll("#education-container .education-item")
+    ).map((item) => ({
+      degree: item.children[0].value,
+      school: item.children[1].value,
+      years: item.children[2].value,
+    }));
 
-  const skills = Array.from(
-    document.querySelectorAll("#resume-skills .skill-tag")
-  ).map((tag) => tag.textContent);
+    const skills = Array.from(
+      document.querySelectorAll("#resume-skills .skill-tag")
+    ).map((tag) => tag.textContent);
 
-  const previewContent = document.getElementById("resume-preview-content");
+    const previewContent = document.getElementById("resume-preview-content");
 
-  previewContent.className = `resume-template ${template}`;
+    previewContent.className = `resume-template ${template}`;
 
-  previewContent.innerHTML = `
-    <h2>${name}</h2>
-    <p>${email} | ${phone}</p>
+    previewContent.innerHTML = `
+      <h2>${name}</h2>
+      <p>${email} | ${phone}</p>
 
-    <h3>Professional Summary</h3>
-    <p>${summary}</p>
+      <h3>Professional Summary</h3>
+      <p>${summary}</p>
 
-    <h3>Work Experience</h3>
-    ${experiences.map(exp => `
-      <p><strong>${exp.title}</strong> – ${exp.company}</p>
-      <p>${exp.desc}</p>
-    `).join("")}
+      <h3>Work Experience</h3>
+      ${experiences.map(exp => `
+        <p><strong>${exp.title}</strong> – ${exp.company}</p>
+        <p>${exp.desc}</p>
+      `).join("")}
 
-    <h3>Education</h3>
-    ${educations.map(edu => `
-      <p><strong>${edu.degree}</strong>, ${edu.school} (${edu.years})</p>
-    `).join("")}
+      <h3>Education</h3>
+      ${educations.map(edu => `
+        <p><strong>${edu.degree}</strong>, ${edu.school} (${edu.years})</p>
+      `).join("")}
 
-    <h3>Skills</h3>
-    <p>${skills.join(", ")}</p>
-  `;
+      <h3>Skills</h3>
+      <p>${skills.join(", ")}</p>
+    `;
 
-  openModal("resume-preview-modal");
+    hideButtonLoading(generateBtn);
+    openModal("resume-preview-modal");
+  }, 1000);
 }
 
 function downloadResume() {
@@ -1937,4 +1972,7 @@ window.handleGetStartedClick = handleGetStartedClick;
 window.setDynamicCopyright = setDynamicCopyright('AI Career Advisor');
 window.setDynamicCopyright=setDynamicCopyright('AI Career Advisor');
 window.openEditProfile = openEditProfile;
-window.openChosenCareer = openChosenCareer;
+window.showButtonLoading = showButtonLoading;
+window.hideButtonLoading = hideButtonLoading;
+window.showLoading = showLoading;
+window.hideLoading = hideLoading;

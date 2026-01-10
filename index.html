@@ -48,6 +48,13 @@
     </nav>
 
     <main id="main-content">
+    <!-- Loading Spinner -->
+    <div id="loading-spinner" class="loading-spinner" role="status" aria-label="Loading content">
+        <div>
+            <div class="spinner" aria-hidden="true"></div>
+            <div class="loading-text">Loading...</div>
+        </div>
+    </div>
     <div id="home-page" class="page active" role="main" aria-label="Home page content">
         <section class="hero" style="background-image: none;" aria-labelledby="hero-title">
             <div class="container">
@@ -724,6 +731,8 @@
         </div>
     </div>
 
+    </main>
+
     <div id="job-search-modal" class="modal hidden" role="dialog" aria-labelledby="job-search-title" aria-modal="true">
         <div class="modal-content">
             <div class="modal-header">
@@ -741,7 +750,6 @@
             </div>
         </div>
     </div>
-    </main>
 
     <!--Back to top button-->
     <button id="btn" aria-label="Back to top"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></button>
