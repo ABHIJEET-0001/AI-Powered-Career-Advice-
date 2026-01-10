@@ -372,6 +372,91 @@ let assessmentData = {
 };
 let skillGapChartInstance = null;
 
+// Accessibility and Screen Reader Support
+function announceToScreenReader(message) {
+  const announcement = document.createElement('div');
+  announcement.setAttribute('aria-live', 'polite');
+  announcement.setAttribute('aria-atomic', 'true');
+  announcement.className = 'sr-only';
+  announcement.textContent = message;
+  document.body.appendChild(announcement);
+  
+  setTimeout(() => {
+    document.body.removeChild(announcement);
+  }, 1000);
+}
+
+function updatePageTitle(title) {
+  document.title = `${title} - AI Career Advisor`;
+}
+
+function manageFocus(elementId) {
+  const element = document.getElementById(elementId);
+  if (element) {
+    element.focus();
+    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+// Keyboard Navigation Support
+function setupKeyboardNavigation() {
+  document.addEventListener('keydown', function(e) {
+    // Escape key to close modals
+    if (e.key === 'Escape') {
+      const openModal = document.querySelector('.modal:not(.hidden)');
+      if (openModal) {
+        const modalId = openModal.id;
+        closeModal(modalId);
+        e.preventDefault();
+      }
+    }
+    
+    // Enter key for buttons and interactive elements
+    if (e.key === 'Enter' && e.target.classList.contains('answer-option')) {
+      e.target.click();
+      e.preventDefault();
+    }
+    
+    // Arrow key navigation for answer options
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      const answerOptions = document.querySelectorAll('.answer-option');
+      const currentIndex = Array.from(answerOptions).indexOf(document.activeElement);
+      
+      if (currentIndex !== -1) {
+        let nextIndex;
+        if (e.key === 'ArrowDown') {
+          nextIndex = (currentIndex + 1) % answerOptions.length;
+        } else {
+          nextIndex = (currentIndex - 1 + answerOptions.length) % answerOptions.length;
+        }
+        answerOptions[nextIndex].focus();
+        e.preventDefault();
+      }
+    }
+  });
+}
+
+// Enhanced Mobile Menu Toggle
+function toggleMobileMenu() {
+  const navMenu = document.getElementById('nav-menu');
+  const navToggle = document.querySelector('.nav-toggle');
+  const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+  
+  navMenu.classList.toggle('active');
+  navToggle.setAttribute('aria-expanded', !isExpanded);
+  
+  if (!isExpanded) {
+    announceToScreenReader('Navigation menu opened');
+    // Focus first menu item
+    const firstMenuItem = navMenu.querySelector('.nav-link');
+    if (firstMenuItem) {
+      setTimeout(() => firstMenuItem.focus(), 100);
+    }
+  } else {
+    announceToScreenReader('Navigation menu closed');
+  }
+}
+
 // Initialize the application
 document.addEventListener("DOMContentLoaded", function () {
   const savedUser = localStorage.getItem("currentUser");
@@ -386,12 +471,26 @@ document.addEventListener("DOMContentLoaded", function () {
   addEducation(true); // Add initial example
   // Initialize form validation for profile setup
   setupProfileFormValidation();
+  // Setup keyboard navigation
+  setupKeyboardNavigation();
+  // Setup ARIA live regions
+  setupAriaLiveRegions();
 
   // Set initial form validation state if profile page exists
   if (document.getElementById("profile-setup-page")) {
     validateProfileForm();
   }
 });
+
+function setupAriaLiveRegions() {
+  // Create a live region for announcements
+  const liveRegion = document.createElement('div');
+  liveRegion.id = 'live-region';
+  liveRegion.setAttribute('aria-live', 'polite');
+  liveRegion.setAttribute('aria-atomic', 'true');
+  liveRegion.className = 'sr-only';
+  document.body.appendChild(liveRegion);
+}
 
 // Theme Toggle Functionality
 const themeToggle = document.getElementById("theme-toggle");
@@ -553,6 +652,34 @@ function showPage(pageName) {
   if (targetPage) {
     targetPage.classList.add("active");
     currentPage = pageName;
+    
+    // Update page title and announce page change
+    const pageTitles = {
+      'home': 'Home',
+      'auth': 'Login & Registration',
+      'profile-setup': 'Profile Setup',
+      'assessment': 'Career Assessment',
+      'careers': 'Explore Careers',
+      'dashboard': 'Dashboard',
+      'learning': 'Learning Hub',
+      'community': 'Community',
+      'resume': 'Resume Builder'
+    };
+    
+    const pageTitle = pageTitles[pageName] || 'Page';
+    updatePageTitle(pageTitle);
+    announceToScreenReader(`Navigated to ${pageTitle} page`);
+    
+    // Focus management
+    const mainHeading = targetPage.querySelector('h1, h2');
+    if (mainHeading) {
+      mainHeading.setAttribute('tabindex', '-1');
+      setTimeout(() => {
+        mainHeading.focus();
+        mainHeading.removeAttribute('tabindex');
+      }, 100);
+    }
+    
     window.scrollTo(0, 0);
     switch (pageName) {
       case "careers":
