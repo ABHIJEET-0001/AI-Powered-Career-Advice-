@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article - AI Career Advisor</title>
+    <link rel="stylesheet" href="./assets/styles/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <style>
+        /* Specific styles for the article reader */
+        body {
+            background-color: #f8fafc;
+        }
+        .article-container {
+            max-width: 800px;
+            margin: 4rem auto;
+            padding: 3rem;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e5e7eb;
+        }
+        .article-content {
+            line-height: 1.8;
+            color: #374151;
+            font-family: 'Inter', sans-serif;
+        }
+        .article-content h1 { 
+            font-size: 2.25rem; 
+            margin-top: 1rem; 
+            margin-bottom: 1.5rem; 
+            color: #111827; 
+            font-weight: 800;
+        }
+        .article-content h2 { 
+            margin-top: 2.5rem; 
+            margin-bottom: 1rem; 
+            color: #1f2937; 
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .article-content p { margin-bottom: 1.5rem; font-size: 1.1rem; }
+        .article-content ul { 
+            padding-left: 20px; 
+            margin-bottom: 1.5rem; 
+            background: #eff6ff;
+            padding: 1.5rem 1.5rem 1.5rem 2.5rem;
+            border-radius: 8px;
+        }
+        .article-content li { margin-bottom: 0.5rem; }
+        
+        .back-link { 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 5px;
+            margin-bottom: 2rem; 
+            color: #2563eb; 
+            text-decoration: none; 
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .back-link:hover { text-decoration: underline; gap: 8px; transition: gap 0.2s; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h2>AI Career Advisor</h2>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="blog.html" class="nav-link active">Learning Hub</a>
+                <a href="help.html" class="nav-link">Help</a>
+                <button class="btn btn--primary" onclick="window.location.href='index.html#get-started'">Get Started</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="article-container">
+        <a href="blog.html" class="back-link"><i class="ri-arrow-left-line"></i> Back to Learning Hub</a>
+        
+        <div id="content-area" class="article-content">
+            <h1><i class="ri-loader-4-line ri-spin"></i> Loading article...</h1>
+        </div>
+    </main>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const postSlug = urlParams.get('post');
+        const contentArea = document.getElementById('content-area');
+
+        if (postSlug) {
+            fetch(`./content/blog/${postSlug}.md`)
+                .then(response => {
+                    if (!response.ok) throw new Error("Article not found");
+                    return response.text();
+                })
+                .then(markdown => {
+                    // Remove Frontmatter (metadata at the top)
+                    const cleanMarkdown = markdown.replace(/^---[\s\S]*?---/, '');
+                    contentArea.innerHTML = marked.parse(cleanMarkdown);
+                })
+                .catch(error => {
+                    contentArea.innerHTML = `
+                        <div style="text-align: center; color: #ef4444;">
+                            <i class="ri-error-warning-line" style="font-size: 3rem;"></i>
+                            <h2>Oops! Article not found.</h2>
+                            <p>We couldn't load the file: content/blog/${postSlug}.md</p>
+                            <a href="blog.html" class="btn btn--primary" style="display:inline-block; margin-top:1rem; text-decoration:none;">Go Back</a>
+                        </div>`;
+                });
+        } else {
+            contentArea.innerHTML = "<h2>No article selected.</h2>";
+        }
+    </script>
+</body>
+</html>
