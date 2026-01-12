@@ -178,7 +178,17 @@
                     <h2 id="login-title">Login to Your Account</h2>
                     <div class="form-group">
                         <label class="form-label" for="login-email">Email</label>
-                        <input type="email" class="form-control" id="login-email" placeholder="Enter your email" required aria-describedby="email-help">
+                        <input
+                        type="email"
+                        class="form-control"
+                        id="login-email"
+                        name="email"
+                        placeholder="Enter your email"
+                        required
+                        aria-describedby="email-help"
+                        pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
+                        title="Please enter a valid email address (example: user@gmail.com)"
+                        >
                         <div id="email-help" class="sr-only">Enter your registered email address</div>
                     </div>
                     <div class="form-group">
@@ -808,6 +818,19 @@
   document.getElementById("nav-menu").classList.toggle("active");
 }
 
+</script>
+<script>
+  const loginForm = document.querySelector("form");
+  const emailInput = document.getElementById("login-email");
+
+  loginForm.addEventListener("submit", function (e) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(emailInput.value)) {
+      e.preventDefault();
+      alert("Invalid email address. Please enter a valid one.");
+    }
+  });
 </script>
 </body>
 
