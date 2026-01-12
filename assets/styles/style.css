@@ -1,4 +1,4 @@
- :root {
+:root {
   /* Light Theme Variables */
   --primary: #4381ff; /* Brighter, more energetic blue */
   --primary-dark: #3a71e8;
@@ -1728,7 +1728,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Make sure icons don't interfere with screen readers */
 i[aria-hidden="true"] {
-    speak: none;
+    visibility: hidden;
 }
 
 /* Improve table accessibility if any tables are added */
