@@ -1219,8 +1219,8 @@ function filterCareers(type, value) {
   displayCareers(filtered);
 }
 
-function showCareerDetails(careerId) {
-  const career = appData.careers.find((c) => c.id === careerId);
+  function showCareerDetails(careerId) {
+  const career = appData.careers.find(c => c.id === careerId);
   if (!career) return;
 
   const fit = calculateCareerFit(career);
@@ -1228,24 +1228,46 @@ function showCareerDetails(careerId) {
   document.getElementById("modal-career-title").textContent = career.title;
 
   document.getElementById("career-details").innerHTML = `
-                <div class="career-detail-section"><h4>Overview</h4><p>${career.description
-    }</p></div>
-                <div class="career-detail-section"><h4>Required Skills</h4><div class="skills-list">${career.required_skills
-      .map((skill) => `<span class="skill-tag">${skill}</span>`)
-      .join("")}</div></div>
-                <div class="career-detail-section"><h4>Salary Range</h4><p class="salary-range">${career.salary_range
-    }</p></div>
-                <div class="career-detail-section"><h4>Future Outlook</h4><p>${career.growth_outlook
-    }</p></div>
-                <div class="career-detail-section"><h4>Learning Path</h4><div class="learning-path">${career.learning_path
-      .map(
-        (step, index) =>
-          `<div class="learning-step"><div class="step-number-small">${index + 1
-          }</div><span>${step}</span></div>`
-      )
-      .join("")}</div></div>
-            `;
-    <!-- Career Fit Summary -->
+    <div class="career-detail-section">
+      <h4>Overview</h4>
+      <p>${career.description}</p>
+    </div>
+
+    <div class="career-detail-section">
+      <h4>Required Skills</h4>
+      <div class="skills-list">
+        ${career.required_skills
+          .map(skill => `<span class="skill-tag">${skill}</span>`)
+          .join("")}
+      </div>
+    </div>
+
+    <div class="career-detail-section">
+      <h4>Salary Range</h4>
+      <p class="salary-range">${career.salary_range}</p>
+    </div>
+
+    <div class="career-detail-section">
+      <h4>Future Outlook</h4>
+      <p>${career.growth_outlook}</p>
+    </div>
+
+    <div class="career-detail-section">
+      <h4>Learning Path</h4>
+      <div class="learning-path">
+        ${career.learning_path
+          .map(
+            (step, index) => `
+              <div class="learning-step">
+                <div class="step-number-small">${index + 1}</div>
+                <span>${step}</span>
+              </div>
+            `
+          )
+          .join("")}
+      </div>
+    </div>
+
     <div class="career-detail-section">
       <h4>Career Fit Summary</h4>
       <p><strong>${fit.score}% Match</strong></p>
@@ -1255,7 +1277,9 @@ function showCareerDetails(careerId) {
           : "No strong matches yet"
       }</p>
       <p><strong>Skills to Improve:</strong> ${
-        fit.missingSkills.join(", ")
+        fit.missingSkills.length
+          ? fit.missingSkills.join(", ")
+          : "None"
       }</p>
       <p><strong>Estimated Time to Job-Ready:</strong> ${fit.timeToReady}</p>
 
@@ -1265,79 +1289,42 @@ function showCareerDetails(careerId) {
       </button>
     </div>
 
-    <!-- Required Skills with Status -->
     <div class="career-detail-section">
-      <h4>Required Skills</h4>
+      <h4>Skill Match Status</h4>
       <div class="skills-list">
         ${career.required_skills
-          .map((skill) => {
-            const skillLower = skill.toLowerCase();
-const exact = fit.matchedSkills.includes(skill);
-const partial = currentUser?.profile?.skills.some(
-  s =>
-    s.toLowerCase().includes(skillLower) ||
-    skillLower.includes(s.toLowerCase())
-);
+          .map(skill => {
+            const userSkills =
+              currentUser?.profile?.skills.map(s => s.toLowerCase()) || [];
+            const exact = userSkills.includes(skill.toLowerCase());
 
-let cls = "skill-missing";
-let symbol = "✗";
+            const cls = exact ? "skill-owned" : "skill-missing";
+            const symbol = exact ? "✓" : "✗";
 
-if (exact) {
-  cls = "skill-owned";
-  symbol = "✓";
-} else if (partial) {
-  cls = "skill-partial";
-  symbol = "~";
-}
-
-return `
-  <span class="skill-tag ${cls}">
-    ${skill} ${symbol}
-  </span>`;
-
+            return `<span class="skill-tag ${cls}">
+              ${skill} ${symbol}
+            </span>`;
           })
           .join("")}
       </div>
     </div>
 
-   <!-- Salary Breakdown -->
-<div class="career-detail-section">
-  <h4>Salary Range</h4>
-  ${
-    (() => {
-      const cleaned = career.salary_range
-        .replace("₹", "")
-        .replace(" LPA", "");
-      const [min, max] = cleaned.split("-");
-      return `
-        <ul>
-          <li><strong>Entry-level:</strong> ₹${min} LPA</li>
-          <li><strong>Mid-level:</strong> ₹${cleaned} LPA</li>
-          <li><strong>Senior-level:</strong> ₹${max} LPA</li>
-        </ul>
-      `;
-    })()
-  }
-</div>
-
-
-    <!-- Learning Path -->
     <div class="career-detail-section">
       <h4>Actionable Learning Path</h4>
       ${career.learning_path
         .map(
-          (step, index) => `
-          <div class="topic-item">
-            <div>
-              <strong>${step}</strong>
-              <span>Estimated: 4–6 weeks</span>
+          step => `
+            <div class="topic-item">
+              <div>
+                <strong>${step}</strong>
+                <span>Estimated: 4–6 weeks</span>
+              </div>
+              <button class="btn btn--outline btn--sm"
+                onclick="showPage('learning')">
+                Start Learning
+              </button>
             </div>
-            <button class="btn btn--outline btn--sm"
-              onclick="showPage('learning')">
-              Start Learning
-            </button>
-          </div>
-        `
+          `
         )
         .join("")}
     </div>
@@ -1345,7 +1332,6 @@ return `
 
   openModal("career-modal");
 }
-
 
 function loadDashboard() {
   if (!currentUser) return showPage("auth");
@@ -1935,6 +1921,5 @@ window.enrollInCourse = enrollInCourse;
 window.unEnrollCourse = unEnrollCourse;
 window.handleGetStartedClick = handleGetStartedClick;
 window.setDynamicCopyright = setDynamicCopyright('AI Career Advisor');
-window.setDynamicCopyright=setDynamicCopyright('AI Career Advisor');
 window.openEditProfile = openEditProfile;
 window.openChosenCareer = openChosenCareer;
