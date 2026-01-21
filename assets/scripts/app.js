@@ -361,6 +361,22 @@ const appData = {
     },
   ],
 };
+// Refactored app.js
+import { appData } from "../data/appData.js";
+import {
+  announceToScreenReader,
+  updatePageTitle,
+  manageFocus,
+  setupKeyboardNavigation,
+} from "../utils/accessibility.js";
+import {
+  generateAIResponse,
+  toggleChatbot,
+  handleChatInput,
+  sendChatMessage,
+} from "../modules/chatbot.js";
+import { navigateTo } from "../modules/navigation.js";
+import { initTheme, toggleTheme } from "../modules/theme.js";
 
 // Application State
 let currentUser = null;
@@ -385,6 +401,35 @@ document.addEventListener("DOMContentLoaded", function () {
   addExperience(true); // Add initial example
   addEducation(true); // Add initial example
 });
+
+  // Initialize form validation for profile setup
+  setupProfileFormValidation();
+  // Setup keyboard navigation
+  setupKeyboardNavigation();
+  // Setup ARIA live regions
+  setupAriaLiveRegions();
+
+  // Set initial form validation state if profile page exists
+  if (document.getElementById("profile-setup-page")) {
+    validateProfileForm();
+  }
+
+   // Chatbot auto-greeting (FIXED)
+  const chatbotMessages = document.getElementById("chatbot-messages");
+  if (chatbotMessages) {
+    addChatMessage(chatbotResponses.greetings, "bot");
+  }
+});
+
+function setupAriaLiveRegions() {
+  // Create a live region for announcements
+  const liveRegion = document.createElement("div");
+  liveRegion.id = "live-region";
+  liveRegion.setAttribute("aria-live", "polite");
+  liveRegion.setAttribute("aria-atomic", "true");
+  liveRegion.className = "sr-only";
+  document.body.appendChild(liveRegion);
+}
 
 // Theme Toggle Functionality
 const themeToggle = document.getElementById("theme-toggle");
@@ -417,6 +462,7 @@ themeToggle.addEventListener("click", () => {
     localStorage.setItem("theme", "dark");
   }
 });
+themeToggle.addEventListener("click", toggleTheme);
 // --- Smarter Chatbot with Career Questions ---
 const chatbotKnowledge = {
   greetings: ["hello", "hi", "hey"],
@@ -532,6 +578,34 @@ function showPage(pageName) {
   if (targetPage) {
     targetPage.classList.add("active");
     currentPage = pageName;
+    
+    // Update page title and announce page change
+    const pageTitles = {
+      'home': 'Home',
+      'auth': 'Login & Registration',
+      'profile-setup': 'Profile Setup',
+      'assessment': 'Career Assessment',
+      'careers': 'Explore Careers',
+      'dashboard': 'Dashboard',
+      'learning': 'Learning Hub',
+      'community': 'Community',
+      'resume': 'Resume Builder'
+    };
+    
+    const pageTitle = pageTitles[pageName] || 'Page';
+    updatePageTitle(pageTitle);
+    announceToScreenReader(`Navigated to ${pageTitle} page`);
+    
+    // Focus management
+    const mainHeading = targetPage.querySelector('h1, h2');
+    if (mainHeading) {
+      mainHeading.setAttribute('tabindex', '-1');
+      setTimeout(() => {
+        mainHeading.focus();
+        mainHeading.removeAttribute('tabindex');
+      }, 100);
+    }
+    
     window.scrollTo(0, 0);
     switch (pageName) {
       case "careers":
@@ -554,6 +628,13 @@ function showPage(pageName) {
 
 function toggleMobileMenu() {
   document.getElementById("nav-menu").classList.toggle("active");
+      case "profile-setup":
+        loadProfileForEditing();
+        break;
+    }
+  }
+  document.getElementById("nav-menu").classList.remove("active");
+  document.querySelector('.nav-toggle').setAttribute('aria-expanded', 'false');
 }
 
 // Auth Functions
@@ -645,12 +726,186 @@ function addSkill() {
   const skill = skillInput.value.trim();
   if (!skill) return;
 
+  // Validate skill length
+  if (!skill) {
+    showValidationError("skills-error", "Please enter a skill");
+    return;
+  }
+
+  if (skill.length < 3) {
+    showValidationError("skills-error", "Skill must be at least 3 characters long");
+    return;
+  }
+
   const skillsList = document.getElementById("skills-list");
   const skillTag = document.createElement("span");
   skillTag.className = "skill-tag";
   skillTag.textContent = skill;
   skillsList.appendChild(skillTag);
   skillInput.value = "";
+  // store the actual skill text in a data attribute to avoid serializing the remove button
+  skillTag.dataset.skill = skill;
+  skillTag.appendChild(document.createTextNode(skill));
+
+  // Add remove button
+  const removeButton = document.createElement("span");
+  removeButton.className = "remove-skill";
+  removeButton.innerHTML = "&times;";
+  skillTag.appendChild(removeButton);
+
+  skillsList.appendChild(skillTag);
+  skillInput.value = "";
+  clearValidationError("skills-error");
+
+  // Validate form after adding skill
+  validateProfileForm();
+}
+
+// Allow removing skills by delegating click events
+function setupSkillRemoval() {
+  const skillsList = document.getElementById("skills-list");
+  if (skillsList) {
+    skillsList.addEventListener("click", function (event) {
+      if (event.target.classList.contains("remove-skill")) {
+        const parent = event.target.parentElement;
+        if (parent) parent.remove();
+        validateProfileForm();
+      }
+    });
+  }
+}
+
+// Simple validation helpers
+function showValidationError(id, message) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.textContent = message;
+  el.style.display = "block";
+}
+function chooseCareerPath(careerId) {
+  if (!currentUser) return;
+
+  currentUser.selectedCareerPath = careerId;
+  updateUserInStorage();
+  alert("Career path selected successfully!");
+  closeModal("career-modal");
+  showPage("dashboard");
+}
+
+
+function clearValidationError(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.textContent = "";
+  el.style.display = "none";
+}
+
+// Validate profile form and enable/disable save button
+function validateProfileForm() {
+  const education = document.getElementById("education-level");
+  const skillsList = document.getElementById("skills-list");
+  const interests = document.querySelectorAll('.interests-grid input[type="checkbox"]:checked');
+  const saveButton = document.querySelector('.profile-setup .btn--full-width');
+
+  let valid = true;
+
+  if (!education || !education.value) {
+    showValidationError("education-error", "Please select your education level");
+    if (education) education.classList.add('error');
+    valid = false;
+  } else {
+    clearValidationError("education-error");
+    if (education) education.classList.remove('error');
+  }
+
+  if (!skillsList || skillsList.children.length === 0) {
+    showValidationError("skills-error", "Please add at least one skill");
+    const skillInput = document.getElementById('skill-input');
+    if (skillInput) skillInput.classList.add('error');
+    valid = false;
+  } else {
+    clearValidationError("skills-error");
+    const skillInput = document.getElementById('skill-input');
+    if (skillInput) skillInput.classList.remove('error');
+  }
+
+  if (!interests || interests.length === 0) {
+    showValidationError("interests-error", "Please select at least one interest");
+    valid = false;
+  } else {
+    clearValidationError("interests-error");
+  }
+
+  if (saveButton) saveButton.disabled = !valid;
+}
+
+function loadProfileForEditing() {
+  if (!currentUser || !currentUser.profile) return;
+
+  // Set education
+  const educationSelect = document.getElementById("education-level");
+  if (educationSelect) educationSelect.value = currentUser.profile.educationLevel;
+
+  // Set skills
+  const skillsList = document.getElementById("skills-list");
+  if (skillsList) {
+    skillsList.innerHTML = "";
+    currentUser.profile.skills.forEach(skill => {
+      const skillTag = document.createElement("span");
+      skillTag.className = "skill-tag";
+      skillTag.dataset.skill = skill;
+      skillTag.appendChild(document.createTextNode(skill));
+
+      const removeButton = document.createElement("span");
+      removeButton.className = "remove-skill";
+      removeButton.innerHTML = "&times;";
+      skillTag.appendChild(removeButton);
+
+      skillsList.appendChild(skillTag);
+    });
+  }
+
+  // Set interests
+  const interests = currentUser.profile.interests || [];
+  document.querySelectorAll('.interests-grid input[type="checkbox"]').forEach(cb => {
+    cb.checked = interests.includes(cb.value);
+  });
+
+  // Set Coding Profiles
+  if (currentUser.profile.codingProfiles) {
+    if (document.getElementById("github-profile")) document.getElementById("github-profile").value = currentUser.profile.codingProfiles.github || "";
+    if (document.getElementById("leetcode-profile")) document.getElementById("leetcode-profile").value = currentUser.profile.codingProfiles.leetcode || "";
+    if (document.getElementById("codeforces-profile")) document.getElementById("codeforces-profile").value = currentUser.profile.codingProfiles.codeforces || "";
+  }
+
+  // Change button text if updating
+  const saveBtn = document.querySelector('.profile-setup .btn--full-width');
+  if (saveBtn) saveBtn.textContent = "Update Profile";
+
+  validateProfileForm();
+}
+
+// Setup form listeners and skill removal
+function setupProfileFormValidation() {
+  const education = document.getElementById("education-level");
+  const skillInput = document.getElementById("skill-input");
+  const interests = document.querySelectorAll('.interests-grid input[type="checkbox"]');
+
+  if (education) education.addEventListener("change", validateProfileForm);
+  if (skillInput) {
+    skillInput.addEventListener("input", function () { clearValidationError("skills-error"); });
+    // allow Enter to add
+    skillInput.addEventListener("keypress", function (e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        addSkill();
+      }
+    });
+  }
+  interests.forEach(cb => cb.addEventListener("change", validateProfileForm));
+
+  // Setup skill removal delegation
+  setupSkillRemoval();
 }
 
 function saveProfile() {
@@ -665,6 +920,33 @@ function saveProfile() {
   if (!educationLevel || skills.length === 0 || interests.length === 0)
     return alert("Please complete all profile fields");
 
+
+  const skills = Array.from(
+    document.getElementById("skills-list").children
+  ).map((el) =>
+    el.dataset && el.dataset.skill
+      ? el.dataset.skill
+      : el.textContent.trim()
+  );
+
+  const interests = Array.from(
+    document.querySelectorAll('.interests-grid input[type="checkbox"]:checked')
+  ).map((cb) => cb.value);
+
+  // ✅ Optional coding profiles (NEW FEATURE)
+  const codingProfiles = {
+    github: document.getElementById("github-profile")?.value.trim() || "",
+    linkedin: document.getElementById("linkedin-profile")?.value.trim() || "",
+    leetcode: document.getElementById("leetcode-profile")?.value.trim() || "",
+    codeforces: document.getElementById("codeforces-profile")?.value.trim() || "",
+  };
+
+  // Validation (unchanged behavior)
+  if (!educationLevel || skills.length === 0 || interests.length === 0) {
+    return alert("Please complete required profile fields");
+  }
+
+  // ✅ Store everything together
   currentUser.profile = {
     educationLevel,
     skills,
@@ -672,6 +954,12 @@ function saveProfile() {
   };
   const users = JSON.parse(localStorage.getItem("users") || "[]");
   const userIndex = users.findIndex((u) => u.id === currentUser.id);
+    codingProfiles,
+  };
+
+  const users = JSON.parse(localStorage.getItem("users") || "[]");
+  const userIndex = users.findIndex((u) => u.id === currentUser.id);
+
   if (userIndex !== -1) {
     users[userIndex] = currentUser;
     localStorage.setItem("users", JSON.stringify(users));
@@ -679,6 +967,53 @@ function saveProfile() {
   }
   showPage("assessment");
 }
+
+  showPage("assessment");
+}
+function openEditProfile() {
+  if (!currentUser || !currentUser.profile) {
+    return showPage("profile-setup");
+  }
+
+  // Prefill education
+  document.getElementById("education-level").value =
+    currentUser.profile.educationLevel || "";
+
+  // Prefill skills
+  const skillsList = document.getElementById("skills-list");
+  skillsList.innerHTML = "";
+  (currentUser.profile.skills || []).forEach((skill) => {
+    const skillTag = document.createElement("span");
+    skillTag.className = "skill-tag";
+    skillTag.dataset.skill = skill;
+    skillTag.appendChild(document.createTextNode(skill));
+
+    const removeButton = document.createElement("span");
+    removeButton.className = "remove-skill";
+    removeButton.innerHTML = "&times;";
+    skillTag.appendChild(removeButton);
+
+    skillsList.appendChild(skillTag);
+  });
+
+  // Prefill interests
+  document
+    .querySelectorAll('.interests-grid input[type="checkbox"]')
+    .forEach((cb) => {
+      cb.checked = currentUser.profile.interests.includes(cb.value);
+    });
+
+  // ✅ Prefill coding profiles
+  const profiles = currentUser.profile.codingProfiles || {};
+  document.getElementById("github-profile").value = profiles.github || "";
+  document.getElementById("linkedin-profile").value = profiles.linkedin || "";
+  document.getElementById("leetcode-profile").value = profiles.leetcode || "";
+  document.getElementById("codeforces-profile").value = profiles.codeforces || "";
+
+  validateProfileForm();
+  showPage("profile-setup");
+}
+
 
 // Assessment Functions
 function resetAssessment() {
@@ -735,6 +1070,10 @@ function loadQuestion() {
       appData.assessmentQuestions.length) *
     100
   }%`;
+  document.getElementById("assessment-progress").style.width = `${((assessmentData.currentQuestion + 1) /
+    appData.assessmentQuestions.length) *
+    100
+    }%`;
 
   // Button visibility
   document
@@ -817,6 +1156,12 @@ function displayCareers(careers) {
                                   `<span class="skill-tag">${skill}</span>`
                               )
                               .join("")}
+          .slice(0, 3)
+          .map(
+            (skill) =>
+              `<span class="skill-tag">${skill}</span>`
+          )
+          .join("")}
                         </div>
                     </div>
                     <p style="flex-grow: 1;">${career.description}</p>
@@ -825,6 +1170,8 @@ function displayCareers(careers) {
                         <button class="btn btn--primary btn--sm" onclick="showCareerDetails(${
                           career.id
                         })">Learn More</button>
+                        <button class="btn btn--primary btn--sm" onclick="showCareerDetails(${career.id
+        })">Learn More</button>
                     </div>
                 </div>
             `
@@ -882,6 +1229,134 @@ function showCareerDetails(careerId) {
 }
 
 // Dashboard Functions
+
+  const fit = calculateCareerFit(career);
+
+  document.getElementById("modal-career-title").textContent = career.title;
+
+  document.getElementById("career-details").innerHTML = `
+                <div class="career-detail-section"><h4>Overview</h4><p>${career.description
+    }</p></div>
+                <div class="career-detail-section"><h4>Required Skills</h4><div class="skills-list">${career.required_skills
+      .map((skill) => `<span class="skill-tag">${skill}</span>`)
+      .join("")}</div></div>
+                <div class="career-detail-section"><h4>Salary Range</h4><p class="salary-range">${career.salary_range
+    }</p></div>
+                <div class="career-detail-section"><h4>Future Outlook</h4><p>${career.growth_outlook
+    }</p></div>
+                <div class="career-detail-section"><h4>Learning Path</h4><div class="learning-path">${career.learning_path
+      .map(
+        (step, index) =>
+          `<div class="learning-step"><div class="step-number-small">${index + 1
+          }</div><span>${step}</span></div>`
+      )
+      .join("")}</div></div>
+            `;
+    // Career Fit Summary
+    `
+    <div class="career-detail-section">
+      <h4>Career Fit Summary</h4>
+      <p><strong>${fit.score}% Match</strong></p>
+      <p><strong>Strengths:</strong> ${
+        fit.matchedSkills.length
+          ? fit.matchedSkills.join(", ")
+          : "No strong matches yet"
+      }</p>
+      <p><strong>Skills to Improve:</strong> ${
+        fit.missingSkills.join(", ")
+      }</p>
+      <p><strong>Estimated Time to Job-Ready:</strong> ${fit.timeToReady}</p>
+
+      <button class="btn btn--primary mt-4"
+        onclick="chooseCareerPath(${career.id})">
+        Choose This Career Path
+      </button>
+    </div>
+    `;
+
+    // Required Skills with Status
+    `
+    <div class="career-detail-section">
+      <h4>Required Skills</h4>
+      <div class="skills-list">
+        ${career.required_skills
+          .map((skill) => {
+            const skillLower = skill.toLowerCase();
+const exact = fit.matchedSkills.includes(skill);
+const partial = currentUser?.profile?.skills.some(
+  s =>
+    s.toLowerCase().includes(skillLower) ||
+    skillLower.includes(s.toLowerCase())
+);
+
+let cls = "skill-missing";
+let symbol = "✗";
+
+if (exact) {
+  cls = "skill-owned";
+  symbol = "✓";
+} else if (partial) {
+  cls = "skill-partial";
+  symbol = "~";
+}
+
+return `
+  <span class="skill-tag ${cls}">
+    ${skill} ${symbol}
+  </span>`;
+
+          })
+          .join("")}
+      </div>
+    </div>
+
+   <!-- Salary Breakdown -->
+<div class="career-detail-section">
+  <h4>Salary Range</h4>
+  ${
+    (() => {
+      const cleaned = career.salary_range
+        .replace("₹", "")
+        .replace(" LPA", "");
+      const [min, max] = cleaned.split("-");
+      return `
+        <ul>
+          <li><strong>Entry-level:</strong> ₹${min} LPA</li>
+          <li><strong>Mid-level:</strong> ₹${cleaned} LPA</li>
+          <li><strong>Senior-level:</strong> ₹${max} LPA</li>
+        </ul>
+      `;
+    })()
+  }
+</div>
+
+
+    <!-- Learning Path -->
+    <div class="career-detail-section">
+      <h4>Actionable Learning Path</h4>
+      ${career.learning_path
+        .map(
+          (step, index) => `
+          <div class="topic-item">
+            <div>
+              <strong>${step}</strong>
+              <span>Estimated: 4–6 weeks</span>
+            </div>
+            <button class="btn btn--outline btn--sm"
+              onclick="showPage('learning')">
+              Start Learning
+            </button>
+          </div>
+        `
+        )
+        .join("")}
+    </div>
+  `;
+
+  openModal("career-modal");
+}
+
+
 function loadDashboard() {
   if (!currentUser) return showPage("auth");
   document.getElementById("user-name").textContent = currentUser.name;
@@ -891,6 +1366,16 @@ function loadDashboard() {
   loadEnrolledCourses();
 }
 
+  renderCodingProfiles();
+  renderChosenCareer(); 
+}
+ function openChosenCareer() {
+  if (!currentUser?.selectedCareerPath) return;
+  showCareerDetails(currentUser.selectedCareerPath);
+}
+
+
+
 function updateDashboardStats() {
   const completion =
     currentUser && currentUser.assessment
@@ -898,6 +1383,8 @@ function updateDashboardStats() {
       : currentUser && currentUser.profile
       ? "75%"
       : "25%";
+        ? "75%"
+        : "25%";
   document.getElementById("profile-completion").textContent = completion;
   document.getElementById("career-matches").textContent =
     calculateCareerMatches().length;
@@ -925,6 +1412,97 @@ function loadCareerRecommendations() {
     )
     .join("");
 }
+
+}// Dashboard Functions
+
+function renderChosenCareer() {
+  const card = document.getElementById("chosen-career-card");
+  const titleEl = document.getElementById("chosen-career-title");
+
+  if (!card || !currentUser?.selectedCareerPath) {
+    card?.classList.add("hidden");
+    return;
+  }
+
+  const career = appData.careers.find(
+    c => c.id === currentUser.selectedCareerPath
+  );
+
+  if (!career) {
+    card.classList.add("hidden");
+    return;
+  }
+
+  titleEl.textContent = career.title;
+  card.classList.remove("hidden");
+}
+
+function renderCodingProfiles() {
+  const container = document.getElementById("coding-profiles-list");
+  const card = document.getElementById("coding-profiles-card");
+
+  if (!container || !currentUser?.profile?.codingProfiles) {
+    if (card) card.style.display = "none";
+    return;
+  }
+
+  const profiles = currentUser.profile.codingProfiles;
+
+  const links = [
+    { label: "GitHub", url: profiles.github },
+    { label: "LinkedIn", url: profiles.linkedin },
+    { label: "LeetCode", url: profiles.leetcode },
+    { label: "Codeforces", url: profiles.codeforces },
+  ].filter((p) => p.url);
+
+  if (links.length === 0) {
+    card.style.display = "none";
+    return;
+  }
+
+  card.style.display = "block";
+
+  container.innerHTML = links
+    .map(
+      (p) => `
+        <div class="topic-item">
+          <a href="${p.url}" target="_blank" rel="noopener">
+            <strong>${p.label}</strong>
+          </a>
+        </div>
+      `
+    )
+    .join("");
+}
+
+
+function loadCareerRecommendations() {
+  const container = document.getElementById("career-recommendations");
+  if (!container) return;
+
+  const recommendations = calculateCareerMatches().slice(0, 3);
+
+  container.innerHTML = recommendations
+    .map((career) => {
+      const isSelected = career.id === currentUser?.selectedCareerPath;
+
+      return `
+        <div class="topic-item ${isSelected ? "selected-career" : ""}"
+             style="cursor: pointer;"
+             onclick="showCareerDetails(${career.id})">
+          <div>
+            <h4>
+              ${career.title}
+              ${isSelected ? " ⭐" : ""}
+            </h4>
+            <span>${career.salary_range}</span>
+          </div>
+        </div>
+      `;
+    })
+    .join("");
+}
+
 
 function calculateCareerMatches() {
   if (!currentUser || !currentUser.profile) return appData.careers.slice(0, 3);
@@ -976,6 +1554,47 @@ function initializeSkillGapChart() {
     },
   });
 }
+function calculateCareerFit(career) {
+  if (!currentUser || !currentUser.profile) {
+    return {
+      score: 0,
+      matchedSkills: [],
+      missingSkills: career.required_skills,
+      timeToReady: "N/A",
+    };
+  }
+
+  const userSkills = currentUser.profile.skills.map(s => s.toLowerCase());
+
+  const matchedSkills = career.required_skills.filter(skill =>
+    userSkills.includes(skill.toLowerCase())
+  );
+
+  const missingSkills = career.required_skills.filter(
+    skill => !userSkills.includes(skill.toLowerCase())
+  );
+
+  const score =
+  career.required_skills.length === 0
+    ? 0
+    : Math.round(
+        (matchedSkills.length / career.required_skills.length) * 100
+      );
+
+
+  return {
+    score,
+    matchedSkills,
+    missingSkills,
+    timeToReady:
+      missingSkills.length <= 2
+        ? "3–6 months"
+        : missingSkills.length <= 4
+        ? "6–9 months"
+        : "9–12 months",
+  };
+}
+
 
 // Learning Hub & Enrollment Functions
 function loadCourses() {
@@ -1009,6 +1628,22 @@ function loadCourses() {
                             class="btn btn--primary btn--sm ${
                               isEnrolled ? "enrolled" : ""
                             }" 
+          .map(
+            (feature) =>
+              `<span><i class="fas fa-check-circle" style="color: var(--accent);"></i> ${feature}</span>`
+          )
+          .join(" &bull; ")}
+                    </div>
+                    <div class="course-card-info">
+                        <div>
+                            <span>${course.duration} • ${course.level
+        }</span><br>
+                             <span class="course-card-rating">Rating: ${course.rating
+        } ★</span>
+                        </div>
+                        <button 
+                            class="btn btn--primary btn--sm ${isEnrolled ? "enrolled" : ""
+        }" 
                             onclick="enrollInCourse(this, ${course.id})"
                             ${isEnrolled ? "disabled" : ""}>
                             ${isEnrolled ? "Enrolled" : "Enroll Now"}
@@ -1107,6 +1742,14 @@ function addExperience(isExample = false) {
                     ? "Analyzed sales data to identify trends, creating dashboards that improved decision-making."
                     : ""
                 }</textarea>
+                <input type="text" class="form-control mb-4" placeholder="Job Title" value="${isExample ? "Data Analyst Intern" : ""
+    }">
+                <input type="text" class="form-control mb-4" placeholder="Company" value="${isExample ? "Tech Solutions Inc." : ""
+    }">
+                <textarea class="form-control" rows="2" placeholder="Responsibilities...">${isExample
+      ? "Analyzed sales data to identify trends, creating dashboards that improved decision-making."
+      : ""
+    }</textarea>
             `;
   container.appendChild(item);
 }
@@ -1125,6 +1768,12 @@ function addEducation(isExample = false) {
                 <input type="text" class="form-control" placeholder="Years Attended" value="${
                   isExample ? "2019 - 2023" : ""
                 }">
+                <input type="text" class="form-control mb-4" placeholder="Degree" value="${isExample ? "B.Tech in Computer Science" : ""
+    }">
+                <input type="text" class="form-control mb-4" placeholder="Institution" value="${isExample ? "University of Technology" : ""
+    }">
+                <input type="text" class="form-control" placeholder="Years Attended" value="${isExample ? "2019 - 2023" : ""
+    }">
             `;
   container.appendChild(item);
 }
@@ -1166,6 +1815,23 @@ function generateResume() {
       years: item.children[2].value,
     };
   });
+  const template = document.getElementById("resume-template").value;
+
+  const experiences = Array.from(
+    document.querySelectorAll("#experience-container .experience-item")
+  ).map((item) => ({
+    title: item.children[0].value,
+    company: item.children[1].value,
+    desc: item.children[2].value,
+  }));
+
+  const educations = Array.from(
+    document.querySelectorAll("#education-container .education-item")
+  ).map((item) => ({
+    degree: item.children[0].value,
+    school: item.children[1].value,
+    years: item.children[2].value,
+  }));
 
   const skills = Array.from(
     document.querySelectorAll("#resume-skills .skill-tag")
@@ -1211,6 +1877,30 @@ function generateResume() {
                       .join("")}
                 </div>
             `;
+
+  previewContent.className = `resume-template ${template}`;
+
+  previewContent.innerHTML = `
+    <h2>${name}</h2>
+    <p>${email} | ${phone}</p>
+
+    <h3>Professional Summary</h3>
+    <p>${summary}</p>
+
+    <h3>Work Experience</h3>
+    ${experiences.map(exp => `
+      <p><strong>${exp.title}</strong> – ${exp.company}</p>
+      <p>${exp.desc}</p>
+    `).join("")}
+
+    <h3>Education</h3>
+    ${educations.map(edu => `
+      <p><strong>${edu.degree}</strong>, ${edu.school} (${edu.years})</p>
+    `).join("")}
+
+    <h3>Skills</h3>
+    <p>${skills.join(", ")}</p>
+  `;
 
   openModal("resume-preview-modal");
 }
@@ -1341,6 +2031,9 @@ const debouncedJobSearch = debounce(simulateJobSearch, 300);
 function setDynamicCopyright(companyName){
   const currYear = new Date().getFullYear();
   document.getElementById("copyright").textContent=`© ${currYear} ${companyName}. All rights reserved.`;
+function setDynamicCopyright(companyName) {
+  const currYear = new Date().getFullYear();
+  document.getElementById("copyright").textContent = `© ${currYear} ${companyName}. All rights reserved.`;
 }
 //----End Dynamic Copyright----
 
@@ -1377,3 +2070,7 @@ window.enrollInCourse = enrollInCourse;
 window.unEnrollCourse = unEnrollCourse;
 window.handleGetStartedClick = handleGetStartedClick;
 window.setDynamicCopyright=setDynamicCopyright('AI Career Advisor');
+window.setDynamicCopyright = setDynamicCopyright('AI Career Advisor');
+window.setDynamicCopyright=setDynamicCopyright('AI Career Advisor');
+window.openEditProfile = openEditProfile;
+window.openChosenCareer = openChosenCareer;

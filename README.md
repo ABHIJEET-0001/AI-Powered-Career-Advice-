@@ -1,18 +1,17 @@
-<h1 align="center">🎯 AI Career Advisor</h1>
-<h3 align="center">Personalized Career & Skills Guidance using AI</h3>
+# 🎯 AI Career Advisor  
+### Personalized Career & Skills Guidance using AI  
 
 <p align="center">
-  <a href="https://sunny-rabanadas-bd1f6f.netlify.app/" target="_blank">
-    🚀 <b>Live Demo</b>
+  🚀 <b>Live Demo</b><br/>
+  <a href="https://ai-powered-career-advice-five.vercel.app/" target="_blank">
+    https://ai-powered-career-advice-five.vercel.app/
   </a>
-  &nbsp;•&nbsp;
-  <b>Smart India Hackathon 2025</b>
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Deployed%20on-Netlify-00C7B7?logo=netlify&logoColor=white" />
+  <img src="https://img.shields.io/badge/Deployed%20on-Vercel-black?logo=vercel&logoColor=white" />
   <img src="https://img.shields.io/badge/License-MIT-green.svg" />
-  <img src="https://img.shields.io/badge/Status-Prototype%20%2F%20Active-blue" />
+  <img src="https://img.shields.io/badge/Status-Active-blue" />
 </p>
 
 <p align="center">
@@ -22,138 +21,104 @@
   </b>
 </p>
 
-<hr/>
+---
 
-<h2>✨ Overview</h2>
+## ✨ Overview  
 
-<p>
-  <b>AI Career Advisor</b> is an intelligent web application designed to provide
-  <b>personalized career guidance</b> using <b>Artificial Intelligence (AI)</b> and
-  <b>Natural Language Processing (NLP)</b>.
-</p>
+**AI Career Advisor** is an intelligent web application that provides  
+**personalized career guidance** using **Artificial Intelligence (AI)** and  
+**Natural Language Processing (NLP)**.
 
-<p>
-  Built as part of <b>Smart India Hackathon 2025</b>, the platform helps users
-  analyze their skills, interests, and career goals, and maps them to
-  relevant career paths, learning roadmaps, and growth opportunities.
-</p>
+Built for **Smart India Hackathon 2025**, this platform analyzes a user’s  
+skills, interests, and goals to suggest:
 
-<p>
-  The core vision is to <b>bridge the gap between education and employability</b>
-  through explainable, data-driven recommendations.
-</p>
+- Career paths  
+- Skill roadmaps  
+- Learning & certification guidance  
 
-<hr/>
+Its mission is to **bridge the gap between education and employability** using AI-powered insights.
 
-<h2>🚀 Key Features</h2>
+---
 
-<ul>
-  <li>💬 <b>AI-powered Career Chat Assistant</b><br/>
-      Interactive chat interface for career-related queries and guidance.</li>
+## 🚀 Key Features  
 
-  <li>🧭 <b>Personalized Career Roadmaps</b><br/>
-      Tailored learning paths, skill recommendations, and certification guidance.</li>
+- 💬 **AI Career Chat Assistant**  
+- 🧭 **Personalized Career Roadmaps**  
+- 📊 **Skill & Career Insights**  
+- 🌐 **Responsive Modern UI**  
+- ⚡ **AI-powered Recommendations**  
 
-  <li>📊 <b>Data-Driven Insights</b><br/>
-      Structured foundation for job-market trend and skill-demand analysis.</li>
+---
 
-  <li>🌐 <b>Responsive & Modern UI</b><br/>
-      Clean, accessible design optimized for desktop and mobile devices.</li>
+## 🧠 Tech Stack  
 
-  <li>⚡ <b>AI-based Recommendations</b><br/>
-      NLP-powered responses with scope for deeper personalization.</li>
-</ul>
+| Layer | Technology |
+|------|-----------|
+| Frontend | React.js, HTML, CSS, JavaScript |
+| Backend | Node.js, FastAPI |
+| AI | OpenAI API (LLM-based engine) |
+| Database | Firebase |
+| Hosting | Vercel |
 
-<hr/>
+---
 
-<h2>🧠 Tech Stack</h2>
+## 🧩 System Architecture  
+User (React UI)
+↓
+Backend API (Node.js / FastAPI)
+↓
+AI Engine (OpenAI)
+↓
+Career Recommendations
+↓
+Displayed on UI
 
-<ul>
-  <li>💻 <b>Frontend:</b> React.js, HTML5, CSS3, JavaScript</li>
-  <li>🧩 <b>Backend:</b> Node.js, FastAPI</li>
-  <li>🤖 <b>AI & NLP:</b> OpenAI API (LLM-based recommendation engine)</li>
-  <li>🔥 <b>Database & Authentication:</b> Firebase</li>
-  <li>📱 <b>Deployment:</b> Netlify</li>
-</ul>
 
-<hr/>
+---
 
-<h2>🧩 System Workflow</h2>
+## 📘 How It Works  
 
-<pre>
-User Interface (React)
-        ↓
-Skill & Goal Inputs
-        ↓
-Backend APIs (Node.js / FastAPI)
-        ↓
-AI Recommendation Engine (OpenAI)
-        ↓
-Career Insights & Roadmaps
-        ↓
-Results Rendered on UI
-</pre>
+1. User enters skills, interests, and goals  
+2. Backend sends data to AI engine  
+3. AI analyzes profile  
+4. Career & skill recommendations are generated  
+5. Results are shown in real-time  
 
-<p>
-  This modular architecture allows scalability, clearer AI visibility,
-  and seamless future integrations.
-</p>
+---
 
-<hr/>
+## 🔮 Future Enhancements  
 
-<h2>📘 How It Works</h2>
+- LinkedIn & GitHub profile analysis  
+- User dashboards  
+- AI voice assistant  
+- Progress tracking  
+- Job market analytics  
 
-<ol>
-  <li>Visit the <a href="https://sunny-rabanadas-bd1f6f.netlify.app/" target="_blank">Live Demo</a>.</li>
-  <li>Enter your skills, interests, and career goals.</li>
-  <li>The backend processes inputs and triggers AI analysis.</li>
-  <li>AI generates career suggestions and learning directions.</li>
-  <li>Users explore roadmaps and actionable insights.</li>
-</ol>
+---
 
-<hr/>
+## 🤝 Contributing  
 
-<h2>🔮 Future Enhancements</h2>
+1. Fork the repo  
+2. Create a new branch  
+3. Add your feature  
+4. Open a Pull Request  
 
-<ul>
-  <li>🔗 LinkedIn & GitHub integration for automatic skill extraction</li>
-  <li>🗂️ Persistent user profiles and saved career journeys</li>
-  <li>🎙️ AI Voice Assistant for conversational guidance</li>
-  <li>🏆 Gamified dashboard for skill and progress tracking</li>
-  <li>📊 Advanced job-market analytics and insights</li>
-</ul>
+---
 
-<hr/>
+## 📜 License  
 
-<h2>🤝 Contributing</h2>
+This project is licensed under the **MIT License**.  
+You are free to use, modify, and distribute it.
 
-<p>
-  Contributions are welcome and appreciated.
-</p>
+---
 
-<ul>
-  <li>Fork the repository</li>
-  <li>Create a feature or documentation branch</li>
-  <li>Submit a well-described pull request</li>
-</ul>
+## 🌐 Live Demo  
 
-<p>
-  Let’s build smarter, AI-powered career guidance together 🚀
-</p>
+🔗 https://ai-powered-career-advice-five.vercel.app/  
 
-<hr/>
+---
 
-<h2>📜 License</h2>
+### ⭐ Developed with passion by  
+**[Abhijeet Kasera](https://github.com/ABHIJEET-0001)**  
+*Always building intelligent systems that matter.*
 
-<p>
-  This project is licensed under the <b>MIT License</b> — free to use,
-  modify, and distribute with proper attribution.
-</p>
-
-<hr/>
-
-<h3 align="center">
-  ⭐ Developed with passion by
-  <a href="https://github.com/ABHIJEET-0001" target="_blank">Abhijeet Kasera</a><br/>
-  <sub>Always building intelligent systems that matter.</sub>
-</h3>
