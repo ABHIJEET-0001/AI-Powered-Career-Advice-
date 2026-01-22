@@ -171,6 +171,9 @@ function handleGetStartedClick() {
     showPage("dashboard");
   } else {
     showPage("auth");
+    showRegisterForm();
+    const firstRegisterField = document.getElementById("register-name");
+    if (firstRegisterField) firstRegisterField.focus();
   }
 }
 
@@ -269,8 +272,10 @@ function login() {
 function register() {
   const name = document.getElementById("register-name").value;
   const email = document.getElementById("register-email").value;
+  const preferredCareer = document.getElementById("register-career")?.value;
   const password = document.getElementById("register-password").value;
-  if (!name || !email || !password) return alert("Please fill all fields");
+  if (!name || !email || !password || !preferredCareer)
+    return alert("Please fill all fields and select a preferred career path");
 
   const users = JSON.parse(localStorage.getItem("users") || "[]");
   if (users.some((u) => u.email === email))
@@ -280,6 +285,7 @@ function register() {
     id: Date.now(),
     name,
     email,
+    preferredCareer,
     password,
     profile: null,
     enrolledCourses: [],

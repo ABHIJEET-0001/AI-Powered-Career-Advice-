@@ -205,6 +205,21 @@
                         <div id="register-email-help" class="sr-only">Enter a valid email address for your account</div>
                     </div>
                     <div class="form-group">
+                        <label class="form-label" for="register-career">Preferred Career Path</label>
+                        <select class="form-control" id="register-career" required aria-describedby="register-career-help">
+                            <option value="">Select your preferred path</option>
+                            <option value="software-development">Software Development</option>
+                            <option value="data-science">Data Science / AI</option>
+                            <option value="design">UI/UX Design</option>
+                            <option value="product-management">Product Management</option>
+                            <option value="cybersecurity">Cybersecurity</option>
+                            <option value="cloud-devops">Cloud & DevOps</option>
+                            <option value="business-analytics">Business Analytics</option>
+                            <option value="other">Other / Exploring</option>
+                        </select>
+                        <div id="register-career-help" class="sr-only">Choose the career path you want to pursue so we can personalize recommendations</div>
+                    </div>
+                    <div class="form-group">
                         <label class="form-label" for="register-password">Password</label>
                         <input type="password" class="form-control" id="register-password" placeholder="Create a password" required aria-describedby="register-password-help">
                         <div id="register-password-help" class="sr-only">Create a strong password with at least 8 characters</div>
