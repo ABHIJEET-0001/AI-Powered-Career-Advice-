@@ -2129,3 +2129,8 @@ legend {
 #home-page {
     margin-top: 0;
 }
+
+#finalbtn{
+  display: flex;
+  align-items: center;
+}
