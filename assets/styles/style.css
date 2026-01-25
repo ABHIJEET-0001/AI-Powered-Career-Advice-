@@ -1223,9 +1223,9 @@ section {
 /* Back to top button styles*/
 #btn{
     position: fixed;
-     bottom: 15px;
-    right: 100px;
-    z-index: 100;
+     bottom: 81px;
+    right: 18px;
+    z-index: 9999;
     font-size: larger;
     border-radius: 50%;
     font-size: 20px;
@@ -2130,7 +2130,16 @@ legend {
     margin-top: 0;
 }
 
-#finalbtn{
-  display: flex;
-  align-items: center;
+/* Kill Voiceflow's default floating */
+.vf-widget {
+  right: auto !important;
+  bottom: auto !important;
+}
+
+.vf-widget {
+  position: fixed !important;
+  right: var(--floating-x) !important;
+  bottom: 90px !important;   /* higher Y */
+  z-index: 9998 !important;
+  color: #3a71e8
 }
