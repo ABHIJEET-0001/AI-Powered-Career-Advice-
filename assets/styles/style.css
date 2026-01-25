@@ -1,3 +1,95 @@
+
+/* ===============================
+   THEME VARIABLES
+   =============================== */
+
+/* Light Theme (Default) */
+:root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f4f6f8;
+    --text-primary: #1f2933;
+    --text-secondary: #6b7280;
+    --border-color: #e5e7eb;
+    --card-bg: #ffffff;
+    --shadow: rgba(0, 0, 0, 0.08);
+    --accent: #3b82f6;
+}
+
+/* Dark Theme */
+body.dark-theme {
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5f5;
+    --border-color: #334155;
+    --card-bg: #020617;
+    --shadow: rgba(0, 0, 0, 0.4);
+    --accent: #60a5fa;
+}
+
+/* ===============================
+   GLOBAL APPLICATION
+   =============================== */
+
+html, body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Navigation */
+.navbar {
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Cards & Sections */
+.feature-card,
+.step-card,
+.testimonial-card,
+.career-card,
+.dashboard-card,
+.community-card,
+.action-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 20px var(--shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Form Fields */
+input, select, textarea {
+    background-color: var(--card-bg);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    background-color: var(--card-bg);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 8px 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.08);
+    box-shadow: 0 4px 12px var(--shadow);
+}
+
+/* Smooth global transitions */
+* {
+    transition: background-color 0.25s ease,
+                color 0.25s ease,
+                border-color 0.25s ease;
+}
+
 :root {
   /* Light Theme Variables */
   --primary: #4381ff; /* Brighter, more energetic blue */
