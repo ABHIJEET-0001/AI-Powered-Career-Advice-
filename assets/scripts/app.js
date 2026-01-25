@@ -35,6 +35,25 @@ document.addEventListener("DOMContentLoaded", function () {
   loadCareers();
   loadCourses();
   initTheme();
+const toggleBtn = document.getElementById("theme-toggle");
+
+// Check saved theme in localStorage
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme) {
+    document.documentElement.setAttribute("data-theme", savedTheme);
+    toggleBtn.textContent = savedTheme === "dark" ? "☀️" : "🌙";
+}
+
+// Toggle theme on click
+toggleBtn.addEventListener("click", () => {
+    const currentTheme = document.documentElement.getAttribute("data-theme");
+    const newTheme = currentTheme === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", newTheme);
+    localStorage.setItem("theme", newTheme);
+
+    // Update button emoji
+    toggleBtn.textContent = newTheme === "dark" ? "☀️" : "🌙";
+});
   addExperience(true); // Add initial example
   addEducation(true); // Add initial example
   // Initialize form validation for profile setup
@@ -43,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
   setupKeyboardNavigation();
   // Setup ARIA live regions
   setupAriaLiveRegions();
-
+_________
   // Set initial form validation state if profile page exists
   if (document.getElementById("profile-setup-page")) {
     validateProfileForm();
@@ -66,11 +85,6 @@ function setupAriaLiveRegions() {
   document.body.appendChild(liveRegion);
 }
 
-// Theme Toggle Functionality
-const themeToggle = document.getElementById("theme-toggle");
-const themeIcon = themeToggle.querySelector("i");
-
-themeToggle.addEventListener("click", toggleTheme);
 // --- Smarter Chatbot with Career Questions ---
 const chatbotKnowledge = {
   greetings: ["hello", "hi", "hey"],

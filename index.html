@@ -35,9 +35,7 @@
                 <a href="help.html" class="nav-link" onclick="showPage('help')">Help</a>
                 <a href="#" id="dashboard-link" class="nav-link hidden" onclick="showPage('dashboard')">Dashboard</a>
                 <button id="auth-button" class="btn btn--primary" onclick="handleGetStartedClick()">Get Started</button>
-                <button class="theme-toggle" id="theme-toggle">
-                    <i class="fas fa-moon"></i>
-                </button>
+              <button id="theme-toggle">🌙</button>
             </div>
             <button class="nav-toggle" onclick="toggleMobileMenu()" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="nav-menu">
                 <span aria-hidden="true"></span>
@@ -821,6 +819,27 @@
   document.getElementById("nav-menu").classList.toggle("active");
 }
 
+</script>
+<script>
+const toggleBtn = document.getElementById("theme-toggle");
+
+// Check saved theme in localStorage
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme) {
+    document.documentElement.setAttribute("data-theme", savedTheme);
+    toggleBtn.textContent = savedTheme === "dark" ? "☀️" : "🌙";
+}
+
+// Toggle theme on click
+toggleBtn.addEventListener("click", () => {
+    const currentTheme = document.documentElement.getAttribute("data-theme");
+    const newTheme = currentTheme === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", newTheme);
+    localStorage.setItem("theme", newTheme);
+
+    // Update button emoji
+    toggleBtn.textContent = newTheme === "dark" ? "☀️" : "🌙";
+});
 </script>
 </body>
 
