@@ -1236,10 +1236,31 @@ section {
     cursor: pointer;
     transform: scale(1) 0.4s ease;
 
+  position: fixed;
+  bottom: 80px;
+  right: 22px;
+  z-index: 1000;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--primary-dark);
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, background-color 0.2s ease;
 }
 #btn:hover{
-    scale: 1.2;
-    transition: smooth;
+    transform: scale(1.1);
+}
+#btn i {
+  visibility: visible !important;
+  font-size: 20px;
+  color: #ffffff;
 }
 /* Chatbot */
 .chatbot-container {

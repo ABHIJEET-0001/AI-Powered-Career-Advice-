@@ -35,9 +35,7 @@
                 <a href="help.html" class="nav-link" onclick="showPage('help')">Help</a>
                 <a href="#" id="dashboard-link" class="nav-link hidden" onclick="showPage('dashboard')">Dashboard</a>
                 <button id="auth-button" class="btn btn--primary" onclick="handleGetStartedClick()">Get Started</button>
-                <button class="theme-toggle" id="theme-toggle">
-                    <i class="fas fa-moon"></i>
-                </button>
+              <button id="theme-toggle">🌙</button>
             </div>
             <button class="nav-toggle" onclick="toggleMobileMenu()" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="nav-menu">
                 <span aria-hidden="true"></span>
@@ -203,6 +201,21 @@
                         <label class="form-label" for="register-email">Email</label>
                         <input type="email" class="form-control" id="register-email" placeholder="Enter your email" required aria-describedby="register-email-help">
                         <div id="register-email-help" class="sr-only">Enter a valid email address for your account</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="register-career">Preferred Career Path</label>
+                        <select class="form-control" id="register-career" required aria-describedby="register-career-help">
+                            <option value="">Select your preferred path</option>
+                            <option value="software-development">Software Development</option>
+                            <option value="data-science">Data Science / AI</option>
+                            <option value="design">UI/UX Design</option>
+                            <option value="product-management">Product Management</option>
+                            <option value="cybersecurity">Cybersecurity</option>
+                            <option value="cloud-devops">Cloud & DevOps</option>
+                            <option value="business-analytics">Business Analytics</option>
+                            <option value="other">Other / Exploring</option>
+                        </select>
+                        <div id="register-career-help" class="sr-only">Choose the career path you want to pursue so we can personalize recommendations</div>
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="register-password">Password</label>
@@ -806,6 +819,27 @@
   document.getElementById("nav-menu").classList.toggle("active");
 }
 
+</script>
+<script>
+const toggleBtn = document.getElementById("theme-toggle");
+
+// Check saved theme in localStorage
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme) {
+    document.documentElement.setAttribute("data-theme", savedTheme);
+    toggleBtn.textContent = savedTheme === "dark" ? "☀️" : "🌙";
+}
+
+// Toggle theme on click
+toggleBtn.addEventListener("click", () => {
+    const currentTheme = document.documentElement.getAttribute("data-theme");
+    const newTheme = currentTheme === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", newTheme);
+    localStorage.setItem("theme", newTheme);
+
+    // Update button emoji
+    toggleBtn.textContent = newTheme === "dark" ? "☀️" : "🌙";
+});
 </script>
 </body>
 
