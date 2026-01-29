@@ -1,4 +1,4 @@
- const backBtn = document.getElementById("btn");
+ const backBtn = document.getElementById("back-to-top");
 
   window.addEventListener("scroll", () => {
     if (window.scrollY > 200) {
