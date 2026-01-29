@@ -1,366 +1,19 @@
-// Application Data
-const appData = {
-  careers: [
-    {
-      id: 1,
-      title: "Data Scientist",
-      description:
-        "Analyze complex data to help businesses make decisions. Data scientists use statistical methods, machine learning, and analytics to extract insights from data.",
-      required_skills: [
-        "Python",
-        "Machine Learning",
-        "Statistics",
-        "SQL",
-        "Data Visualization",
-      ],
-      salary_range: "₹8-25 LPA",
-      growth_outlook: "High demand, 25% growth expected",
-      learning_path: [
-        "Statistics Fundamentals",
-        "Python Programming",
-        "Machine Learning",
-        "Deep Learning",
-        "Big Data Tools",
-      ],
-      growth: "high",
-      skill_level: "advanced",
-      salary_category: "high",
-    },
-    {
-      id: 2,
-      title: "UX Designer",
-      description:
-        "Design user-friendly interfaces and experiences. UX designers focus on creating products that provide meaningful and relevant experiences to users.",
-      required_skills: [
-        "Figma",
-        "User Research",
-        "Prototyping",
-        "Wireframing",
-        "Design Thinking",
-      ],
-      salary_range: "₹6-20 LPA",
-      growth_outlook: "Growing field, focus on digital experiences",
-      learning_path: [
-        "Design Fundamentals",
-        "User Research Methods",
-        "Prototyping Tools",
-        "Interaction Design",
-        "Design Systems",
-      ],
-      growth: "high",
-      skill_level: "intermediate",
-      salary_category: "medium",
-    },
-    {
-      id: 3,
-      title: "Software Engineer",
-      description:
-        "Develop and maintain software applications. Software engineers apply engineering principles to software development.",
-      required_skills: [
-        "Programming",
-        "Problem Solving",
-        "System Design",
-        "Database Management",
-        "Testing",
-      ],
-      salary_range: "₹5-30 LPA",
-      growth_outlook: "Excellent prospects across all industries",
-      learning_path: [
-        "Programming Basics",
-        "Data Structures",
-        "Web Development",
-        "System Design",
-        "Software Architecture",
-      ],
-      growth: "high",
-      skill_level: "intermediate",
-      salary_category: "high",
-    },
-    {
-      id: 4,
-      title: "Digital Marketing Specialist",
-      description:
-        "Promote brands and products through digital channels. Digital marketers use online platforms to reach customers.",
-      required_skills: [
-        "SEO/SEM",
-        "Social Media Marketing",
-        "Content Creation",
-        "Analytics",
-        "Email Marketing",
-      ],
-      salary_range: "₹4-15 LPA",
-      growth_outlook: "Rapid growth with digital transformation",
-      learning_path: [
-        "Marketing Fundamentals",
-        "SEO Optimization",
-        "Social Media Strategy",
-        "Content Marketing",
-        "Marketing Analytics",
-      ],
-      growth: "medium",
-      skill_level: "beginner",
-      salary_category: "medium",
-    },
-    {
-      id: 5,
-      title: "Cloud Architect",
-      description:
-        "Design and manage cloud computing strategies. Cloud architects oversee cloud adoption plans and cloud application design.",
-      required_skills: [
-        "AWS/Azure",
-        "DevOps",
-        "Security",
-        "Networking",
-        "Architecture Design",
-      ],
-      salary_range: "₹12-40 LPA",
-      growth_outlook: "Extremely high demand with cloud adoption",
-      learning_path: [
-        "Cloud Fundamentals",
-        "Platform Certification",
-        "DevOps Tools",
-        "Security Best Practices",
-        "Advanced Architecture",
-      ],
-      growth: "high",
-      skill_level: "advanced",
-      salary_category: "high",
-    },
-    {
-      id: 6,
-      title: "Data Analyst",
-      description:
-        "Interpret data to inform business decisions. Data analysts transform data into insights that drive business value.",
-      required_skills: [
-        "Excel",
-        "SQL",
-        "Data Visualization",
-        "Statistics",
-        "Reporting",
-      ],
-      salary_range: "₹4-18 LPA",
-      growth_outlook: "Strong demand across industries",
-      learning_path: [
-        "Excel Mastery",
-        "SQL Fundamentals",
-        "Data Visualization Tools",
-        "Statistical Analysis",
-        "Reporting Techniques",
-      ],
-      growth: "medium",
-      skill_level: "beginner",
-      salary_category: "medium",
-    },
-  ],
-  courses: [
-    {
-      id: 1,
-      title: "Python for Data Science",
-      provider: "Coursera",
-      description:
-        "Learn Python programming fundamentals for data analysis and visualization.",
-      duration: "6 weeks",
-      level: "Beginner",
-      rating: 4.8,
-      features: ["Certificate", "Flexible deadlines", "Peer review"],
-    },
-    {
-      id: 2,
-      title: "Machine Learning A-Z™",
-      provider: "Udemy",
-      description:
-        "Introduction to machine learning algorithms and applications with hands-on Python & R exercises.",
-      duration: "8 weeks",
-      level: "Intermediate",
-      rating: 4.7,
-      features: ["Certificate", "Lifetime access", "Practical projects"],
-    },
-    {
-      id: 3,
-      title: "Google UX Design Professional Certificate",
-      provider: "Coursera",
-      description:
-        "Master the fundamentals of user experience design and research to kickstart your UX career.",
-      duration: "10 weeks",
-      level: "Beginner",
-      rating: 4.8,
-      features: [
-        "Professional Certificate",
-        "Portfolio projects",
-        "Google certified",
-      ],
-    },
-    {
-      id: 4,
-      title: "AWS Certified Solutions Architect - Associate",
-      provider: "Udemy",
-      description:
-        "Learn to deploy and manage applications on Amazon Web Services and pass the certification exam.",
-      duration: "12 weeks",
-      level: "Intermediate",
-      rating: 4.9,
-      features: ["Exam prep", "Practice tests", "Expert instructor"],
-    },
-    {
-      id: 5,
-      title: "Digital Marketing Fundamentals",
-      provider: "Google Digital Garage",
-      description:
-        "Master the basics of digital marketing with our free course, packed with practical exercises and real-world examples.",
-      duration: "4 weeks",
-      level: "Beginner",
-      rating: 4.6,
-      features: ["Free Certificate", "Self-paced", "Beginner-friendly"],
-    },
-    {
-      id: 6,
-      title: "The Complete Full-Stack Web Developer Course",
-      provider: "Udemy",
-      description:
-        "Learn to build modern web applications using the MERN stack (MongoDB, Express, React, Node.js).",
-      duration: "20 weeks",
-      level: "Intermediate",
-      rating: 4.8,
-      features: ["Certificate", "80+ hours of video", "Build 10+ projects"],
-    },
-  ],
-  assessmentQuestions: [
-    {
-      id: 1,
-      question:
-        "When faced with a complex problem, what is your initial approach?",
-      options: [
-        "Break it down into smaller, manageable parts.",
-        "Research existing solutions and best practices.",
-        "Brainstorm a wide range of creative ideas.",
-        "Create a detailed, step-by-step plan before starting.",
-        "Experiment with different approaches immediately.",
-        "Discuss it with colleagues to get different perspectives.",
-        "Analyze the available data to find patterns or insights.",
-      ],
-    },
-    {
-      id: 2,
-      question: "Which work environment makes you feel most productive?",
-      options: [
-        "A quiet, focused space for deep concentration.",
-        "A highly collaborative, open-plan office.",
-        "A flexible, remote environment where I manage my schedule.",
-        "A structured, corporate setting with clear processes.",
-        "A fast-paced, dynamic startup environment.",
-        "A creative studio or workshop with hands-on projects.",
-        "An academic or research-oriented setting.",
-      ],
-    },
-    {
-      id: 3,
-      question: "What kind of tasks give you the most satisfaction?",
-      options: [
-        "Organizing information and creating efficient systems.",
-        "Solving a difficult logical or mathematical puzzle.",
-        "Creating something visually beautiful or aesthetic.",
-        "Helping or teaching others to understand something.",
-        "Persuading or negotiating with people.",
-        "Building something tangible with my hands or with code.",
-        "Discovering a new insight or pattern from data.",
-        "Leading a team and coordinating a project.",
-      ],
-    },
-    {
-      id: 4,
-      question: "How do you prefer to learn new things?",
-      options: [
-        "Through structured online courses with clear modules.",
-        "By reading books, articles, and documentation.",
-        "By watching video tutorials and demonstrations.",
-        "Through hands-on projects and learning by doing.",
-        "By attending workshops or classes with an instructor.",
-        "By discussing concepts with a mentor or expert.",
-        "Through self-directed exploration and experimentation.",
-      ],
-    },
-    {
-      id: 5,
-      question: "In a team project, what role do you naturally take on?",
-      options: [
-        "The Leader: organizing the team and delegating tasks.",
-        "The Analyst: digging into the data and details.",
-        "The Innovator: coming up with new and creative ideas.",
-        "The Implementer: focusing on getting the work done.",
-        "The Mediator: ensuring everyone works together smoothly.",
-        "The Specialist: providing deep expertise in an area.",
-        "The Presenter: communicating the team's findings.",
-      ],
-    },
-    {
-      id: 6,
-      question: "Which of these subjects are you most drawn to?",
-      options: [
-        "Psychology and human behavior.",
-        "Technology and computer science.",
-        "Art, design, and aesthetics.",
-        "Economics and business strategy.",
-        "Biology and life sciences.",
-        "Mathematics and statistics.",
-        "Communication and languages.",
-        "Engineering and physics.",
-      ],
-    },
-    {
-      id: 7,
-      question: "What is your primary motivator at work?",
-      options: [
-        "Financial reward and stability.",
-        "Mastering a new skill and personal growth.",
-        "Making a positive impact on society.",
-        "Gaining recognition and advancing my career.",
-        "Solving intellectually stimulating problems.",
-        "Creative expression and innovation.",
-        "Having autonomy and control over my work.",
-        "Working with a great team and strong social connections.",
-      ],
-    },
-    {
-      id: 8,
-      question: "How do you handle tight deadlines and pressure?",
-      options: [
-        "I thrive under pressure; it helps me focus.",
-        "I create a detailed to-do list and prioritize.",
-        "I communicate with stakeholders to manage expectations.",
-        "I focus on one task at a time to avoid being overwhelmed.",
-        "I use stress as fuel to get things done.",
-        "I ask for help or delegate if possible.",
-        "I prefer environments without constant high pressure.",
-      ],
-    },
-    {
-      id: 9,
-      question: "In a successful project, what part are you most proud of?",
-      options: [
-        "The flawless execution and efficiency of the process.",
-        "The innovative solution no one thought of before.",
-        "The positive feedback from users or clients.",
-        "The measurable business results achieved.",
-        "The complex technical challenge that was overcome.",
-        "The strong collaboration that made it happen.",
-        "The clean, elegant design and user experience.",
-      ],
-    },
-    {
-      id: 10,
-      question: "Which statement best describes your long-term career goal?",
-      options: [
-        "To become a top expert in a specialized field.",
-        "To lead a large team or an entire company.",
-        "To create my own business or product.",
-        "To have a stable, secure job with good work-life balance.",
-        "To work on globally impactful projects.",
-        "To have the flexibility to work from anywhere.",
-        "To constantly learn and adapt to new challenges.",
-      ],
-    },
-  ],
-};
+// Refactored app.js
+import { appData } from "../data/appData.js";
+import {
+  announceToScreenReader,
+  updatePageTitle,
+  manageFocus,
+  setupKeyboardNavigation,
+} from "../utils/accessibility.js";
+import {
+  generateAIResponse,
+  toggleChatbot,
+  handleChatInput,
+  sendChatMessage,
+} from "../modules/chatbot.js";
+import { navigateTo } from "../modules/navigation.js";
+import { initTheme, toggleTheme } from "../modules/theme.js";
 
 // Application State
 let currentUser = null;
@@ -372,91 +25,6 @@ let assessmentData = {
 };
 let skillGapChartInstance = null;
 
-// Accessibility and Screen Reader Support
-function announceToScreenReader(message) {
-  const announcement = document.createElement('div');
-  announcement.setAttribute('aria-live', 'polite');
-  announcement.setAttribute('aria-atomic', 'true');
-  announcement.className = 'sr-only';
-  announcement.textContent = message;
-  document.body.appendChild(announcement);
-  
-  setTimeout(() => {
-    document.body.removeChild(announcement);
-  }, 1000);
-}
-
-function updatePageTitle(title) {
-  document.title = `${title} - AI Career Advisor`;
-}
-
-function manageFocus(elementId) {
-  const element = document.getElementById(elementId);
-  if (element) {
-    element.focus();
-    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-}
-
-// Keyboard Navigation Support
-function setupKeyboardNavigation() {
-  document.addEventListener('keydown', function(e) {
-    // Escape key to close modals
-    if (e.key === 'Escape') {
-      const openModal = document.querySelector('.modal:not(.hidden)');
-      if (openModal) {
-        const modalId = openModal.id;
-        closeModal(modalId);
-        e.preventDefault();
-      }
-    }
-    
-    // Enter key for buttons and interactive elements
-    if (e.key === 'Enter' && e.target.classList.contains('answer-option')) {
-      e.target.click();
-      e.preventDefault();
-    }
-    
-    // Arrow key navigation for answer options
-    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
-      const answerOptions = document.querySelectorAll('.answer-option');
-      const currentIndex = Array.from(answerOptions).indexOf(document.activeElement);
-      
-      if (currentIndex !== -1) {
-        let nextIndex;
-        if (e.key === 'ArrowDown') {
-          nextIndex = (currentIndex + 1) % answerOptions.length;
-        } else {
-          nextIndex = (currentIndex - 1 + answerOptions.length) % answerOptions.length;
-        }
-        answerOptions[nextIndex].focus();
-        e.preventDefault();
-      }
-    }
-  });
-}
-
-// Enhanced Mobile Menu Toggle
-function toggleMobileMenu() {
-  const navMenu = document.getElementById('nav-menu');
-  const navToggle = document.querySelector('.nav-toggle');
-  const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
-  
-  navMenu.classList.toggle('active');
-  navToggle.setAttribute('aria-expanded', !isExpanded);
-  
-  if (!isExpanded) {
-    announceToScreenReader('Navigation menu opened');
-    // Focus first menu item
-    const firstMenuItem = navMenu.querySelector('.nav-link');
-    if (firstMenuItem) {
-      setTimeout(() => firstMenuItem.focus(), 100);
-    }
-  } else {
-    announceToScreenReader('Navigation menu closed');
-  }
-}
-
 // Initialize the application
 document.addEventListener("DOMContentLoaded", function () {
   const savedUser = localStorage.getItem("currentUser");
@@ -467,6 +35,25 @@ document.addEventListener("DOMContentLoaded", function () {
   loadCareers();
   loadCourses();
   initTheme();
+const toggleBtn = document.getElementById("theme-toggle");
+
+// Check saved theme in localStorage
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme) {
+    document.documentElement.setAttribute("data-theme", savedTheme);
+    toggleBtn.textContent = savedTheme === "dark" ? "☀️" : "🌙";
+}
+
+// Toggle theme on click
+toggleBtn.addEventListener("click", () => {
+    const currentTheme = document.documentElement.getAttribute("data-theme");
+    const newTheme = currentTheme === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", newTheme);
+    localStorage.setItem("theme", newTheme);
+
+    // Update button emoji
+    toggleBtn.textContent = newTheme === "dark" ? "☀️" : "🌙";
+});
   addExperience(true); // Add initial example
   addEducation(true); // Add initial example
   // Initialize form validation for profile setup
@@ -475,54 +62,29 @@ document.addEventListener("DOMContentLoaded", function () {
   setupKeyboardNavigation();
   // Setup ARIA live regions
   setupAriaLiveRegions();
-
+_________
   // Set initial form validation state if profile page exists
   if (document.getElementById("profile-setup-page")) {
     validateProfileForm();
+  }
+
+   // Chatbot auto-greeting (FIXED)
+  const chatbotMessages = document.getElementById("chatbot-messages");
+  if (chatbotMessages) {
+    addChatMessage(chatbotResponses.greetings, "bot");
   }
 });
 
 function setupAriaLiveRegions() {
   // Create a live region for announcements
-  const liveRegion = document.createElement('div');
-  liveRegion.id = 'live-region';
-  liveRegion.setAttribute('aria-live', 'polite');
-  liveRegion.setAttribute('aria-atomic', 'true');
-  liveRegion.className = 'sr-only';
+  const liveRegion = document.createElement("div");
+  liveRegion.id = "live-region";
+  liveRegion.setAttribute("aria-live", "polite");
+  liveRegion.setAttribute("aria-atomic", "true");
+  liveRegion.className = "sr-only";
   document.body.appendChild(liveRegion);
 }
 
-// Theme Toggle Functionality
-const themeToggle = document.getElementById("theme-toggle");
-const themeIcon = themeToggle.querySelector("i");
-
-function initTheme() {
-  const savedTheme =
-    localStorage.getItem("theme") ||
-    (window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light");
-  if (savedTheme === "dark") {
-    document.documentElement.setAttribute("data-theme", "dark");
-    themeIcon.classList.remove("fa-moon");
-    themeIcon.classList.add("fa-sun");
-  }
-}
-
-themeToggle.addEventListener("click", () => {
-  const currentTheme = document.documentElement.getAttribute("data-theme");
-  if (currentTheme === "dark") {
-    document.documentElement.removeAttribute("data-theme");
-    themeIcon.classList.remove("fa-sun");
-    themeIcon.classList.add("fa-moon");
-    localStorage.setItem("theme", "light");
-  } else {
-    document.documentElement.setAttribute("data-theme", "dark");
-    themeIcon.classList.remove("fa-moon");
-    themeIcon.classList.add("fa-sun");
-    localStorage.setItem("theme", "dark");
-  }
-});
 // --- Smarter Chatbot with Career Questions ---
 const chatbotKnowledge = {
   greetings: ["hello", "hi", "hey"],
@@ -617,10 +179,6 @@ function addChatMessage(message, sender) {
   messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
 
-// ===== Auto greet on load =====
-window.onload = () => {
-  addChatMessage(chatbotResponses.greetings, "bot");
-};
 
 // Navigation Functions
 function handleGetStartedClick() {
@@ -628,6 +186,9 @@ function handleGetStartedClick() {
     showPage("dashboard");
   } else {
     showPage("auth");
+    showRegisterForm();
+    const firstRegisterField = document.getElementById("register-name");
+    if (firstRegisterField) firstRegisterField.focus();
   }
 }
 
@@ -726,8 +287,10 @@ function login() {
 function register() {
   const name = document.getElementById("register-name").value;
   const email = document.getElementById("register-email").value;
+  const preferredCareer = document.getElementById("register-career")?.value;
   const password = document.getElementById("register-password").value;
-  if (!name || !email || !password) return alert("Please fill all fields");
+  if (!name || !email || !password || !preferredCareer)
+    return alert("Please fill all fields and select a preferred career path");
 
   const users = JSON.parse(localStorage.getItem("users") || "[]");
   if (users.some((u) => u.email === email))
@@ -737,6 +300,7 @@ function register() {
     id: Date.now(),
     name,
     email,
+    preferredCareer,
     password,
     profile: null,
     enrolledCourses: [],
@@ -1269,6 +833,25 @@ function filterCareers(type, value) {
       </div>
     </div>
 
+                <div class="career-detail-section"><h4>Overview</h4><p>${career.description
+    }</p></div>
+                <div class="career-detail-section"><h4>Required Skills</h4><div class="skills-list">${career.required_skills
+      .map((skill) => `<span class="skill-tag">${skill}</span>`)
+      .join("")}</div></div>
+                <div class="career-detail-section"><h4>Salary Range</h4><p class="salary-range">${career.salary_range
+    }</p></div>
+                <div class="career-detail-section"><h4>Future Outlook</h4><p>${career.growth_outlook
+    }</p></div>
+                <div class="career-detail-section"><h4>Learning Path</h4><div class="learning-path">${career.learning_path
+      .map(
+        (step, index) =>
+          `<div class="learning-step"><div class="step-number-small">${index + 1
+          }</div><span>${step}</span></div>`
+      )
+      .join("")}</div></div>
+            `;
+    // Career Fit Summary
+    `
     <div class="career-detail-section">
       <h4>Career Fit Summary</h4>
       <p><strong>${fit.score}% Match</strong></p>
@@ -1289,7 +872,10 @@ function filterCareers(type, value) {
         Choose This Career Path
       </button>
     </div>
+    `;
 
+    // Required Skills with Status
+    `
     <div class="career-detail-section">
       <h4>Skill Match Status</h4>
       <div class="skills-list">
