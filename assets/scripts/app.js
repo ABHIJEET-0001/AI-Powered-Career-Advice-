@@ -609,6 +609,7 @@ function sendChatMessage() {
 
 function addChatMessage(message, sender) {
   const messagesContainer = document.getElementById("chatbot-messages");
+  if(!messagesContainer) return;
   const messageDiv = document.createElement("div");
   messageDiv.className = `message ${sender}-message`;
   messageDiv.innerHTML = `<p>${message}</p>`;
@@ -1329,7 +1330,33 @@ function filterCareers(type, value) {
         .join("")}
     </div>
   `;
+   // ===== Adaptive Roadmap Rendering =====
+const roadmap = fit.roadmap;
 
+if (roadmap && roadmap.steps?.length) {
+  const roadmapHTML = `
+    <div class="career-detail-section">
+      <h4>
+        Adaptive ${roadmap.type === "weekly" ? "Weekly" : "Monthly"} Roadmap
+      </h4>
+
+      ${roadmap.steps
+        .map(
+          step => `
+            <div class="topic-item">
+              <div>
+                <strong>${step.duration}: ${step.title}</strong>
+                <p>${step.focus}</p>
+              </div>
+            </div>
+          `
+        )
+        .join("")}
+    </div>
+  `;
+
+  document.getElementById("career-details").innerHTML += roadmapHTML;
+}
   openModal("career-modal");
 }
 
@@ -1533,6 +1560,7 @@ function calculateCareerFit(career) {
         (matchedSkills.length / career.required_skills.length) * 100
       );
 
+  const roadmap = generateAdaptiveRoadmap(career, missingSkills);
 
   return {
     score,
@@ -1544,9 +1572,48 @@ function calculateCareerFit(career) {
         : missingSkills.length <= 4
         ? "6–9 months"
         : "9–12 months",
+    roadmap,
   };
 }
 
+function generateAdaptiveRoadmap(career, missingSkills) {
+  const roadmap = [];
+
+  // Decide roadmap granularity
+  const mode = missingSkills.length <= 2 ? "weekly" : "monthly";
+
+  if (mode === "weekly") {
+    missingSkills.forEach((skill, index) => {
+      roadmap.push({
+        title: skill,
+        duration: `Week ${index + 1}`,
+        focus: `Hands-on practice and fundamentals of ${skill}`,
+      });
+    });
+  } else {
+    missingSkills.forEach((skill, index) => {
+      roadmap.push({
+        title: skill,
+        duration: `Month ${index + 1}`,
+        focus: `Deep dive into ${skill} with projects`,
+      });
+    });
+  }
+
+  return {
+    type: mode,
+    steps: roadmap,
+  };
+}
+
+// ================= Rescheduling Placeholder =================
+// Future enhancement: reschedule incomplete tasks when
+// task completion tracking is introduced.
+function rescheduleIncompleteTasks(roadmap) {
+  // Currently a no-op (intentionally)
+  // Will be implemented once weekly task completion exists
+  return roadmap;
+}
 
 // Learning Hub & Enrollment Functions
 function loadCourses() {
