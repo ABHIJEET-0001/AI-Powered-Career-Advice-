@@ -65,13 +65,13 @@ Its mission is to **bridge the gap between education and employability** using A
 ## 🧩 System Architecture (Project Workflow)
 ```mermaid
 flowchart TD
-    U[👤 User]
-    UI[🖥️ Frontend UI<br/>(HTML / CSS / JavaScript)]
-    CL[⚙️ Client Logic<br/>(assets/scripts)]
-    AI[🤖 AI Engine<br/>(Career Logic & Recommendations)]
-    CI[📊 Processed Career Insights]
-    PR[🎯 Personalized Career Recommendations]
-    OUT[📺 Rendered on User Interface]
+    U[User]
+    UI[Frontend UI\nHTML / CSS / JavaScript]
+    CL[Client Logic\nassets/scripts]
+    AI[AI Engine\nCareer Logic & Recommendations]
+    CI[Processed Career Insights]
+    PR[Personalized Career Recommendations]
+    OUT[Rendered on User Interface]
 
     U --> UI
     UI --> CL
