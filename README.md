@@ -62,18 +62,85 @@ Its mission is to **bridge the gap between education and employability** using A
 
 ---
 
-## 🧩 System Architecture  
-User (React UI)
-↓
-Backend API (Node.js / FastAPI)
-↓
-AI Engine (OpenAI)
-↓
-Career Recommendations
-↓
-Displayed on UI
+## 🧩 System Architecture (Project Workflow)
+```mermaid
+flowchart TD
+    U[User]
 
+    subgraph Frontend
+        UI[UI Layer]
+        CL[Client Logic]
+    end
 
+    subgraph AI_System
+        AI[AI Engine]
+        CI[Insights Processing]
+    end
+
+    PR[Career Recommendations]
+    OUT[UI Display]
+
+    U --> UI
+    UI --> CL
+    CL --> AI
+    AI --> CI
+    CI --> PR
+    PR --> OUT
+```
+---
+
+## 📁 Folder Architecture 
+```bash
+📦 AI-powered-Career-Advice/
+│
+├── 📄 ACCESSIBILITY.md
+├── 📄 CODE-OF-CONDUCT.md
+├── 📄 CODE_OF_CONDUCT.md
+├── 📄 help.css
+├── 📄 help.html
+├── 📄 index.html
+├── 📄 LICENSE
+├── 📄 README.md
+│
+├── 📁 .github/
+│   ├── 📄 PULL_REQUEST_TEMPLATE.md
+│   └── 📁 ISSUE_TEMPLATE/
+│       ├── 📄 bug_report.md
+│       ├── 📄 config.yml
+│       ├── 📄 feature_request.md
+│       └── 📄 question.md
+│
+├── 📁 AI-Powered-Career-Advice--piyush/
+│
+└── 📁 assets/
+    ├── 📁 scripts/
+    │   ├── 📄 accessibility-checker.js
+    │   ├── 📄 app.js
+    │   ├── 📄 backtoTop.js
+    │   │
+    │   ├── 📁 data/
+    │   │   └── 📄 appData.js
+    │   │
+    │   ├── 📁 modules/
+    │   │   ├── 📄 assessment.js
+    │   │   ├── 📄 auth.js
+    │   │   ├── 📄 careers.js
+    │   │   ├── 📄 chatbot.js
+    │   │   ├── 📄 courses.js
+    │   │   ├── 📄 dashboard.js
+    │   │   ├── 📄 navigation.js
+    │   │   ├── 📄 profile.js
+    │   │   ├── 📄 resume.js
+    │   │   └── 📄 theme.js
+    │   │
+    │   └── 📁 utils/
+    │       ├── 📄 accessibility.js
+    │       ├── 📄 storage.js
+    │       └── 📄 validation.js
+    │
+    └── 📁 styles/
+        └── 📄 style.css
+```
 ---
 
 ## 📘 How It Works  
@@ -99,15 +166,17 @@ Displayed on UI
 ## 🤝 Contributing  
 
 1. Fork the repo  
-2. Create a new branch  
-3. Add your feature  
-4. Open a Pull Request  
+2. Create a new branch  `git checkout -b <feature-name>`
+3. Add your feature  `git add <file-name>`
+4. Commit changes `git commit -m "message"`
+5. Push Changes `git push origin <feature-name>`
+6. Open a Pull Request  
 
 ---
 
 ## 📜 License  
 
-This project is licensed under the **MIT License**.  
+This project is licensed under the [MIT License](LICENSE).  
 You are free to use, modify, and distribute it.
 
 ---
@@ -121,4 +190,3 @@ You are free to use, modify, and distribute it.
 ### ⭐ Developed with passion by  
 **[Abhijeet Kasera](https://github.com/ABHIJEET-0001)**  
 *Always building intelligent systems that matter.*
-
