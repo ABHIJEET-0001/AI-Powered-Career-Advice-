@@ -63,32 +63,23 @@ Its mission is to **bridge the gap between education and employability** using A
 ---
 
 ## 🧩 System Architecture (Project Workflow)
-```bash
-👤 User
-│
-▼
-🖥️ Frontend UI (HTML / CSS / JavaScript)
-│
-▼
-⚙️ Client Logic (assets/scripts/)
-│
-├─ Authentication & Profile Modules
-├─ Career Assessment Engine
-├─ Resume & Dashboard Handling
-│
-▼
-🤖 AI Engine (Career Logic / Recommendations)
-│
-▼
-📊 Processed Career Insights
-│
-▼
-🎯 Personalized Career Recommendations
-│
-▼
-📺 Rendered Back to User Interface
-```
+```mermaid
+flowchart TD
+    U[👤 User]
+    UI[🖥️ Frontend UI<br/>(HTML / CSS / JavaScript)]
+    CL[⚙️ Client Logic<br/>(assets/scripts)]
+    AI[🤖 AI Engine<br/>(Career Logic & Recommendations)]
+    CI[📊 Processed Career Insights]
+    PR[🎯 Personalized Career Recommendations]
+    OUT[📺 Rendered on User Interface]
 
+    U --> UI
+    UI --> CL
+    CL --> AI
+    AI --> CI
+    CI --> PR
+    PR --> OUT
+```
 ---
 
 ## 📁 Folder Architecture 
