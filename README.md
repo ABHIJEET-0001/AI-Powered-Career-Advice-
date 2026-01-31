@@ -66,12 +66,19 @@ Its mission is to **bridge the gap between education and employability** using A
 ```mermaid
 flowchart TD
     U[User]
-    UI[Frontend UI\nHTML / CSS / JavaScript]
-    CL[Client Logic\nassets/scripts]
-    AI[AI Engine\nCareer Logic & Recommendations]
-    CI[Processed Career Insights]
-    PR[Personalized Career Recommendations]
-    OUT[Rendered on User Interface]
+
+    subgraph Frontend
+        UI[UI Layer]
+        CL[Client Logic]
+    end
+
+    subgraph AI_System
+        AI[AI Engine]
+        CI[Insights Processing]
+    end
+
+    PR[Career Recommendations]
+    OUT[UI Display]
 
     U --> UI
     UI --> CL
