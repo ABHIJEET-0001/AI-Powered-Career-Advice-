@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Careers | AI Career Advisor</title>
+    <link rel="stylesheet" href="career_path.css">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">AI Career Advisor</div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#" class="active">Explore</a></li>
+                <li><a href="#">Learning Hub</a></li>
+                <li><a href="#">Community</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Discover Your Future</h1>
+            <p>Browse high-growth roles and find where your skills fit best.</p>
+            <div class="search-container">
+                <input type="text" id="careerSearch" placeholder="Search by job title or skill (e.g. 'Data', 'Design')...">
+            </div>
+        </section>
+
+        <section class="filter-tags">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="Tech">Technology</button>
+            <button class="filter-btn" data-filter="Design">Design</button>
+            <button class="filter-btn" data-filter="Business">Business</button>
+        </section>
+
+        <section class="career-grid" id="careerGrid">
+            </section>
+    </main>
+
+    <div id="careerModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script src="carerr_path.js"></script>
+</body>
+</html>

@@ -1,0 +1,312 @@
+:root {
+    --primary: #2563eb;
+    --primary-glow: rgba(37, 99, 235, 0.2);
+    --dark: #0f172a;
+    --light: #f8fafc;
+    --accent: #38bdf8;
+    --card-bg: #ffffff;
+    --border-soft: #e2e8f0;
+}
+
+/* Global */
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+    color: var(--dark);
+    scroll-behavior: smooth;
+}
+
+/* Header / Navbar */
+header {
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(10px);
+    padding: 1rem 5%;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+.logo {
+    font-weight: 800;
+    font-size: 1.6rem;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+nav ul li a {
+    position: relative;
+    transition: color 0.3s;
+}
+
+nav ul li a::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    left: 0;
+    bottom: -5px;
+    transition: 0.3s;
+}
+
+nav ul li a:hover::after,
+.active::after {
+    width: 100%;
+}
+
+/* Hero */
+.hero {
+    text-align: center;
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+}
+
+/* Search */
+.search-container input {
+    width: 100%;
+    max-width: 520px;
+    padding: 15px 20px;
+    border: 2px solid var(--border-soft);
+    border-radius: 40px;
+    font-size: 1rem;
+    outline: none;
+    transition: 0.3s;
+    box-shadow: 0 5px 20px rgba(37,99,235,0.08);
+}
+
+.search-container input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px var(--primary-glow);
+}
+
+/* Filter Tags */
+.filter-tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin: 30px 0;
+}
+
+.filter-btn {
+    padding: 8px 22px;
+    border-radius: 25px;
+    border: 1px solid var(--primary);
+    background: rgba(37,99,235,0.05);
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: 500;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: white;
+    box-shadow: 0 5px 15px rgba(37,99,235,0.25);
+}
+
+/* Career Grid */
+.career-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 0 5% 60px;
+}
+
+/* Cards */
+.card {
+    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    padding: 28px;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    border: 1px solid var(--border-soft);
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top right, rgba(56,189,248,0.12), transparent 60%);
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+.card:hover {
+    transform: translateY(-8px) scale(1.01);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+}
+
+.card h3 {
+    margin-top: 0;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+/* Tag */
+.tag {
+    display: inline-block;
+    background: linear-gradient(135deg, #e0f2fe, #bae6fd);
+    color: #0369a1;
+    padding: 5px 12px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(4px);
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    background: linear-gradient(180deg, #ffffff, #f8fafc);
+    margin: 6% auto;
+    padding: 35px;
+    width: min(90%, 600px);
+    border-radius: 20px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.25);
+    animation: slideUp 0.4s ease;
+}
+
+.close-btn {
+    float: right;
+    cursor: pointer;
+    font-size: 1.6rem;
+    color: #64748b;
+    transition: 0.3s;
+}
+
+.close-btn:hover {
+    color: var(--primary);
+    transform: rotate(90deg);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .modal-content {
+        margin: 15% auto;
+        padding: 25px;
+    }
+
+    .hero {
+        padding: 60px 15px;
+    }
+}
+/* ===== NAVBAR FIX & ENHANCEMENT ===== */
+
+header {
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(10px);
+    padding: 1rem 5%;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Logo */
+.logo {
+    font-weight: 900;
+    font-size: 1.6rem;
+    letter-spacing: 0.5px;
+    background: linear-gradient(135deg, #2563eb, #38bdf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Nav Links */
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 28px;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    position: relative;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #0f172a;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 6px 2px;
+    transition: color 0.3s;
+}
+
+/* Hover underline animation */
+nav ul li a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0%;
+    height: 2px;
+    background: linear-gradient(90deg, #2563eb, #38bdf8);
+    transition: 0.3s;
+    border-radius: 2px;
+}
+
+nav ul li a:hover {
+    color: #2563eb;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+/* Active Link */
+nav ul li a.active,
+nav ul li .active {
+    color: #2563eb;
+    font-weight: 700;
+}
+
+nav ul li a.active::after,
+nav ul li .active::after {
+    width: 100%;
+}
+
+/* Mobile Nav (if you add later) */
+@media (max-width: 768px) {
+    nav ul {
+        gap: 16px;
+        font-size: 0.9rem;
+    }
+}
