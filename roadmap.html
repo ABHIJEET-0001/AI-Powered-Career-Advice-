@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Learning Roadmap | AI Career Advisor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #5b6cff;
+      --secondary: #22c55e;
+      --accent: #38bdf8;
+      --bg: #f7fbff;
+      --card: rgba(255,255,255,0.85);
+      --text-dark: #0f172a;
+      --text: #334155;
+      --border: #e0e7ff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(120deg, #eef4ff, #fdfefe);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Floating gradients */
+    .orb {
+      position: fixed;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.35;
+      z-index: 0;
+      animation: float 12s ease-in-out infinite;
+    }
+
+    .orb.one { background:#7aa2ff; top:-80px; left:-80px; }
+    .orb.two { background:#7ef0c1; bottom:-100px; right:-80px; animation-delay:4s; }
+
+    @keyframes float {
+      0%,100% { transform: translate(0,0); }
+      50% { transform: translate(30px,-30px); }
+    }
+
+    /* Navbar */
+    .navbar {
+      background: rgba(255,255,255,0.75);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.6);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      font-weight: 800;
+      font-size: 1.5rem;
+      background: linear-gradient(90deg,#5b6cff,#22c55e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+    }
+
+    .menu a {
+      margin-left: 22px;
+      text-decoration: none;
+      font-weight: 500;
+      color: var(--text-dark);
+      position: relative;
+    }
+
+    .menu a::after {
+      content:"";
+      position:absolute;
+      left:0; bottom:-6px;
+      width:0%;
+      height:2px;
+      background: linear-gradient(90deg,#5b6cff,#22c55e);
+      transition:.3s;
+    }
+
+    .menu a:hover::after { width:100%; }
+
+    /* Main */
+    .main {
+      max-width: 1200px;
+      margin: 70px auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 2;
+      animation: fadeUp 1s ease forwards;
+    }
+
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(30px); }
+      to { opacity:1; transform:translateY(0); }
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .hero h1 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      background: linear-gradient(90deg,#5b6cff,#22c55e,#38bdf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: 16px auto 0;
+      color: #64748b;
+      font-size: 1.05rem;
+    }
+
+    /* Roadmap Card */
+    .roadmap-card {
+      background: var(--card);
+      backdrop-filter: blur(16px);
+      border-radius: 28px;
+      padding: 60px;
+      border: 1px solid var(--border);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.08);
+    }
+
+    /* Steps */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .step {
+      background: linear-gradient(135deg,#ffffff,#f8fbff);
+      border-radius: 20px;
+      padding: 30px;
+      border: 1px solid #e0e7ff;
+      transition: .4s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .step::before {
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(120deg, transparent, rgba(91,108,255,0.08), transparent);
+      opacity:0;
+      transition:.4s;
+    }
+
+    .step:hover::before { opacity:1; }
+    .step:hover { transform: translateY(-8px); box-shadow:0 20px 40px rgba(91,108,255,0.15); }
+
+    .step-number {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: linear-gradient(135deg,#5b6cff,#22c55e);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .step h3 {
+      margin: 0 0 10px;
+      color: var(--text-dark);
+    }
+
+    /* Career Paths */
+    .paths {
+      margin-top: 70px;
+    }
+
+    .paths h2 {
+      text-align:center;
+      font-size: 2.3rem;
+      margin-bottom: 30px;
+      background: linear-gradient(90deg,#5b6cff,#22c55e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .path-grid {
+      display:grid;
+      grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+      gap: 26px;
+    }
+
+    .path {
+      background: linear-gradient(135deg,#f8fbff,#ffffff);
+      border-radius: 20px;
+      padding: 28px;
+      border: 1px solid #e0e7ff;
+      transition:.4s;
+    }
+
+    .path:hover {
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: 0 18px 40px rgba(56,189,248,0.18);
+    }
+
+    .path h4 {
+      margin-top:0;
+      color: var(--text-dark);
+    }
+
+    footer {
+      text-align:center;
+      padding:40px 20px;
+      color:#64748b;
+      font-size:.95rem;
+    }
+
+    @media(max-width:768px){
+      .roadmap-card{ padding:36px 24px; }
+      .hero h1{ font-size:2.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="orb one"></div>
+<div class="orb two"></div>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a class="brand" href="index.html">AI Career Advisor</a>
+    <div class="menu">
+      <a href="index.html">Home</a>
+      <a href="career_path.html">Careers</a>
+      <a href="roadmap.html">Roadmap</a>
+      <a href="help.html">Help</a>
+    </div>
+  </div>
+</nav>
+
+<main class="main">
+
+  <section class="hero">
+    <h1>Personalized Learning Roadmap</h1>
+    <p>
+      Your AI-powered journey from beginner to professional.  
+      Structured learning paths, career-focused milestones, and guided growth.
+    </p>
+  </section>
+
+  <section class="roadmap-card">
+
+    <h2 style="text-align:center;color:var(--text-dark);margin-bottom:20px;">
+      Your Growth Journey
+    </h2>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <h3>Skill Assessment</h3>
+        <p>Analyze your current skills, strengths, and interests using AI-based evaluation.</p>
+      </div>
+
+      <div class="step">
+        <div class="step-number">2</div>
+        <h3>Goal Mapping</h3>
+        <p>Define career goals and generate a personalized learning strategy.</p>
+      </div>
+
+      <div class="step">
+        <div class="step-number">3</div>
+        <h3>Learning Path</h3>
+        <p>Structured roadmap with courses, projects, and certifications.</p>
+      </div>
+
+      <div class="step">
+        <div class="step-number">4</div>
+        <h3>Skill Building</h3>
+        <p>Hands-on projects, challenges, and real-world applications.</p>
+      </div>
+
+      <div class="step">
+        <div class="step-number">5</div>
+        <h3>Career Readiness</h3>
+        <p>Interview prep, portfolio building, and job readiness guidance.</p>
+      </div>
+
+      <div class="step">
+        <div class="step-number">6</div>
+        <h3>Continuous Growth</h3>
+        <p>Advanced learning paths and lifelong upskilling recommendations.</p>
+      </div>
+    </div>
+
+    <div class="paths">
+      <h2>Popular Career Paths</h2>
+      <div class="path-grid">
+        <div class="path">
+          <h4>💻 Software Developer</h4>
+          <p>DSA → Web Dev → System Design → Projects → Interviews</p>
+        </div>
+        <div class="path">
+          <h4>🤖 AI / ML Engineer</h4>
+          <p>Python → ML → DL → AI Projects → Research Skills</p>
+        </div>
+        <div class="path">
+          <h4>📊 Data Scientist</h4>
+          <p>Statistics → Python → ML → Data Projects → Analytics</p>
+        </div>
+        <div class="path">
+          <h4>☁️ Cloud Engineer</h4>
+          <p>Networking → Linux → AWS → DevOps → Cloud Projects</p>
+        </div>
+        <div class="path">
+          <h4>🔐 Cybersecurity</h4>
+          <p>Networking → Security → Ethical Hacking → SOC → Blue Team</p>
+        </div>
+        <div class="path">
+          <h4>🎨 UI/UX Designer</h4>
+          <p>Design Basics → Figma → UX Research → Prototyping → Portfolio</p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+</main>
+
+<footer>
+  &copy; 2026 AI Career Advisor. All rights reserved.
+</footer>
+
+</body>
+</html>
