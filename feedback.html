@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Feedback - AI Career Advisor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="assets/styles/style.css">
+    <link rel="stylesheet" href="assets/styles/feedback.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="container">
+        <div class="nav-brand">
+            <h2><a href="index.html">AI Career Advisor</a></h2>
+        </div>
+    </div>
+</nav>
+
+<section class="feedback-section">
+    <div class="container">
+        <div class="feedback-card">
+            <h2>Share Your Feedback</h2>
+            <p>Your suggestions help us improve the platform.</p>
+
+            <form class="feedback-form">
+                
+                <div class="form-group">
+                    <label>Name (Optional)</label>
+                    <input type="text" placeholder="Enter your name">
+                </div>
+
+                <div class="form-group">
+                    <label>Email (Optional)</label>
+                    <input type="email" placeholder="Enter your email">
+                </div>
+
+                <div class="form-group">
+                    <label>Your Message</label>
+                    <textarea rows="5" placeholder="Write your feedback here..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn--primary btn--full-width">
+                    Submit Feedback
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-bottom" style="text-align:center; font-size:14px; color:#555; margin:15px 0;">
+            © <span id="year"></span> AI Powered Career Advice. All rights reserved.
+        </div>
+    </div>
+</footer>
+
+<script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    document.querySelector(".feedback-form").addEventListener("submit", function(e){
+        e.preventDefault();
+        alert("Thank you for your feedback!");
+        this.reset();
+    });
+</script>
+
+</body>
+</html>

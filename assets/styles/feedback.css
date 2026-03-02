@@ -1,0 +1,48 @@
+.feedback-section {
+    padding: 80px 0;
+    background-color: #f9fafb;
+    min-height: 80vh;
+}
+
+.feedback-card {
+    max-width: 600px;
+    margin: auto;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.feedback-card h2 {
+    margin-bottom: 10px;
+    font-size: 26px;
+    font-weight: 600;
+}
+
+.feedback-card p {
+    margin-bottom: 25px;
+    color: #666;
+}
+
+.feedback-form .form-group {
+    margin-bottom: 20px;
+}
+
+.feedback-form input,
+.feedback-form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.feedback-form input:focus,
+.feedback-form textarea:focus {
+    outline: none;
+    border-color: #4f46e5;
+}
+
+.btn--full-width {
+    width: 100%;
+}

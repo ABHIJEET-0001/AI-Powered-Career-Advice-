@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Community | AI Career Advisor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #5b6cff;
+      --accent: #22c55e;
+      --soft-bg: #f8fbff;
+      --card-bg: rgba(255, 255, 255, 0.75);
+      --text-dark: #0f172a;
+      --text: #334155;
+      --border: rgba(255,255,255,0.4);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      background: linear-gradient(120deg, #eef4ff, #fdfefe);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* Floating Orbs */
+    .orb {
+      position: fixed;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.35;
+      animation: float 12s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    .orb.one { background: #7aa2ff; top: -80px; left: -80px; }
+    .orb.two { background: #7ef0c1; bottom: -100px; right: -80px; animation-delay: 4s; }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0) translateX(0); }
+      50% { transform: translateY(-30px) translateX(20px); }
+    }
+
+    /* Navbar */
+    .navbar {
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.6);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .navbar .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-brand a {
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 1.5rem;
+      background: linear-gradient(90deg, #5b6cff, #22c55e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-menu a {
+      margin-left: 22px;
+      text-decoration: none;
+      font-weight: 500;
+      color: var(--text-dark);
+      position: relative;
+    }
+
+    .nav-menu a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 0%;
+      height: 2px;
+      background: linear-gradient(90deg, #5b6cff, #22c55e);
+      transition: 0.3s;
+    }
+
+    .nav-menu a:hover::after { width: 100%; }
+
+    /* Main */
+    .main-wrapper {
+      position: relative;
+      z-index: 2;
+      max-width: 1100px;
+      margin: 60px auto;
+      padding: 0 20px;
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 30px;
+      text-align: center;
+      background: linear-gradient(90deg, #5b6cff, #22c55e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .post-form {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      border-radius: 26px;
+      padding: 30px 40px;
+      margin-bottom: 40px;
+      border: 1px solid var(--border);
+    }
+
+    .post-form textarea {
+      width: 100%;
+      resize: none;
+      border-radius: 12px;
+      border: 1px solid #cbd5e1;
+      padding: 12px;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      min-height: 80px;
+      margin-bottom: 12px;
+    }
+
+    .post-form button {
+      padding: 10px 24px;
+      font-weight: 600;
+      color: white;
+      background: linear-gradient(90deg, #5b6cff, #22c55e);
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .post-form button:hover { opacity: 0.9; }
+
+    .community-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      border-radius: 26px;
+      padding: 30px 40px;
+      margin-bottom: 30px;
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+      transition: 0.3s;
+      position: relative;
+    }
+
+    .community-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 25px 60px rgba(91,108,255,0.1);
+    }
+
+    .post-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .post-author { font-weight: 600; color: var(--text-dark); }
+    .post-date { font-size: 0.9rem; color: #64748b; }
+
+    .post-content { font-size: 1rem; line-height: 1.8; margin-bottom: 20px; }
+
+    .delete-btn {
+      background: none;
+      border: none;
+      color: #ef4444;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .reply-section { margin-left: 30px; }
+
+    .reply-card {
+      background: rgba(255,255,255,0.55);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 20px 25px;
+      margin-top: 15px;
+      border: 1px solid var(--border);
+      position: relative;
+    }
+
+    .reply-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .reply-author { font-weight: 500; color: var(--text-dark); }
+    .reply-date { font-size: 0.85rem; color: #64748b; }
+
+    .reply-form {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .reply-form textarea {
+      resize: none;
+      border-radius: 12px;
+      border: 1px solid #cbd5e1;
+      padding: 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      min-height: 60px;
+    }
+
+    .reply-form button {
+      align-self: flex-end;
+      padding: 8px 20px;
+      font-weight: 600;
+      color: white;
+      background: linear-gradient(90deg, #5b6cff, #22c55e);
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .reply-form button:hover { opacity: 0.9; }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: #64748b;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 768px) {
+      .community-card { padding: 25px 20px; }
+      h1 { font-size: 2.2rem; }
+      .post-form { padding: 25px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="orb one"></div>
+<div class="orb two"></div>
+
+<nav class="navbar">
+  <div class="container">
+    <div class="nav-brand"><a href="index.html">AI Career Advisor</a></div>
+    <div class="nav-menu">
+      <a href="index.html">Home</a>
+      <a href="career_path.html">Explore Careers</a>
+      <a href="community.html">Community</a>
+      <a href="help.html">Help</a>
+    </div>
+  </div>
+</nav>
+
+<main class="main-wrapper">
+  <h1>Student Community</h1>
+
+  <!-- New Post Form -->
+  <div class="post-form">
+    <textarea id="new-post-content" placeholder="Write a new post..."></textarea>
+    <button id="add-post-btn">Post</button>
+  </div>
+
+  <!-- Container for all posts -->
+  <div id="posts-container"></div>
+</main>
+
+<footer>
+  &copy; 2026 AI Career Advisor. All rights reserved.
+</footer>
+
+<script>
+  const postsContainer = document.getElementById('posts-container');
+  const addPostBtn = document.getElementById('add-post-btn');
+  const newPostContent = document.getElementById('new-post-content');
+
+  // Helper to create a post or reply card
+  function createCard({author, content, date, isReply=false}) {
+    const card = document.createElement('div');
+    card.className = isReply ? 'reply-card' : 'community-card';
+    
+    const header = document.createElement('div');
+    header.className = isReply ? 'reply-header' : 'post-header';
+    header.innerHTML = `<span class="${isReply ? 'reply-author' : 'post-author'}">${author}</span>
+                        <span class="${isReply ? 'reply-date' : 'post-date'}">${date}</span>`;
+    
+    // Delete button
+    const delBtn = document.createElement('button');
+    delBtn.className = 'delete-btn';
+    delBtn.textContent = 'Delete';
+    delBtn.onclick = () => card.remove();
+    header.appendChild(delBtn);
+
+    const contentDiv = document.createElement('div');
+    contentDiv.className = isReply ? 'reply-content' : 'post-content';
+    contentDiv.textContent = content;
+
+    card.appendChild(header);
+    card.appendChild(contentDiv);
+
+    if(!isReply) {
+      const replySection = document.createElement('div');
+      replySection.className = 'reply-section';
+
+      const replyForm = document.createElement('form');
+      replyForm.className = 'reply-form';
+      replyForm.innerHTML = `<textarea placeholder="Write a reply..."></textarea>
+                             <button type="submit">Reply</button>`;
+
+      replyForm.addEventListener('submit', function(e){
+        e.preventDefault();
+        const replyText = this.querySelector('textarea').value.trim();
+        if(replyText){
+          const replyCard = createCard({
+            author: 'You',
+            content: replyText,
+            date: new Date().toLocaleDateString(),
+            isReply: true
+          });
+          replySection.insertBefore(replyCard, replyForm);
+          this.reset();
+        }
+      });
+
+      replySection.appendChild(replyForm);
+      card.appendChild(replySection);
+    }
+
+    return card;
+  }
+
+  addPostBtn.addEventListener('click', function(){
+    const content = newPostContent.value.trim();
+    if(content){
+      const postCard = createCard({
+        author: 'You',
+        content: content,
+        date: new Date().toLocaleDateString()
+      });
+      postsContainer.prepend(postCard);
+      newPostContent.value = '';
+    }
+  });
+</script>
+
+</body>
+</html>

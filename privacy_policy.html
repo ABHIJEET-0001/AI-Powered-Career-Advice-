@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Privacy Policy | AI Career Advisor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #5b6cff;
+      --accent: #22c55e;
+      --soft-bg: #f8fbff;
+      --card-bg: rgba(255, 255, 255, 0.75);
+      --text-dark: #0f172a;
+      --text: #334155;
+      --border: rgba(255,255,255,0.4);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      background: linear-gradient(120deg, #eef4ff, #fdfefe);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* Floating Orbs */
+    .orb {
+      position: fixed;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.35;
+      animation: float 12s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    .orb.one {
+      background: #7aa2ff;
+      top: -80px;
+      left: -80px;
+    }
+
+    .orb.two {
+      background: #7ef0c1;
+      bottom: -100px;
+      right: -80px;
+      animation-delay: 4s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) translateX(0); }
+      50% { transform: translateY(-30px) translateX(20px); }
+    }
+
+    /* Navbar */
+    .navbar {
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.6);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .navbar .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-brand a {
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 1.5rem;
+      background: linear-gradient(90deg, #5b6cff, #22c55e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-menu a {
+      margin-left: 22px;
+      text-decoration: none;
+      font-weight: 500;
+      color: var(--text-dark);
+      position: relative;
+    }
+
+    .nav-menu a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 0%;
+      height: 2px;
+      background: linear-gradient(90deg, #5b6cff, #22c55e);
+      transition: 0.3s;
+    }
+
+    .nav-menu a:hover::after {
+      width: 100%;
+    }
+
+    /* Main */
+    .main-wrapper {
+      position: relative;
+      z-index: 2;
+      max-width: 1100px;
+      margin: 60px auto;
+      padding: 0 20px;
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .privacy-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      border-radius: 26px;
+      padding: 70px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.08);
+      border: 1px solid var(--border);
+    }
+
+    .privacy-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .privacy-header h1 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      background: linear-gradient(90deg, #5b6cff, #22c55e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .privacy-header p {
+      color: #64748b;
+      font-size: 1rem;
+    }
+
+    .highlight {
+      background: linear-gradient(135deg, #f1f5ff, #ecfeff);
+      border-left: 6px solid #5b6cff;
+      padding: 22px 26px;
+      border-radius: 16px;
+      margin: 36px 0;
+      animation: pulse 3s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 0 0 rgba(91,108,255,0.0); }
+      50% { box-shadow: 0 0 25px rgba(91,108,255,0.15); }
+    }
+
+    h2 {
+      font-size: 1.7rem;
+      margin-top: 56px;
+      margin-bottom: 14px;
+      color: var(--text-dark);
+      position: relative;
+      padding-left: 18px;
+    }
+
+    h2::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 6px;
+      width: 6px;
+      height: 70%;
+      background: linear-gradient(180deg, #5b6cff, #22c55e);
+      border-radius: 10px;
+    }
+
+    p, li {
+      line-height: 1.9;
+      font-size: 1.02rem;
+    }
+
+    ul {
+      margin-left: 26px;
+    }
+
+    .contact-box {
+      margin-top: 60px;
+      padding: 34px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #f8fbff, #f1f5ff);
+      border: 1px solid #e0e7ff;
+      transition: 0.4s;
+    }
+
+    .contact-box:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 40px rgba(91,108,255,0.15);
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: #64748b;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 768px) {
+      .privacy-card {
+        padding: 40px 26px;
+      }
+
+      .privacy-header h1 {
+        font-size: 2.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="orb one"></div>
+<div class="orb two"></div>
+
+<nav class="navbar">
+  <div class="container">
+    <div class="nav-brand">
+      <a href="index.html">AI Career Advisor</a>
+    </div>
+    <div class="nav-menu">
+      <a href="index.html">Home</a>
+      <a href="career_path.html">Explore Careers</a>
+      <a href="help.html">Help</a>
+    </div>
+  </div>
+</nav>
+
+<main class="main-wrapper">
+  <div class="privacy-card">
+
+    <div class="privacy-header">
+      <h1>Privacy Policy</h1>
+      <p>Last Updated: February 2026</p>
+    </div>
+
+    <div class="highlight">
+      🌟 We value your trust. This policy explains how we collect, use, and protect your information to give you the best possible career guidance experience.
+    </div>
+
+    <h2>1. Information We Collect</h2>
+    <ul>
+      <li>Name, email address, and basic profile information</li>
+      <li>Education details, interests, and skill preferences</li>
+      <li>Assessment answers and platform activity</li>
+      <li>Technical data such as browser and device type</li>
+    </ul>
+
+    <h2>2. How We Use Your Information</h2>
+    <ul>
+      <li>Deliver personalized career recommendations</li>
+      <li>Create custom learning roadmaps</li>
+      <li>Improve features and user experience</li>
+      <li>Ensure platform safety and reliability</li>
+    </ul>
+
+    <h2>3. Cookies</h2>
+    <p>We use cookies and local storage to improve performance and remember your preferences.</p>
+
+    <h2>4. Data Security</h2>
+    <p>We implement industry-standard security practices to protect your information.</p>
+
+    <h2>5. Your Rights</h2>
+    <ul>
+      <li>Access and update your data</li>
+      <li>Request deletion of your account</li>
+    </ul>
+
+    <div class="contact-box">
+      <h3>Contact Us</h3>
+      <p>Email: <strong>support@aicareeradvisor.com</strong></p>
+      <p>We’re always happy to help you with privacy-related questions.</p>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  &copy; 2026 AI Career Advisor. All rights reserved.
+</footer>
+
+</body>
+</html>
