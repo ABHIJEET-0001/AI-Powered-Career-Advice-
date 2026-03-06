@@ -63,23 +63,62 @@ function renderCareers(data) {
     grid.appendChild(card);
   });
 }
+/* ==========================================
+   Input Validation for Career Search + User Feedback
+========================================== */
+
+const errorMsg = document.getElementById('searchError');
+
+function validateSearchInput(input){
+
+  const value = input.trim().toLowerCase();
+
+  if(value === ""){
+    return "Please enter a job title or skill to search.";
+  }
+
+  if(value.length < 2){
+    return "Search input is too short. Please type more characters.";
+  }
+
+  const vagueInputs = ["idk","nothing","no idea","random"];
+
+  if(vagueInputs.includes(value)){
+    return "We couldn’t understand your search. Try using a job title or skill.";
+  }
+
+  return null;
+}
 
 /* ================================
    Smart Search (Title + Skills + Category + Growth)
 ================================ */
 searchInput.addEventListener('input', (e) => {
-  const term = e.target.value.toLowerCase();
 
-  const filtered = careers.filter(c => 
-    c.title.toLowerCase().includes(term) ||
-    c.category.toLowerCase().includes(term) ||
-    c.growth.toLowerCase().includes(term) ||
-    c.skills.some(s => s.toLowerCase().includes(term))
+  const term = e.target.value;
+
+  const validationError = validateSearchInput(term);
+
+  if(validationError){
+    errorMsg.textContent = validationError;
+    renderCareers(careers); // show all careers if invalid
+    return;
+  }
+
+  errorMsg.textContent = "";
+
+  const searchTerm = term.toLowerCase();
+
+  const filtered = careers.filter(c =>
+    c.title.toLowerCase().includes(searchTerm) ||
+    c.category.toLowerCase().includes(searchTerm) ||
+    c.growth.toLowerCase().includes(searchTerm) ||
+    c.skills.some(s => s.toLowerCase().includes(searchTerm))
   );
 
   renderCareers(filtered);
-});
 
+});
 /* ================================
    Category Filter
 ================================ */
