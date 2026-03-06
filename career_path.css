@@ -310,3 +310,9 @@ nav ul li .active::after {
         font-size: 0.9rem;
     }
 }
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
